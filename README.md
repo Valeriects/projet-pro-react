@@ -1,3 +1,8 @@
+# Mon projet pour la soutenance de fin de formation
+
+## Projet de site web de cinéma
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
