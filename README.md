@@ -7,7 +7,7 @@
 
 
 ## 3-Mise en place du projet node:
-1- Création du dossier "projet-proc-react" .   
+1- Création du dossier `projet-pro-react`.   
 2- Dans ce dossier, créer un dossier: `back`.   
 3- A la racine du projet, créer un fichier .gitignore, pour que gitHub ignore les fichiers et dossiers trop sensibles.
 
@@ -17,7 +17,7 @@
 ```bash
 npm init -y
 npm install nodemon -D
-npm i dotenv mysql2 express bcrypt cors
+npm i dotenv mysql2 express bcrypt cors jsonwebtoken cookie-parser multer
 ```
 - Dans le fichier `package.json`:   
 On va ajouter ceci: 
@@ -29,16 +29,27 @@ On va ajouter ceci:
     "dev": "nodemon src/app.js"
   },
 ```
-- Ensuite on créé l'arborescence du dossier `back`.  
+- Ensuite on créé l'arborescence du dossier `back`: 
+  - Avec l'ajout d'un dossier `public` à la racine du dossier `back`
+  - Dans le dossier public on aura le dossier `assets` qui contiendra le dossier `ìmages` qui contiendront les images de la BDD.   
+  - A la racine du dossier `back` on créé un fichier `.env`, pour les variables d'environnement et un dossier `src`, c'est dans celui-ci qu'on aura au même niveau les dossiers `config` qui contiendra la connexion à la BDD, `controller` qui contiendra les fichiers controller, `model` qui contiendra la classe Query, `router` qui contiendra les routes de l'api.
+  - Enfin, on créé à la racine du dossier `src`, le fichier `app.js`.    
+  **Visuellement, cela devrait ressemblait à ceci:**   
 ![](./back/public/assets/images/arborescence.png)
+
     
 
+
+
+
+
+
 ## Partie du dossier CLIENT
-A la racine du projet, et dans le terminal, on fait quelques lignes de commande:
+A la racine du projet `projet-pro-react`, et dans le terminal, on fait quelques lignes de commande:
 ```bash 
   npm create vite@latest
 ```
-  on nommera le dossier `client` avec REACT et javascript + swc
+  on nommera le dossier `client` avec `REACT et javascript + swc`
   on entre dans le répertoire `client`
   et on fait:
   ```bash
