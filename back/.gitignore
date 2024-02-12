@@ -2,5 +2,3 @@
 node_modules
 .env
 
-#todo ne pas mettre avant que cela marche
-src/utils/sessionWithTimeTable.js
