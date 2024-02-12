@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { getUsers, upUser, delUser, getRoles, addRole, upRole, delRole } from "../controller/admin/users.js"
-import { getMovies, addMovie, upMovie, deleteMovie } from "../controller/admin/movies.js"
-import { getCinemas, addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js"
-import { getSessions, addSession, upSession, deleteSession } from "../controller/admin/sessionTime.js"
+import { getMovies, addMovie, upMovie, deleteMovie } from "../controller/admin/movies.js";
+import { getCinemas, addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js";
+import { getSessions, addSession, upSession, deleteSession, delTimetable, upTimetable, addTimetable, getTimetables } from "../controller/admin/sessionTime.js";
+import { getOrders, addOrder, upOrder, deleteOrder } from "../controller/admin/orders.js";
 
 
 const router = Router();
@@ -43,16 +44,16 @@ router.patch("/session-movie/:id", upSession);
 router.delete("/session-movie/:id", deleteSession);
 
 //routes TIMETABLE
-// router.get("/timetable", getTimetables);
-// router.post("/timetable", addTimetable);
-// router.patch("/timetable/:id", upTimetable);
-// router.delete("/timetable/:id", delTimetable);
+router.get("/timetable", getTimetables);
+router.post("/timetable", addTimetable);
+router.patch("/timetable/:id", upTimetable);
+router.delete("/timetable/:id", delTimetable);
 
 //routes ORDER
-// router.get("/order", getOrders);
-// router.post("/order", addOrder);
-// router.patch("/order/:id", upOrder);
-// router.delete("/order/:id", deleteOrder);
+router.get("/order", getOrders);
+router.post("/order", addOrder);
+router.patch("/order/user/:users_id/session-movie/:sessions_id", upOrder);
+router.delete("/order/user/:users_id/session-movie/:sessions_id", deleteOrder);
 
 //routes MOVIE_MEDIA 
 // router.get("/movie-media", getMovieMedias);

@@ -50,7 +50,7 @@ const deleteSession = async (req, res) => {
         const { id } = req.params;
         const query = "DELETE FROM sessions WHERE id = ?";
 
-        const SessionDelete = await Query.runByParams(query, [id]);
+        await Query.runByParams(query, [id]);
 
         res.json({ msg: "Séance supprimée", id });
 
@@ -59,4 +59,62 @@ const deleteSession = async (req, res) => {
     }
 };
 
-export { getSessions, addSession, upSession, deleteSession };
+
+//le CRUD pour la table timetables
+const getTimetables = async (req, res) => {
+    try {
+        const query = "SELECT id, hours_timetable FROM timetables";
+
+        const listeTime = await Query.run(query);
+
+        res.json(listeTime);
+        
+
+    } catch (err) {
+        res.status(500).json({ msg: err });
+    }
+};
+const addTimetable = async (req, res) => {
+    try {
+        const { hours_timetable } = req.body;
+        const query = "INSERT INTO timetables (hours_timetable) VALUES (?)";
+
+        const time = await Query.runByParams(query, [hours_timetable]);
+
+        res.json({ id: time.insertId, hours_timetable });
+
+    } catch (err) {
+        res.status(500).json({ msg: err });
+    }
+};
+const upTimetable = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { hours_timetable } = req.body;
+
+        const query = "UPDATE timetables SET hours_timetable = ? WHERE id= ?";
+
+        await Query.runByParams(query, [hours_timetable, id]);
+            
+        res.json({ id, hours_timetable });
+
+    } catch (err) {
+        res.status(500).json({ msg: err });
+    }
+};
+const delTimetable = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const query = "DELETE FROM timetables WHERE id = ?";
+
+        await Query.runByParams(query, [id]);
+
+        res.json({ id });
+
+    } catch (err) {
+        res.status(500).json({ msg: err });
+    }
+};
+
+
+export { getSessions, addSession, upSession, deleteSession, delTimetable, upTimetable, addTimetable, getTimetables };
