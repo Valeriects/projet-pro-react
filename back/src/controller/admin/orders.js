@@ -14,7 +14,7 @@ const getOrders = async (req, res) => {
         res.status(500).json({ msg: err });
     }
 };
-const addOrder = async (req, res) => {
+const addOrder = async (req, res) => { //todo ça doit etre dans le dashboard du coup ? car l'user n'a pas accès au compte admin...
     try {
         const { users_id, sessions_id, price_order, num_CB, cb_date, cryptogramme } = req.body;
 
@@ -28,7 +28,7 @@ const addOrder = async (req, res) => {
         res.status(500).json({ msg: err });
     }
 };
-const upOrder = async (req, res) => { //todo ?? on peut modifier une commande aprsè qu'elle soit passée ?
+const upOrder = async (req, res) => { // TODO ?? on peut modifier une commande après qu'elle soit passée ?
     try {
         const { users_id, sessions_id } = req.params;
         const { price_order, num_CB, cb_date, cryptogramme } = req.body;

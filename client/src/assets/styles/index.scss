@@ -1,0 +1,235 @@
+@use "variables" as *;
+
+@mixin display($param, $jContent) {
+    display: flex;
+    flex-direction: $param;
+    justify-content: $jContent;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $beigeClair;
+}
+
+//la div où on met les composants
+#root {
+    //on fait display flex avec column et le justify, afin de pouvoir regler la hauteur
+    @include display(column, space-between);
+    width: 100%;
+    min-height: 100vh;
+    // max-width: 400px;
+
+}
+
+img {
+    max-width: 100%;
+    // height: auto;
+    // display: block;
+}
+    
+a {
+    text-decoration: none;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+
+    &:hover {
+        color: $orange;
+        cursor: pointer;
+    }
+}
+
+button {
+    border: none;
+    background-color: $transparent;
+
+}
+
+.icon {
+    color: $beigeClair;
+    font-size: 3rem;
+        &:hover {
+                color: $orange;
+                cursor: pointer;
+            }
+}
+
+header, footer {
+    @include display(row, space-evenly);
+    align-items: center;
+    background-color: $marron;
+
+    a {
+        color: $beigeClair;
+    }
+}
+
+header {
+    padding-bottom: .5rem;
+    // width: 100%;
+
+    .btnBurger {
+
+        .menuBurger{
+            padding-top: .5rem;
+            padding-left: .5rem;
+            font-size: 3.5rem;
+        }
+    }
+
+    .logoTitle {
+        @include display(row, flex-end);
+        align-items: flex-end;
+        width: 100%;
+        
+        .logo{
+            width:25%;
+        }
+
+        span  {
+            font-size: 3rem;
+            margin-left: .5rem;
+        }
+    }
+
+    #menu, .menu { //menu mobile
+        @include display(column, space-between);
+        background-color: $marron;
+        font-size: 2.5rem;
+        position: absolute;
+        top: 4.5rem;
+        // padding: 1rem;
+        
+        a {
+            padding: .5rem 1rem;
+
+            &:hover {
+                color: $orange;
+            }
+        }
+    }
+
+    #menu {
+        left:0;
+
+        .burgerDeco {
+            border-top: 1.5px solid $beigeClair;
+            padding: 1rem;
+        }
+    }
+
+    .btnDeco {
+        color: $beigeClair;
+        font-size: 2.5rem;
+        // padding: 0;
+
+        &::first-letter {
+            text-transform: capitalize;
+        }
+    }
+
+    #wrapIcon{
+        @include display(row, space-evenly);
+        width: 40%;
+
+        #iconGlass, #iconUser {
+            padding-top: 0.5rem;
+        }
+
+        .menu {
+            right: 0;
+        }
+    }
+
+}
+
+
+footer {
+    height: 3rem;
+    bottom: 0;
+
+    .icon {
+        font-size: 2rem;
+        margin: 1rem;
+    }
+
+    nav {
+        @include display(row, space-around);
+        // display: none;
+        width:80%;
+    }
+    
+}
+
+
+form {
+    width: 90%;
+    height: 100%;
+    margin: 2rem auto;
+
+    fieldset, input, [type="submit"] {
+        border-radius: .2rem;
+    }
+
+    fieldset {
+        height: 100%;
+        @include display(column, space-between);
+        row-gap: 1rem;
+        padding: 2rem 1rem;
+        border: 1px solid $marron;
+
+        legend, label {
+            color: $marron;
+        }
+        legend {
+            font-size: 3rem;
+        }
+
+        label {
+            font-size: 2rem;
+        }
+
+        input {
+            padding: 0.5rem;
+            border: none;
+
+            &:hover {
+                background-color: $beige;
+                box-shadow: inset $orange 1px 1px 5px 0px;
+            }
+        }
+
+        [type="submit"] {
+            margin-top: 1rem;
+            background-color: $marron;
+            color: $beigeClair;
+            font-weight: bold;
+            border: .5px solid $marron;
+            box-shadow: 1px 1px 5px 0px;
+            
+            &:hover {
+                font-weight: bold;
+                background-color: $orange;
+                box-shadow: inset $marron 1px 1px 3px 0px;
+                cursor: pointer;
+                color: $marron;
+            }
+        }
+    }
+
+    a {
+        font-size: 1.5rem;
+        @include display(inline-block, center);
+    }
+
+}

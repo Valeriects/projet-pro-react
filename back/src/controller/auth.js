@@ -44,7 +44,7 @@ const userLogin = async (req, res) => {
             msg: "Connexion réussie",
             id: userExist.id,
             firstname: userExist.firstname,
-            roles_id: userExist.roles_id,
+            roleUser
         
         });
     

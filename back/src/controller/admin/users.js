@@ -1,40 +1,40 @@
 import Query from "../../model/Query.js";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 
 
-const getUsers = async (req, res) => {  
-    try {
-        const queryUsers = "SELECT * FROM users ORDER BY last_connection_date DESC";
+// const getUsers = async (req, res) => {  
+//     try {
+//         const queryUsers = "SELECT * FROM users ORDER BY last_connection_date DESC";
 
-        const listUsers = await Query.run(queryUsers);
+//         const listUsers = await Query.run(queryUsers);
 
-        res.json(listUsers);
+//         res.json(listUsers);
 
-    } catch (err) {
-        res.status(500).json({ msg: err });
-    }
-};
+//     } catch (err) {
+//         res.status(500).json({ msg: err });
+//     }
+// };
 
 
-const upUser = async (req, res) => {
-    try {
-        const { firstname, lastname, password, address, email, phone, birthday } = req.body;
-        const { id } = req.params;
+// const upUser = async (req, res) => {
+//     try {
+//         const { firstname, lastname, password, address, email, phone, birthday } = req.body;
+//         const { id } = req.params;
 
-        const queryUser = "UPDATE users SET firstname = ?, lastname = ?, password = ?, address = ?, email = ?, phone = ?, birthday = ? WHERE id = ?";
+//         const queryUser = "UPDATE users SET firstname = ?, lastname = ?, password = ?, address = ?, email = ?, phone = ?, birthday = ? WHERE id = ?";
 
-        //on hash le password
-        const salt = Number(process.env.BCRYPT_SALT);
-        const hashPassword = await bcrypt.hash(password, salt);
+//         //on hash le password
+//         const salt = Number(process.env.BCRYPT_SALT);
+//         const hashPassword = await bcrypt.hash(password, salt);
 
-        const user = await Query.runByParams(queryUser, [firstname, lastname, hashPassword, address, email, phone, birthday, id]);
+//         const user = await Query.runByParams(queryUser, [firstname, lastname, hashPassword, address, email, phone, birthday, id]);
 
-        res.json({ id, firstname, lastname, password: hashPassword, address, email, phone, birthday });
+//         res.json({ id, firstname, lastname, password: hashPassword, address, email, phone, birthday });
 
-    } catch (err) {
-        res.status(500).json({ msg: err });
-    }
-};
+//     } catch (err) {
+//         res.status(500).json({ msg: err });
+//     }
+// };
 
 const delUser = async (req, res) => {
     try {
@@ -125,4 +125,4 @@ const delRole = async (req, res) => {
     }
 };
 
-export { getUsers, upUser, delUser, getRoles, addRole, upRole, delRole };
+export { delUser, getRoles, addRole, upRole, delRole };

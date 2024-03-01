@@ -68,3 +68,10 @@ A la racine du projet `projet-pro-react`, et dans le terminal, on fait quelques 
 
   ```
   pour icone du footer le brands
+
+
+  Les couleurs:
+  - Orange : #EBB95C
+- Beige: #FFFFCC
+- Marron : #3F2413
+- Black : #000000
