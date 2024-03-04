@@ -1,0 +1,166 @@
+@use "variables" as *;
+
+@mixin display($param, $jContent) {
+    display: flex;
+    flex-direction: $param;
+    justify-content: $jContent;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    // background-color: $beige;
+}
+
+//la div où on met les composants
+#root {
+    //on fait display flex avec column et le justify, afin de pouvoir regler la hauteur
+    @include display(column, space-between);
+    width: 100%;
+    min-height: 100vh;
+    // max-width: 400px;
+
+}
+
+img {
+    max-width: 100%;
+    // height: auto;
+    // display: block;
+}
+
+a {
+    text-decoration: none;
+
+    &::first-letter {
+        text-transform: capitalize;
+    }
+
+    &:hover {
+        color: $orange;
+        cursor: pointer;
+    }
+}
+
+button {
+    border: none;
+    border-radius: 0.3rem;
+    background-color: $marron;
+    color: $beigeClair;
+
+}
+
+.icon {
+    color: $beigeClair;
+    font-size: 3rem;
+
+    &:hover {
+        color: $orange;
+        cursor: pointer;
+    }
+}
+
+#admin, #membre {
+    color: $marron;
+    padding: 1rem;
+
+    div,
+    ul {
+        @include display(row, none);
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        a:not .tdIcone a {
+            color: $marron;
+            border: 1px solid $marron;
+            border-radius: .3rem;
+            padding: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                color: $marron;
+                background-color: $marron;
+            }
+        }
+
+        li {
+            // text-decoration: none;  
+            list-style: none;
+
+            button {
+                padding: 1rem;
+            }
+        }
+    }
+
+
+}
+
+#userBack, #membre {
+    padding: 2rem, 0;
+    max-height: 70%;
+    overflow-y: auto;
+
+    a:not .tdIcone a {
+        color: $marron;
+        font-weight: bold;
+        border: 1px solid $marron;
+        padding: .7rem;
+        border-radius: .3rem;
+        margin: 2rem;
+    }
+
+    table {
+        display: block;
+        // background-color: $beigeClair;
+        color: $marron;
+        border-collapse: collapse;
+        overflow-x: scroll;
+
+        border: 2px solid $marron;
+        max-width: 95%;
+        margin: auto;
+
+        caption {
+            padding: 1rem;
+            text-transform: uppercase;
+        }
+
+        th, td, tr {
+            border: .5px solid $marron;
+            padding: 1rem;
+        }
+
+
+        td:nth-child(7), th:nth-child(7) {
+            max-width: 150px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .tdIcone {
+            @include display(column, space-around);
+            justify-content: space-around;
+            align-items: center;
+            gap: 1rem;
+
+            .iconeTable {
+                color: $marron;
+                font-size: 4rem;
+            }
+
+            button {
+                background-color: $transparent;
+                border: none;
+            }
+        }
+    }
+}

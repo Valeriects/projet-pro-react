@@ -14,7 +14,7 @@ function App() {
   
   const [userType, setUserType] = useState("visitor");
 
-  console.log(navigate, setUserType);
+  console.log("console.log !!!!!",navigate, setUserType);
 
   useEffect(() => {
     dispatch(fetchMovies());

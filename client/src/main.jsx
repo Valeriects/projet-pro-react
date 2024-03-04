@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 import App from './App.jsx';
 import { store } from "./store/index.js";
-import "./assets/styles/index.scss";
+// import "./assets/styles/index.scss"; //todo dans le userLayout
 
 
 

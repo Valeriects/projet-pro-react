@@ -12,31 +12,39 @@ function Home() {
         
         <main className="home">
             <h1>Les films à l&rsquo;affiche</h1>
+
+            <section  className="carousel">
             {list.map((item) => (
                 
-                <section key={item.id} className="carousel">
-                    {item.media.map((data) => (
                         
-                        <figure key={data.id}>
-                            <img src={data[0]} alt={data} />
-                            {/* <iframe width="560" height="315" src={data[1].src} title={data[1].alt} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
-                         
-                            <figcaption>{data.alt}</figcaption>
-                            
-                        </figure>
+                <figure key={item.id}>
+                    <img src={`http://localhost:9000/img/${item.media[0].src}`} alt={item.media[0].alt} />
 
-                    )) }
-                </section>
+                    {/* <iframe width="560" height="315" src={item.media[1].src} title={item.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+                    
+                    <figcaption>{item.alt}</figcaption>
+                    
+                </figure>
+
             ))}
+            </section>  
 
             {list.map((item) => (
 
                 <section key={item.id} className="homeListe">
                     <h2>{item.title}</h2>
+
+                    <img src={`http://localhost:9000/img/${item.media[0].src}`} alt={item.media[0].alt} />
+
                     <p>{item.director}</p>
                     <p>{item.actor}</p>
                     <p>{item.categories.join(" - ")}</p>
+                    <p>{item.release_date}</p>
+                    <p>{item.time}</p>
+
+
                     <Link to={`/film/${item.id}`}>Voir plus...</Link>
+
                    
 
                 </section>

@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import Header from "../user/Header";
 import Footer from "../user/Footer";
 
+import "../../assets/styles/index.scss";
 
 function UserLayout() {
     return (
