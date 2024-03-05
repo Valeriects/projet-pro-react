@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import AdminLayout from "../views/layout/AdminLayout.jsx";
 import AdminBack from "../views/admin/AdminBack.jsx";
 import ListUsers from "../views/admin/users/ListeUsersBack.jsx";
+import UpDeleteUser from "../views/admin/users/Up&DeleteUser.jsx";
 
 
 function AdminRoutes() {
@@ -14,7 +15,9 @@ function AdminRoutes() {
                 
                 <Route index element={<AdminBack />} />
                 
-                <Route path={"liste-membres"} element={<ListUsers />}/>
+                <Route path={"membre"} element={<ListUsers />} />
+                
+                <Route path={"membre/suppression/:id"} element={<UpDeleteUser />}/>
             
 
                 {/* route non trouvée */}

@@ -14,7 +14,7 @@ function App() {
   
   const [userType, setUserType] = useState("visitor");
 
-  console.log("console.log !!!!!",navigate, setUserType);
+  // console.log("console.log !!!!!",navigate, setUserType);
 
   useEffect(() => {
     dispatch(fetchMovies());
@@ -47,7 +47,7 @@ function App() {
     // }, [userType]);
   }, []);
 
-  console.log(userType);
+  // console.log(userType);
 
   // if (userType === "visitor" || userType === "user") return <UserRoutes />;
 

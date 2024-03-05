@@ -29,7 +29,7 @@ const userLogin = async (req, res) => {
 
         //token:
         const TOKEN = jwt.sign(
-            { id: userExist.id, email, roleUser },
+            { id: userExist.id, firstname : userExist.firstname, roleUser }, //données du payload
             process.env.SECRET_TOKEN,
             { expiresIn: "1h" }
         );
@@ -45,10 +45,7 @@ const userLogin = async (req, res) => {
             id: userExist.id,
             firstname: userExist.firstname,
             roleUser
-        
         });
-    
-
 
     } catch (err) {
         res.status(500).json({ msg: err });

@@ -39,6 +39,7 @@ function HeaderAd() {
         if (response.ok) {
             dispatch(logout());
             dispatch(toggleBurger());
+            
             navigate("/");
         }
     }
@@ -65,7 +66,7 @@ function HeaderAd() {
 
                         {isListOpen && (
                             <>
-                                <NavLink to={"liste-membres"}>membres</NavLink>
+                                <NavLink to={"membre"}>membres</NavLink>
                                 <NavLink to="">role</NavLink>
                                 <NavLink to="">film</NavLink>
                                 <NavLink to="">réservation</NavLink>

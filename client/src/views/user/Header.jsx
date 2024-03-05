@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBars, faMagnifyingGlass, faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 import { logout } from "../../store/slices/user";
+import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 
 function Header() {
 
@@ -15,33 +15,38 @@ function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { isLogged } = useSelector((state) => state.user);
-    console.log(isLogged);
+    const { isLogged, resUser : {id, firstname, roleUser}} = useSelector((state) => state.user);
+
+    // console.log(resUser);
     
     function toggleBurger() {
         setIsBurgerOpen(!isBurgerOpen);
     }
-
+    
     function toggleMember() {
         setIsMemberOpen(!isMemberOpen);
     }
-
+    
     async function userLogout() {
         const response = await fetch("/api/v1/authentication/logout", {
             method: "GET",
             credentials: "include"
         })
-
+        
         if (response.ok) {
             dispatch(logout());
-            dispatch(toggleBurger());
+            // dispatch(toggleBurger());
             dispatch(toggleMember());
             navigate("/");
         }
     }
-
+    console.log(isLogged);
+    console.log(id);
+    console.log(firstname);
+    console.log(roleUser);
+    
     return (
-
+        
         <header>
             <button onClick={toggleBurger} className="btnBurger" title="Accéder au menu de navigation" aria-label="Accéder au menu de navigation">
                 <FontAwesomeIcon className="icon menuBurger" icon={faBars} />    
@@ -59,9 +64,9 @@ function Header() {
                     {isLogged ? (
                         <NavLink to={"utilisateur/compte"} >votre compte</NavLink>
                     ): (
-                        <NavLink to={"/authentification/connexion"}>connexion</NavLink>
+                        <NavLink to={"authentification/connexion"}>connexion</NavLink>
                     )}
-                    <NavLink to={""}>films à l&rsquo;affiche</NavLink>
+                    {/* <NavLink to={""}>films à l&rsquo;affiche</NavLink> */}
                     <NavLink to={""}>infos pratiques</NavLink>
                     <NavLink to={""}>nous contacter</NavLink>
                     <NavLink to={""}>à propos</NavLink>

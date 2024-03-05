@@ -50,7 +50,7 @@ const delUser = async (req, res) => {
         // const roleAdmin = await Query.run(queryRoleAdmin, [id]);
 
         // if(roleAdmin !== 1){
-            const userDel = await Query.runByParams(queryDel, [id]);
+            await Query.runByParams(queryDel, [id]);
             
             res.json({ msg: "Bien supprimé", id })
             // }

@@ -18,7 +18,7 @@ function UserRoutes() {
             <Route path="/" element={<UserLayout />} >
                 
                 <Route>
-                    <Route index element={<Home />} />
+                    <Route path="" index element={<Home />} />
                     
                     <Route path="film/:id" element={<MovieDetail />} />
 

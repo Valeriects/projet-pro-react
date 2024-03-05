@@ -1,27 +1,42 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 import { fetchUsers } from "../../../store/slices/user.js";
 
 function Dashboard() {
-    const { id } = useParams();
+    // const { id } = useParams();
     const dispatch = useDispatch();
 
-    const infoUser = useSelector((state) => state.user.listUser.find(user => user.id === Number(id)));
+    // const { resUser } = useSelector((state) => { state.user });
     
-    console.log("infoUser :", infoUser);
+    // console.log(id);
 
     useEffect(() => {
         dispatch(fetchUsers());
-    }, [dispatch, infoUser]);
+    }, []);
+
+    // const infoUser = useSelector((state) => state.user.listUser.find(user => user.id === Number(id)));
+    
+    // console.log("infoUser :", infoUser);
+
 
 
     return (
         <main id="dash">
-            {infoUser && (
+            <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi est libero quisquam nostrum ratione ipsum, voluptatem vitae assumenda asperiores molestias iusto similique itaque, facere expedita sint id sapiente rerum sed!
+
+            </h1>
+
+            {/* {user.map((item) => (
+                <article key={item.id}>
+
+                    <p>{ item.firstname }</p>
+                </article>
+            ))} */}
+            {/* {infoUser && (
                 <p>{infoUser.email}</p>
-            )}
+            )} */}
         </main>
     )
 }

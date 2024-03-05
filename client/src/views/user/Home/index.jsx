@@ -5,7 +5,7 @@ function Home() {
 
     const {list} = useSelector((state) => state.movie);
 
-    console.log("hello");
+    // console.log("hello");
     console.log(list);
     
     return (
@@ -17,7 +17,7 @@ function Home() {
             {list.map((item) => (
                 
                         
-                <figure key={item.id}>
+                <figure key={item.id} className="picture">
                     <img src={`http://localhost:9000/img/${item.media[0].src}`} alt={item.media[0].alt} />
 
                     {/* <iframe width="560" height="315" src={item.media[1].src} title={item.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
@@ -44,8 +44,6 @@ function Home() {
 
 
                     <Link to={`/film/${item.id}`}>Voir plus...</Link>
-
-                   
 
                 </section>
             ))}

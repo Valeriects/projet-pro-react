@@ -1,27 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
+import { login } from "../../store/slices/user";
 
 function Login() {
 
     const userMailref = useRef();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     //je récupère les données du formulaire:
     const [userInfo, setUserInfo] = useState({
         useremail: "",
-        password:""
-    })
+        password: ""
+    });
+
+    const [msg, setMsg] = useState("");
 
     useEffect(() => {
         userMailref.current.focus();
-    }, [])
+    }, [msg]);
 
     const inputChangeHandler = (e) => setUserInfo({
         ...userInfo, //je spread un nouveau tableau, avec les infos de userInfo
         //je l'associe avec la valeur de chaque input
         [e.target.name]: e.target.value,
-    })
+    });
 
     const submitHandler= async (e) => {
         e.preventDefault();
@@ -37,10 +42,18 @@ function Login() {
 
             if (response.ok) {
                 const resUser = await response.json();
+                
+                console.log("resUser : ", resUser);
+                
+                dispatch(login({id: resUser.id, firstname: resUser.firstname}));
 
-                console.log("resUser: ", resUser);
+                console.log("firstname: ", resUser.firstname);
 
-                navigate('/');
+                if (resUser.roleUser === "admin") window.location.href = "/admin";
+
+                navigate("/");
+            } else {
+                setMsg("Erreur d'authentification");
             }
 
         } catch (err) {
