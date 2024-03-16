@@ -6,11 +6,16 @@ import MovieDetail from "../views/user/Movie/MovieDetail.jsx";
 import Login from "../views/auth/Login.jsx";
 import Register from "../views/auth/Register.jsx";
 import Dashboard from "../views/user/Dashboard/Dashboard.jsx";
+import Cgu from "../views/user/Infos/Cgu.jsx";
+import Confidentiality from "../views/user/Infos/Confidentiality.jsx";
+import Cgv from "../views/user/Infos/Cgv.jsx";
+import requireAuth from "../HOC/ProtectedUserRoutes";
 // import "../assets/styles/index.scss";
 
 
 function UserRoutes() {
     //todo mettre le hoc de protection des routes
+     const DashboardWithAuth = requireAuth(Dashboard);
 
     return (
         <Routes>
@@ -28,6 +33,13 @@ function UserRoutes() {
 
                     {/* route d'un membre vers son dashboard */}
                     <Route path="utilisateur/compte" element={<Dashboard />} />
+                    {/* <Route path="utilisateur/compte" element={<DashboardWithAuth />} /> */}
+
+                    <Route path="CGU" element={<Cgu />} />
+                    
+                    <Route path="CGV" element={<Cgv />} />
+                    
+                    <Route path="politique-confidentialité" element={ <Confidentiality/>} />
                     
                 </Route>
 

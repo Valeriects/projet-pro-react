@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -15,9 +15,14 @@ function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { isLogged, resUser : {id, firstname, roleUser}} = useSelector((state) => state.user);
+    const { isLogged, user} = useSelector((state) => state.user);
+    // const { isLogged, resUser : {id, firstname, roleUser}} = useSelector((state) => state.user);
 
+    const roleUser = user ? user.roleUser : null;
     // console.log(resUser);
+    console.log(user);
+    console.log("roleUser : ",roleUser);
+    // console.log(listUser);
     
     function toggleBurger() {
         setIsBurgerOpen(!isBurgerOpen);
@@ -41,9 +46,9 @@ function Header() {
         }
     }
     console.log(isLogged);
-    console.log(id);
-    console.log(firstname);
-    console.log(roleUser);
+    // console.log(id);
+    // console.log(firstname);
+    // console.log(roleUser);
     
     return (
         
@@ -59,7 +64,7 @@ function Header() {
 
             {isBurgerOpen && (
 
-                <nav id="menu"aria-label="Menu de navigation">
+                <nav id="menu" aria-label="Menu de navigation">
                     <NavLink to={"/"}>accueil</NavLink>
                     {isLogged ? (
                         <NavLink to={"utilisateur/compte"} >votre compte</NavLink>
@@ -68,15 +73,19 @@ function Header() {
                     )}
                     {/* <NavLink to={""}>films à l&rsquo;affiche</NavLink> */}
                     <NavLink to={""}>infos pratiques</NavLink>
-                    <NavLink to={""}>nous contacter</NavLink>
+
+                    <Link href="#contact">nous contacter</Link>
+
                     <NavLink to={""}>à propos</NavLink>
+
                     <NavLink to={""}>paramètres</NavLink>
+                    
                     {isLogged && (
                         <button onClick={userLogout} className="btnDeco burgerDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>
                     )}
                 </nav>
 
-            ) }
+            )}
 
             <div id="wrapIcon">
                 <FontAwesomeIcon id="iconGlass" className="icon" icon={faMagnifyingGlass} />

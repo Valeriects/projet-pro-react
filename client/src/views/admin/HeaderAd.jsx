@@ -62,7 +62,7 @@ function HeaderAd() {
                     <nav className="menu" aria-label="Menu de connexion">
                         <NavLink to={"/admin"} >accueil administrateur</NavLink>
 
-                        <button onClick={toggleList} aria-label="Menu de tableau des données">tableaux de données</button>
+                        <button onClick={toggleList} aria-label="Menu de tableau des données">Tableaux de données</button>
 
                         {isListOpen && (
                             <>
@@ -73,7 +73,7 @@ function HeaderAd() {
                                 <NavLink to="">séance</NavLink>
                                 <NavLink to="">salle</NavLink>
                                 <NavLink to="">cinéma</NavLink>
-                                <NavLink to="">catégorie</NavLink>
+                                <NavLink to={"categorie"}>catégorie</NavLink>
                                 <NavLink to="">média</NavLink>
                             </>
                         )}

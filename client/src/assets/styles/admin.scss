@@ -67,6 +67,11 @@ button {
     }
 }
 
+#adFoot {
+    @include display(row, space-between);
+    padding: .5rem 1rem;
+}
+
 #admin, #membre {
     color: $marron;
     padding: 1rem;
@@ -99,11 +104,9 @@ button {
             }
         }
     }
-
-
 }
 
-#userBack, #membre {
+#userBack, #membre, .table {
     padding: 2rem, 0;
     max-height: 70%;
     overflow-y: auto;
@@ -119,22 +122,29 @@ button {
 
     table {
         display: block;
-        // background-color: $beigeClair;
         color: $marron;
         border-collapse: collapse;
         overflow-x: scroll;
 
-        border: 2px solid $marron;
+        border: 2px solid $gris;
         max-width: 95%;
         margin: auto;
 
         caption {
             padding: 1rem;
             text-transform: uppercase;
+            text-align: left;
+
+            a {
+                font-style: italic;
+                font-weight: bold;
+                font-size: 1.4rem;
+                
+            }
         }
 
         th, td, tr {
-            border: .5px solid $marron;
+            border: .5px solid $gris;
             padding: 1rem;
         }
 
@@ -165,8 +175,6 @@ button {
 
         article {
             position:absolute;
-            
-
         }
     }
 }

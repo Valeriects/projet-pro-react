@@ -64,10 +64,17 @@ A la racine du projet `projet-pro-react`, et dans le terminal, on fait quelques 
 
    npm i --save @fortawesome/free-solid-svg-icons
 
-   npm i --save @fortawesomefree-brands-svg-icons
+   npm i --save @fortawesome/free-brands-svg-icons
 
   ```
-  pour icone du footer le brands
+ 
+ installation du module react slick pour le carousel de la page d'accueil:
+ (https://react-slick.neostack.com/docs/get-started#include-css)
+ ```bash
+ npm install react-slick --save
+
+ npm install slick-carousel --save
+ ```
 
 
   Les couleurs:

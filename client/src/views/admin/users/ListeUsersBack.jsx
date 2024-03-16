@@ -46,7 +46,7 @@ function ListUsers() {
 
     return (
 
-        <main id="membre" className="table">
+        <main className="table">
 
             <table>
                 <caption>Liste des membres de votre site web</caption>
@@ -74,21 +74,13 @@ function ListUsers() {
                         item.roles_id !== 1 && (
                             
                         <tr key={item.id}>
-                            {/* {console.log(convertDate(item.last_connection_date))} */}
                             
                             <td>{item.id}</td>
                             <td className="tdIcone">
-                                <Link to={`/modify/${item.id}`}><FontAwesomeIcon icon={faSquarePen} className="iconeTable" /></Link>
-                                    <Link to={`suppression/${item.id}`} ><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link>  
+                                {/* <Link to={`/modify/${item.id}`}><FontAwesomeIcon icon={faSquarePen} className="iconeTable" /></Link> */}
+                                <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link>  
                                     {/* <button onClick={toggleMsgDelete} ><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button>   */}
-                            {/* { (deleteMsgOpen && item.id) && (
-                                        <CardMsgDelete key={item.id} msg={item} />
-                                    // <article>
-                                    //     <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
-                                    //     <button onClick={(e)=>btnDelete(e, item?.id)}>OUI</button>
-                                    //     <button onClick={toggleMsgDelete}>NON</button>
-                                    // </article>
-                            )} */}
+                        
                                
                             </td>
                             <td>{item.last_connection_date}</td>
@@ -103,10 +95,6 @@ function ListUsers() {
                             <td>{item.created_date}</td>
 
                         </tr>   
-
-                            
-    
-                            
       
             ))}
                 </tbody>

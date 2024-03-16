@@ -14,21 +14,39 @@ function MovieDetail() {
     return (
         <main id="movieDetail">
             {movie && (
-                <article>
-                    <h2>{movie.title}</h2>
+                <section>
+                    <article>
 
-                    <img src={`http://localhost:9000/img/${movie.media[0].src}`} alt={movie.media[0].alt} />
-                    <iframe width="560" height="315" src={movie.media[1].src} title={movie.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    <p>Réalisateur: {movie.director}</p>
-                    <p>Acteurs: {movie.actor}</p>
-                    <p>Genre: {movie.categories.join(" - ")}</p>
-                    <p>Date de réalisation: {movie.release_date}</p>
-                    <p>Résumé: {movie.synopsis}</p>
-                    <p>Durée: {movie.time}</p>
+                        <h2>{movie.title}</h2>
 
-                    <Link to={"/"}>Accueil</Link>
+                        <img src={`http://localhost:9000/img/${movie.media[0].src}`} alt={movie.media[0].alt} />
+                        
+                        <p className="real">Réalisateur: <strong> {movie.director}</strong></p>
+                        <p className="actor">Acteurs: <strong>{movie.actor}</strong></p>
+                        <p className="categorie">Genre: <strong>{movie.categories.join(" - ")}</strong></p>
+                        <p className="dateReal">Date de réalisation: <strong>{movie.release_date}</strong></p>
+                        <p className="timeMovie">Durée: <strong>{movie.time}</strong></p>
+
+                    </article>
+                    
+                    <article className="video">
+
+                        <iframe src={movie.media[1].src} title={movie.media[1].alt} allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+                        {/* <iframe width="560" height="315" src={movie.media[1].src} title={movie.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
+                    </article>
+
+                    <article className="synopsys">
+                        <p>Résumé:</p>
+
+                        <strong>{movie.synopsis}</strong>
+                        
+
+                    </article>
+
+                    <Link to={"/"}>Retour vers l&apos;accueil</Link>
                    
-                </article>
+                </section>
             )}
 
         </main>

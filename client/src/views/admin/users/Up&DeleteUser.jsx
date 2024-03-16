@@ -11,19 +11,31 @@ function UpDeleteUser() {
     
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
+    const [roles_id, setRoles_id] = useState("2");
+
+    const radioChange = e => {
+        setRoles_id(e.target.value)
+    }
 
     const { listUser } = useSelector((state) => state.user);
+
+
     const [user, setUser] = useState();
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
+ 
+
+    useEffect(() => {
+        dispatch(fetchUsers());
+        if (!user) {
+            setUser(listUser.find((user) => user.id === Number(id)));
+        }
+    }, []);
     
-    //   async function btnDelete(e, id) {
-    //       e.preventDefault();
-    
-    const btnDelete = async (id) => {
+    const btnDelete = async () => {
           try {
-              const res = await fetchUsers(`/api/v1/admin/user/${id}`, {
+              const res = await fetch(`/api/v1/admin/user/${user.id}`, {
                   method: "DELETE"
               });
   
@@ -38,16 +50,28 @@ function UpDeleteUser() {
           }
   
     }
-    
-    useEffect(() => {
-        dispatch(fetchUsers());
-        if (!user) {
-            setUser(listUser.find((user) => user.id === Number(id)));
-        }
-    }, [user]);
 
+    const btnUp = async () => {
+        try {
+            const res = await fetch(`/api/v1/admin/user/${user.id}`, {
+                method: "PATCH",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(),
+            });
+
+            if (res.ok) {
+                console.log(res);
+                navigate("/admin/membre");
+
+            }
+              
+        } catch (err) {
+            console.log(err);
+        }
+    }
     console.log(id)
-    // console.log("userid", user.id)
 
     console.log(user);
     console.log("listuser: ",listUser);
@@ -56,73 +80,52 @@ function UpDeleteUser() {
         setDeleteMsgOpen(!deleteMsgOpen);
     }
 
+    if (!user) {
+        return <div>Chargement des données en cours...</div>;
+    }
 
     return (
-        <main className="deleteUser">
+        <main className="detail">
             <form className="datas">
                  <fieldset>
                     <legend>Données du membre n°{ user?.id }</legend>
                        
-                    <label htmlFor="lastname">Nom :
-                        <input name="lastname" id="lastname" type="text" value={user?.lastname} />
-                    </label>
-                    <label htmlFor="firstname">Prénom :
-                        <input name="firstname" id="firstname" type="text" value={user?.firstname} />
+                    <p>Nom: <span>{user?.lastname}</span></p>
+                    <p>Prénom: <span>{user?.firstname}</span></p>
+                    <p>Email: <span>{user?.email}</span></p>
+                    <p>Mot de passe: <span>{user?.password}</span></p>
+                    <p>Date de naissance: <span>{user?.birthday}</span></p>
+                    <p>Date de création du compte: <span>{user?.created_date}</span></p>
+                    <p>Téléphone: <span>{user?.phone}</span></p>
+                    <p>Adresse postale: <span>{user?.address}</span></p>
+                    <p>Date de dernière connexion: <span>{user?.last_connection_date}</span></p>
+
                     
+                    <label htmlFor="member">Rôle membre:
+                        <input type="radio" name="roles_id" id="member" value="2" checked={roles_id === "2"} onChange={radioChange}/>
+                        {/* <input type="text" id="roles_id" name="roles_id" value={user?.roles_id} /> */}
                     </label>
-                    <label  htmlFor="email">Email : 
-                        <input name="email" id="email" type="email" value={user?.email} />
+                    <label htmlFor="admin">Rôle admin:
+                        <input type="radio" name="roles_id" id="admin" value="1" checked={roles_id === "1"} onChange={radioChange} />
+                        {/* <input type="text" id="roles_id" name="roles_id" value={user?.roles_id} /> */}
                     </label>
-                    <label  htmlFor="password">Mot de passe : 
-                        <input name="password" id="password" type="password" value={user?.lastname} />
-                    </label>
-                    <label  htmlFor="birthday">Date de naissance : 
-                        <input name="birthday" id="birthday" type="date" value={user?.lastname} />
-                    </label>
-                    <label  htmlFor="created_date">Nom : 
-                        <input name="created_date" id="created_date" type="date" value={user?.lastname} />
-                    </label>
-                    <label  htmlFor="phone">Téléphone : 
-                        <input name="phone" id="phone" type="tel" value={user?.lastname} pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
-                    </label>
-                    <label  htmlFor="address">Adresse postale : 
-                        <input name="address" id="address" type="text" value={user?.lastname} />
-                    </label>
-                    <label  htmlFor="roles_id">Rôle : 
-                        <input name="roles_id" id="roles_id" type="number" value={user?.lastname} />
-                    </label>
-                    <label  htmlFor="last_connection_date">Date de dernière connexion : 
-                        <input name="last_connection_date" id="last_connection_date" type="date" value={user?.lastname} />
-                    </label>
-                   
-                    
-                        
-                   
+                        <button onClick={btnUp} >
+                            <FontAwesomeIcon icon={faSquarePen} className="iconeTable" />
+                        </button>
+                    <select name="" id=""></select>
                     
                 </fieldset>
-
-                <tbody>
-                    <tr>
-                        {/* <td>{user.lastname}</td>
-                        <td>{user.firstname}</td>
-                        <td>{user.email}</td> */}
-                       
-                        
-                    </tr>
-                </tbody>
+      
 
             </form>
-
           
-
-            <button onClick={toggleMsgDelete} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" /></button> 
 
             <button onClick={toggleMsgDelete} ><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button> 
 
             {deleteMsgOpen && (
-               <article>
+               <article className="msgDelete">
                     <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
-                    <button onClick={btnDelete(user.id)}>OUI</button>
+                    <button onClick={btnDelete}>OUI</button>
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}

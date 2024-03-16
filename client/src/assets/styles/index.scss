@@ -1,5 +1,6 @@
 @use "variables" as *;
 
+
 @mixin display($param, $jContent) {
     display: flex;
     flex-direction: $param;
@@ -18,6 +19,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: $beigeClair;
+    font-family: $monserrat;
+    font-size: 1.6rem;
 }
 
 //la div où on met les composants
@@ -28,6 +31,11 @@ body {
     min-height: 100vh;
     // max-width: 400px;
 
+}
+
+h1, h2, h3 {
+    font-family: $varela;
+    text-align: center;
 }
 
 img {
@@ -76,10 +84,8 @@ header, footer {
 
 header {
     padding-bottom: .5rem;
-    // width: 100%;
 
     .btnBurger {
-
         .menuBurger{
             padding-top: .5rem;
             padding-left: .5rem;
@@ -97,24 +103,27 @@ header {
         }
 
         span  {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin-left: .5rem;
+            font-family: $varela;
         }
     }
 
     #menu, .menu { //menu mobile
         @include display(column, space-between);
         background-color: $marron;
-        font-size: 2.5rem;
+        font-size: 2rem;
         position: absolute;
         top: 4.5rem;
-        // padding: 1rem;
+        z-index: 10;
         
         a {
             padding: .5rem 1rem;
+            font-weight: bold;
 
             &:hover {
-                color: $orange;
+                color: $marron;
+                background-color: $orange;
             }
         }
     }
@@ -123,7 +132,8 @@ header {
         left:0;
 
         .burgerDeco {
-            border-top: 1.5px solid $beigeClair;
+            border-top: 1.5px dotted $beigeClair;
+            border-radius:0;
             padding: 1rem;
         }
     }
@@ -131,7 +141,6 @@ header {
     .btnDeco {
         color: $beigeClair;
         font-size: 2.5rem;
-        // padding: 0;
 
         &::first-letter {
             text-transform: capitalize;
@@ -155,19 +164,68 @@ header {
 
 
 footer {
-    height: 3rem;
-    bottom: 0;
+    @include display(column, space-between);
+    background-color: $marron;
+    color: $beigeClair;
+    text-align: center;
 
-    .icon {
-        font-size: 2rem;
-        margin: 1rem;
+    h3 {
+        margin-bottom: .5rem;
+        font-weight: normal;
+        font-size: 1.5rem;
+        text-decoration-line: underline;
     }
 
+    article {
+        width: 90%;
+        border-bottom: 1px dotted $beigeClair;
+        padding-bottom: 1.5rem;
+        
+        address {
+            .logoFooter {
+                width: 18%;
+            }
+            p , a{
+                margin: 0;
+                font-size: 1.3rem;
+                strong {
+                    font-weight: normal;
+                    margin-left: .45em;
+                    
+                }
+            }
+        }
+    }
+    
     nav {
-        @include display(row, space-around);
-        // display: none;
-        width:80%;
+        @include display(column, space-evenly);
+        width: 90%;
+        font-size: 1.2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px dotted $beigeClair;
+
+        a {
+            width: 90%;
+            margin: auto;
+        }
+
     }
+
+    div {
+        @include display(row, space-around);
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+
+        h3 {
+            width: 100%
+        }
+
+        .icon {
+            font-size: 2.5rem;
+            margin-top: 1rem;
+        }
+    }
+
     
 }
 
@@ -233,4 +291,187 @@ form {
         @include display(inline-block, center);
     }
 
+}
+
+// style de la page home
+.home {
+
+    .carousel {
+        .slick-arrow {
+            // z-index: 9;
+
+            &::before {
+                color: $marron;
+                font-size: 3rem;
+            }
+        }
+
+        .slick-prev {
+            left: .5rem;
+        }
+        .slick-next {
+            right: 1.5rem;
+        }
+
+        .slick-dots {
+            button::before {
+                margin-top: -20px;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .homeListe {
+        width: 100%;
+        padding: .5rem;
+        @include display(column, space-around);
+
+        figure:not(:last-child) {
+            border-bottom: 1px solid $black;
+        }
+   
+        figure {
+            margin: 0;
+            padding: 1.5rem 0;
+
+                img {
+                    width: 40%;
+                    float: left;
+                    margin-right: .5rem;
+                }
+
+                figcaption {
+
+                    h2, p {
+                        &::first-letter {
+                            text-transform: capitalize;
+                        }
+                    }
+
+                    h2 {
+                        margin-top: 0;
+                        margin-bottom: .5rem;
+                    }
+                
+                    p { 
+                        margin: 0;
+                        font-family: $varela;
+                        
+                        span {
+                            font-style: italic;
+                            font-family: $monserrat;
+                            // font-weight: bold;
+                        }
+                    }
+                }
+                
+                .clearfix {
+                    display: inline-block;
+                    clear: both;
+                    font-style: italic;
+                    font-size: 1.3rem;
+                    font-weight: bold;
+                    margin-top: 1rem;
+                }
+        }
+    }    
+}
+
+// style page de détail d'un film:
+#movieDetail {
+
+    article:not(.video) {
+        width: 90%;
+        margin: 1rem auto;
+    }
+
+    article {
+
+        h2, p {
+            &::first-letter {
+                text-transform: capitalize;
+            }
+        }
+
+        h2 {
+            text-align: center
+        }
+
+        img {
+            float: left;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        iframe {
+            width: 100%;
+            height: 35vh;
+            margin: 2rem 0;
+        }
+
+        p {
+            margin: 0;
+            font-size: 1.4rem;
+            
+            strong {
+                margin-left: .5rem;
+                font-style: italic;
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .synopsys {
+        // background-color: $white;
+        // border-radius: 0.2rem;
+        // border: 1px solid $marron;
+        padding: 1rem;
+
+        p{
+            margin-bottom: 1rem;
+        }
+        
+        strong {
+            font-weight: normal;
+            font-size: 1.4rem;
+        }
+    }
+
+    a {
+        display: inline-block;
+        margin: 2rem;
+        font-style: italic;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+}
+
+.infos {
+    padding: 1rem;
+    
+    section {
+        padding: 2rem;
+        border: 1px solid $marron;
+        border-radius: .2rem;
+        background-color: $white;
+
+        h2 {
+            margin: 0;
+        }
+
+        dt {
+            font-weight: bold;
+            font-size: 1.9rem;
+        }
+
+        dl:not(:last-child) {
+            border-bottom: 1px solid $marron;
+        }
+
+        dl {
+            strong {
+                font-weight: normal;
+            }
+        }
+    }
 }

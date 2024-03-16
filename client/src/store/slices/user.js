@@ -14,12 +14,14 @@ const fetchUsers = createAsyncThunk(
 const initialState = {
     listUser: [],
     isLogged: false,
-    id: '',
+    user: "",
+    // roleUser:  "",
+    // id: '',
+    // roleUser:  "",
     // firstname: "",
-    resUser: {
-        prenom: "",
-        roleUser: "",
-    },
+    // resUser: [
+    //     firstname= ""
+    // ],
     loading: false,
     error: null
 };
@@ -31,13 +33,7 @@ const userSlice = createSlice({
         login(state, action) {
             state.isLogged = true;
             console.log("action: ", action.payload);
-         
-            // state.resUser = action.payload;
-            // state.id = action.payload.id;
-            // console.log(payload);
-            // state.resUser.prenom = action.payload.firstname;
-            // state.roles_id = action.payload.roles_id;
-            // state.roleUser = action.payload.roles_id;
+            state.user = action.payload;
         },
         logout(state) {
             state.isLogged = false;

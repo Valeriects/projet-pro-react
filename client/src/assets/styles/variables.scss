@@ -1,6 +1,19 @@
+@use "fonts" as *;
+
 $orange : #EBB95C;
 $beige: #FFFFCC;
 $beigeClair: #FAEDD3;
 $marron : #3F2413;
 $black : #000000;
 $transparent : #00000000;
+$white: #fff;
+
+// couleurs page admin: 
+$gris: rgb(67, 92, 111);
+
+
+// variables de fonts:
+$monserrat : "Montserrat",
+sans-serif;
+$varela: "Varela Round",
+sans-serif;
