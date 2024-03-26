@@ -5,41 +5,47 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchCategoryMovies } from "../../../store/slices/categoryMovie";
 
-function UpDeleteCategory() {
+function UpDeleteCategoryMovie() {
     
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  
-    const [category, setCategory] = useState(null);
+    const [catMovie, setCatMovie] = useState(null);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { list } = useSelector((state) => state.categoryMovie);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
  
 
     useEffect(() => {
-        dispatch(fetchCategory());
-        if (!category) {
-            setCategory(listCategory.find((category) => category.id === Number(id)));
+        dispatch(fetchCategoryMovies());
+        if (!catMovie) {
+            setCatMovie(list.find((catMovie) => catMovie.id === Number(id)));
         }
 
-    }, [dispatch,listCategory]);
+    }, [dispatch, list]);
+
+    const handleChange = (e) => {
+        setCatMovie({
+            ...catMovie,
+            [e.target.name]: e.target.value
+        });
+    }
 
 
     const btnDelete = async () => {
           try {
-              const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+              const res = await fetch(`/api/v1/admin/category-movie/${catMovie.id}`, {
                   method: "DELETE"
               });
   
               if (res.ok) {
                   console.log(res);
-                  navigate("/admin/categorie");
+                  navigate("/admin/catégorie-film");
               }
-              
           } catch (err) {
               console.log(err);
           }
@@ -48,17 +54,17 @@ function UpDeleteCategory() {
 
     const btnUp = async () => {
         try {
-            const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+            const res = await fetch(`/api/v1/admin/category-movie/${catMovie.id}`, {
                 method: "PATCH",
                 headers: {
-                "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name_cat : category.name_cat}),
+                body: JSON.stringify(catMovie),
             });
 
             if (res.ok) {
                 console.log(res);
-                navigate("/admin/categorie/:id");
+                navigate("/admin/catégorie-film/:id");
             }
               
         } catch (err) {
@@ -70,24 +76,29 @@ function UpDeleteCategory() {
         setDeleteMsgOpen(!deleteMsgOpen);
     }
 
-    if (!category) {
+    if (!catMovie) {
         return <div>Chargement des données en cours...</div>;
     }
 
     return (
         <main className="detail">
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
             <form className="datas" onSubmit={btnUp}>
-                {category && (
+                {catMovie && (
                 
                     <fieldset>
-                        <legend>Données de la catégorie n°{ category?.id }</legend>
+                        <legend>Données du lien tentre un film et sa catégorie n°{ catMovie?.id }</legend>
                         
-                        <p>Nom: <span>&quot;{category?.name_cat}&quot;</span></p>
-
-                        <label htmlFor="name_cat">Modifier le nom :
-                            <input onChange={(e) => setCategory({...category, name_cat: e.target.value})} type="text" id="name_cat" name="name_cat" value={category.name_cat}/>
+                        
+                        <label htmlFor="movies_id">Modifier l&apos;id du film: &quot;<span>{catMovie?.movies_id}</span>&quot;
+                            <input onChange={handleChange} type="text" id="movies_id" name="movies_id" value={catMovie.movies_id}/>
                         </label>
+
+                        <label htmlFor="categories_id">Modifier l&apos;id de la catégorie: <span>&quot;{catMovie?.categories_id}&quot;</span>
+                            {/* <input  onChange={(e) => setCatMovie({...catMovie, categories_id: e.target.value})} type="text" id="categories_id" name="categories_id" value={catMovie.categories_id}/> */}
+                            <input onChange={handleChange} type="text" id="categories_id" name="categories_id" value={catMovie.categories_id}/>
+                        </label>
+                 
                         
                         <button type="submit" >
                             <FontAwesomeIcon icon={faSquarePen} className="iconeTable" />
@@ -95,10 +106,7 @@ function UpDeleteCategory() {
                     
                     </fieldset>
                 )}
-      
-
             </form>
-          
 
             <button onClick={toggleMsgDelete} ><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button> 
 
@@ -109,11 +117,9 @@ function UpDeleteCategory() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
- 
+            <Link to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
         </main>
     )
 }
 
-
-export default UpDeleteCategory;
+export default UpDeleteCategoryMovie;

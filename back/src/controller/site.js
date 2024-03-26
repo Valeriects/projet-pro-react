@@ -11,7 +11,7 @@ const getAllMovies = async (req, res) => {
 
         const allCategories = await Query.run(queryCategories);
 
-        const queryMedias = "SELECT movies.id AS movieId, src_media, alt, type_media FROM movies JOIN movies_media ON movies.id = movies_id JOIN media ON media.id = media_id";
+        const queryMedias = "SELECT movies.id AS movieId, src_img, alt_img, src_video, alt_video FROM movies JOIN movies_media ON movies.id = movies_id JOIN media ON media.id = media_id";
 
         const allMedia = await Query.run(queryMedias);
 

@@ -32,11 +32,12 @@ function Home() {
                         
                             <figure className="picture">
                                 
-                                <img src={`http://localhost:9000/img/${item.media[0].src}`} alt={item.media[0].alt} />
+                                <img src={`http://localhost:9000/img/${item.media[0]?.src_img}`} alt={item.media[0]?.alt_img} />
 
                                 {/* <iframe width="560" height="315" src={item.media[1].src} title={item.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
                                 
-                                <figcaption>{item.alt}</figcaption>
+                                {/* mettre une légende ???? pour lorsqu'on survole les affiches */}
+                                {/* <figcaption>{item.media[0].alt_img}</figcaption> */}
                                 
                             </figure>
                         </div>
@@ -49,7 +50,7 @@ function Home() {
             <section className="homeListe">
                 {list.map((item) => (
                     <figure key={item.id}>
-                        <img src={`http://localhost:9000/img/${item.media[0].src}`} alt={item.media[0].alt} />
+                        <img src={`http://localhost:9000/img/${item.media[0]?.src_img}`} alt={item.media[0]?.alt_img} />
                         
                         <figcaption>
                                 
@@ -64,8 +65,6 @@ function Home() {
                         </figcaption>
                         <Link to={`/film/${item.id}`} className="clearfix">Voir plus...</Link>
                     </figure>
-
-
 
                 ))}
             </section>

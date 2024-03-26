@@ -4,38 +4,43 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchSessions} from "../../../store/slices/session";
 
-function TableCategories() {
-    // const navigate = useNavigate();
+function TableSessions() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCategory());
+        dispatch(fetchSessions());
     }, []);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { list } = useSelector((state) => state.session);
  
 
-    console.log(listCategory);
+    console.log(list);
 
     return (
         <main className="table">
 
 
             <table>
-                <caption>Liste des catégories <Link to={"/admin/categorie/ajout"}>Ajouter une catégorie</Link></caption>
+                <caption>Liste des rôles <Link to={"/admin/séance/ajout"}>Ajouter une séance</Link></caption>
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Actions</th>
-                        <th>Nom</th>
+                        <th>Date de la séance</th>
+                        <th>Id du film</th>
+                        <th>Id de la salle</th>
+                        <th>Langue du film</th>
+                        <th>Prix de la séance</th>
+                        <th>id de l&apos;horaire</th>
+                        <th>Version 2D ou 3D</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    {listCategory.map((item) => (                  
+                    {list.map((item) => (                  
                     <tr key={item.id}>
                         
                         <td>{item.id}</td> 
@@ -44,7 +49,13 @@ function TableCategories() {
                             <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link> 
                         
                         </td>
-                        <td>{item?.name_cat}</td>
+                        <td>{item?.session_date}</td>
+                        <td>{item?.movies_id}</td>
+                        <td>{item?.movie_theaters_id}</td>
+                        <td>{item?.language}</td>
+                        <td>{item?.price}</td>
+                        <td>{item?.timetables_id}</td>
+                        <td>{item?.version_2D_3D}</td>
 
                     </tr>   
                    ))}
@@ -54,4 +65,4 @@ function TableCategories() {
     )
 }
 
-export default TableCategories;
+export default TableSessions;

@@ -7,6 +7,9 @@ import { getSessions, addSession, upSession, deleteSession, delTimetable, upTime
 import { getOrders, addOrder, upOrder, deleteOrder } from "../controller/admin/orders.js";
 import { getMovieMedias, addMovieMedia, upMovieMedia, delMovieMedia, getMedias, addMedia, upMedia, delMedia,getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
 
+// import { multerStorage, storage } from "../middlewares/multer-config.js";
+import { storage, upload } from "../middlewares/multer-config.js";
+
 const router = Router();
 
 //routes USER
@@ -53,26 +56,29 @@ router.delete("/timetable/:id", delTimetable);
 //routes ORDER
 router.get("/order", getOrders);
 router.post("/order", addOrder); //TODO mettre dans site.js ?
-router.patch("/order/user/:users_id/session-movie/:sessions_id", upOrder);
-router.delete("/order/user/:users_id/session-movie/:sessions_id", deleteOrder);
+router.patch("/order/:id", upOrder);
+router.delete("/order/:id", deleteOrder);
 
 //routes MOVIE_MEDIA 
 router.get("/movie-media", getMovieMedias);
 router.post("/movie-media", addMovieMedia);
-router.patch("/movie-media/movie/:movies_id/media/:media_id", upMovieMedia);
-router.delete("/movie-media/movie/:movies_id/media/:media_id", delMovieMedia);
+router.patch("/movie-media/:id", upMovieMedia);
+router.delete("/movie-media/:id", delMovieMedia);
 
 //routes MEDIA
 router.get("/media", getMedias);
-router.post("/media", addMedia);
-router.patch("/media/:id", upMedia);
+// router.post("/media", multerStorage, addMedia);
+// router.patch("/media/:id", multerStorage, upMedia);
+router.post("/media", upload.single('src_img'), addMedia);
+// router.post("/media",storage, upload.single('src_img'), addMedia);
+// router.patch("/media/:id", storage, upload.single('src_img'), upMedia);
 router.delete("/media/:id", delMedia);
 
 //routes CATEGORY_MOVIE
 router.get("/category-movie", getCatMovies);
 router.post("/category-movie", addCatMovie);
-router.patch("/category-movie/movie/:movies_id/category/:categories_id", upCatMovie);
-router.delete("/category-movie/movie/:movies_id/category/:categories_id", deleteCatMovie);
+router.patch("/category-movie/:id", upCatMovie);
+router.delete("/category-movie/:id", deleteCatMovie);
 
 //routes CATEGORY
 router.get("/category", getCategories);

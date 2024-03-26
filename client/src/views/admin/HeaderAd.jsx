@@ -67,14 +67,17 @@ function HeaderAd() {
                         {isListOpen && (
                             <>
                                 <NavLink to={"membre"}>membres</NavLink>
-                                <NavLink to="">role</NavLink>
-                                <NavLink to="">film</NavLink>
-                                <NavLink to="">réservation</NavLink>
-                                <NavLink to="">séance</NavLink>
-                                <NavLink to="">salle</NavLink>
-                                <NavLink to="">cinéma</NavLink>
+                                <NavLink to={"role"}>role</NavLink>
+                                <NavLink to={"film"}>film</NavLink>
+                                <NavLink to={"réservation"}>réservation</NavLink>
+                                <NavLink to={"séance"}>séance</NavLink>
+                                <NavLink to={"salle"}>salle</NavLink>
+                                <NavLink to={"cinéma"}>cinéma</NavLink>
                                 <NavLink to={"categorie"}>catégorie</NavLink>
-                                <NavLink to="">média</NavLink>
+                                <NavLink to={"média"}>média</NavLink>
+                                <NavLink to={"média-film"}>média-film</NavLink>
+                                <NavLink to={"catégorie-film"}>catégorie-film</NavLink>
+                                <NavLink to={"horaire"}>horaire</NavLink>
                             </>
                         )}
 

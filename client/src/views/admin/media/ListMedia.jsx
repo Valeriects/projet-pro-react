@@ -4,48 +4,49 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchMedia } from "../../../store/slices/media";
 
-function TableCategories() {
+function TableMedia() {
     // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCategory());
+        dispatch(fetchMedia());
     }, []);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { listMedia } = useSelector((state) => state.media);
  
 
-    console.log(listCategory);
+    console.log(listMedia);
 
     return (
         <main className="table">
 
-
             <table>
-                <caption>Liste des catégories <Link to={"/admin/categorie/ajout"}>Ajouter une catégorie</Link></caption>
+                <caption>Liste des médias <Link to={"/admin/média/ajout"}>Ajouter un média</Link></caption>
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Actions</th>
-                        <th>Nom</th>
+                        <th>Alt affiche</th>
+                        <th>Src affiche</th>
+                        <th>Alt vidéo</th>
+                        <th>Src vidéo</th>
                     </tr>
                 </thead>
 
                 <tbody>
-
-                    {listCategory.map((item) => (                  
+                    {listMedia.map((item) => (                  
                     <tr key={item.id}>
                         
                         <td>{item.id}</td> 
                         <td className="tdIcone">
-                            
                             <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link> 
-                        
                         </td>
-                        <td>{item?.name_cat}</td>
-
+                        <td>{item?.alt_img}</td>
+                        <td>{item?.src_img}</td>
+                        <td>{item?.alt_video}</td>                     
+                        <td>{item?.src_video}</td>                     
                     </tr>   
                    ))}
                 </tbody>
@@ -54,4 +55,4 @@ function TableCategories() {
     )
 }
 
-export default TableCategories;
+export default TableMedia;

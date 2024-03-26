@@ -5,39 +5,39 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchTimes } from "../../../store/slices/timetable";
 
-function UpDeleteCategory() {
+function UpDeleteTimeTable() {
     
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  
-    const [category, setCategory] = useState(null);
+    const [timeTable, setTimeTable] = useState(null);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { list } = useSelector((state) => state.timeTable);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
  
 
     useEffect(() => {
-        dispatch(fetchCategory());
-        if (!category) {
-            setCategory(listCategory.find((category) => category.id === Number(id)));
+        dispatch(fetchTimes());
+        if (!timeTable) {
+            setTimeTable(list.find((timeTable) => timeTable.id === Number(id)));
         }
 
-    }, [dispatch,listCategory]);
+    }, [dispatch, list]);
 
 
     const btnDelete = async () => {
           try {
-              const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+              const res = await fetch(`/api/v1/admin/timetable/${timeTable.id}`, {
                   method: "DELETE"
               });
   
               if (res.ok) {
                   console.log(res);
-                  navigate("/admin/categorie");
+                  navigate("/admin/horaire");
               }
               
           } catch (err) {
@@ -48,17 +48,17 @@ function UpDeleteCategory() {
 
     const btnUp = async () => {
         try {
-            const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+            const res = await fetch(`/api/v1/admin/timetable/${timeTable.id}`, {
                 method: "PATCH",
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name_cat : category.name_cat}),
+                body: JSON.stringify(timeTable),
             });
 
             if (res.ok) {
                 console.log(res);
-                navigate("/admin/categorie/:id");
+                navigate("/admin/horaire/:id");
             }
               
         } catch (err) {
@@ -70,23 +70,23 @@ function UpDeleteCategory() {
         setDeleteMsgOpen(!deleteMsgOpen);
     }
 
-    if (!category) {
+    if (!timeTable) {
         return <div>Chargement des données en cours...</div>;
     }
 
     return (
         <main className="detail">
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/horaire"}>Retour à la liste des horaires</Link>
             <form className="datas" onSubmit={btnUp}>
-                {category && (
+                {timeTable && (
                 
                     <fieldset>
-                        <legend>Données de la catégorie n°{ category?.id }</legend>
+                        <legend>Données de l&apos;horaire n°{ timeTable?.id }</legend>
                         
-                        <p>Nom: <span>&quot;{category?.name_cat}&quot;</span></p>
+                        <p>Horaire à modifier: <span>&quot;{timeTable?.hours_timetable}&quot;</span></p>
 
-                        <label htmlFor="name_cat">Modifier le nom :
-                            <input onChange={(e) => setCategory({...category, name_cat: e.target.value})} type="text" id="name_cat" name="name_cat" value={category.name_cat}/>
+                        <label htmlFor="hours_timetable">Modifier le nom :
+                            <input onChange={(e) => setTimeTable({...timeTable, hours_timetable: e.target.value})} type="time" id="hours_timetable" name="hours_timetable" value={timeTable.hours_timetable}/>
                         </label>
                         
                         <button type="submit" >
@@ -95,8 +95,6 @@ function UpDeleteCategory() {
                     
                     </fieldset>
                 )}
-      
-
             </form>
           
 
@@ -109,11 +107,11 @@ function UpDeleteCategory() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/horaire"}>Retour à la liste des horaires</Link>
  
         </main>
     )
 }
 
 
-export default UpDeleteCategory;
+export default UpDeleteTimeTable;

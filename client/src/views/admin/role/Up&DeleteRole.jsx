@@ -5,39 +5,39 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchRoles } from "../../../store/slices/role";
 
-function UpDeleteCategory() {
+function UpDeleteRole() {
     
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  
-    const [category, setCategory] = useState(null);
+    const [role, setRole] = useState(null);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { list } = useSelector((state) => state.role);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
  
 
     useEffect(() => {
-        dispatch(fetchCategory());
-        if (!category) {
-            setCategory(listCategory.find((category) => category.id === Number(id)));
+        dispatch(fetchRoles());
+        if (!role) {
+            setRole(list.find((role) => role.id === Number(id)));
         }
 
-    }, [dispatch,listCategory]);
+    }, [dispatch,list]);
 
 
     const btnDelete = async () => {
           try {
-              const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+              const res = await fetch(`/api/v1/admin/role/${role.id}`, {
                   method: "DELETE"
               });
   
               if (res.ok) {
                   console.log(res);
-                  navigate("/admin/categorie");
+                  navigate("/admin/role");
               }
               
           } catch (err) {
@@ -48,17 +48,17 @@ function UpDeleteCategory() {
 
     const btnUp = async () => {
         try {
-            const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+            const res = await fetch(`/api/v1/admin/role/${role.id}`, {
                 method: "PATCH",
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name_cat : category.name_cat}),
+                body: JSON.stringify(role),
             });
 
             if (res.ok) {
                 console.log(res);
-                navigate("/admin/categorie/:id");
+                navigate("/admin/role/:id");
             }
               
         } catch (err) {
@@ -70,23 +70,23 @@ function UpDeleteCategory() {
         setDeleteMsgOpen(!deleteMsgOpen);
     }
 
-    if (!category) {
+    if (!role) {
         return <div>Chargement des données en cours...</div>;
     }
 
     return (
         <main className="detail">
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/role"}>Retour à la liste des rôles</Link>
             <form className="datas" onSubmit={btnUp}>
-                {category && (
+                {role && (
                 
                     <fieldset>
-                        <legend>Données de la catégorie n°{ category?.id }</legend>
+                        <legend>Données du rôle n°{ role?.id }</legend>
                         
-                        <p>Nom: <span>&quot;{category?.name_cat}&quot;</span></p>
+                        <p>Nom: <span>&quot;{role?.name_role}&quot;</span></p>
 
-                        <label htmlFor="name_cat">Modifier le nom :
-                            <input onChange={(e) => setCategory({...category, name_cat: e.target.value})} type="text" id="name_cat" name="name_cat" value={category.name_cat}/>
+                        <label htmlFor="name_role">Modifier le nom du rôle :
+                            <input onChange={(e) => setRole({...role, name_role: e.target.value})} type="text" id="name_role" name="name_role" value={role.name_role}/>
                         </label>
                         
                         <button type="submit" >
@@ -109,11 +109,11 @@ function UpDeleteCategory() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/role"}>Retour à la liste des rôles</Link>
  
         </main>
     )
 }
 
 
-export default UpDeleteCategory;
+export default UpDeleteRole;

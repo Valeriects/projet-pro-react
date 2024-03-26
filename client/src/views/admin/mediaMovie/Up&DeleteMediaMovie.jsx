@@ -5,39 +5,38 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchMediaMovie } from "../../../store/slices/mediaMovie";
 
-function UpDeleteCategory() {
+function UpDeleteRole() {
     
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  
-    const [category, setCategory] = useState(null);
-
-    const { listCategory } = useSelector((state) => state.category);
+    const [mediaMovie, setMediaMovie] = useState(null);
+    const { listMediaMovie} = useSelector((state) => state.mediaMovie);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
  
 
     useEffect(() => {
-        dispatch(fetchCategory());
-        if (!category) {
-            setCategory(listCategory.find((category) => category.id === Number(id)));
+        dispatch(fetchMediaMovie());
+        if (!mediaMovie) {
+            setMediaMovie(listMediaMovie.find((mediaMovie) => mediaMovie.id === Number(id)));
         }
 
-    }, [dispatch,listCategory]);
+    }, [dispatch,listMediaMovie]);
 
 
     const btnDelete = async () => {
           try {
-              const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+              const res = await fetch(`/api/v1/admin/movie-media/${mediaMovie.id}`, {
                   method: "DELETE"
               });
   
               if (res.ok) {
                   console.log(res);
-                  navigate("/admin/categorie");
+                  navigate("/admin/média-film");
               }
               
           } catch (err) {
@@ -48,19 +47,18 @@ function UpDeleteCategory() {
 
     const btnUp = async () => {
         try {
-            const res = await fetch(`/api/v1/admin/category/${category.id}`, {
+            const res = await fetch(`/api/v1/admin/movie-media/${mediaMovie.id}`, {
                 method: "PATCH",
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name_cat : category.name_cat}),
+                body: JSON.stringify(mediaMovie),
             });
 
             if (res.ok) {
                 console.log(res);
-                navigate("/admin/categorie/:id");
+                navigate(`/admin/média-film/${mediaMovie.id}`);
             }
-              
         } catch (err) {
             console.log(err);
         }
@@ -70,23 +68,28 @@ function UpDeleteCategory() {
         setDeleteMsgOpen(!deleteMsgOpen);
     }
 
-    if (!category) {
+    if (!mediaMovie) {
         return <div>Chargement des données en cours...</div>;
     }
 
     return (
         <main className="detail">
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
             <form className="datas" onSubmit={btnUp}>
-                {category && (
+                {mediaMovie && (
                 
                     <fieldset>
-                        <legend>Données de la catégorie n°{ category?.id }</legend>
+                        <legend>Données du média lié au film n°{ mediaMovie?.id }</legend>
                         
-                        <p>Nom: <span>&quot;{category?.name_cat}&quot;</span></p>
+                        <p>Titre du film: <span>&quot;{mediaMovie?.title}&quot;</span></p>
+                        <p>Nom du média: <span>&quot;{mediaMovie?.alt_img}&quot;</span></p>
 
-                        <label htmlFor="name_cat">Modifier le nom :
-                            <input onChange={(e) => setCategory({...category, name_cat: e.target.value})} type="text" id="name_cat" name="name_cat" value={category.name_cat}/>
+                        <label htmlFor="movies_id">Modifier l&apos;ID du film {mediaMovie?.title}:
+                            <input onChange={(e) => setMediaMovie({...mediaMovie, movies_id: e.target.value})} type="text" id="movies_id" name="movies_id" value={mediaMovie?.movies_id}/>
+                        </label>
+
+                        <label htmlFor="media_id">Modifier l&apos;ID du média {mediaMovie?.alt_img}:
+                            <input onChange={(e) => setMediaMovie({...mediaMovie, media_id: e.target.value})} type="text" id="media_id" name="media_id" value={mediaMovie?.media_id}/>
                         </label>
                         
                         <button type="submit" >
@@ -109,11 +112,11 @@ function UpDeleteCategory() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
  
         </main>
     )
 }
 
 
-export default UpDeleteCategory;
+export default UpDeleteRole;

@@ -4,38 +4,40 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchMovieTheaters} from "../../../store/slices/movieTheater";
 
-function TableCategories() {
-    // const navigate = useNavigate();
+function TableMovieTheater() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCategory());
+        dispatch(fetchMovieTheaters());
     }, []);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { list } = useSelector((state) => state.movieTheater);
  
 
-    console.log(listCategory);
+    console.log(list);
 
     return (
         <main className="table">
 
 
             <table>
-                <caption>Liste des catégories <Link to={"/admin/categorie/ajout"}>Ajouter une catégorie</Link></caption>
+                <caption>Liste des salles <Link to={"/admin/salle/ajout"}>Ajouter une salle</Link></caption>
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Actions</th>
-                        <th>Nom</th>
+                        <th>id du cinéma</th>
+                        <th>accès handicapé</th>
+                        <th>nom de la salle</th>
+                        <th>nombre de places</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    {listCategory.map((item) => (                  
+                    {list.map((item) => (                  
                     <tr key={item.id}>
                         
                         <td>{item.id}</td> 
@@ -44,8 +46,10 @@ function TableCategories() {
                             <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link> 
                         
                         </td>
-                        <td>{item?.name_cat}</td>
-
+                        <td>{item?.cinemas_id}</td>
+                        <td>{item?.disabled_access}</td>
+                        <td>{item?.name_theater}</td>
+                        <td>{item?.nbr_seats}</td>
                     </tr>   
                    ))}
                 </tbody>
@@ -54,4 +58,4 @@ function TableCategories() {
     )
 }
 
-export default TableCategories;
+export default TableMovieTheater;

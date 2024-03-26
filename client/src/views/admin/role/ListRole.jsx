@@ -4,38 +4,37 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchCategory } from "../../../store/slices/category";
+import { fetchRoles} from "../../../store/slices/role";
 
-function TableCategories() {
-    // const navigate = useNavigate();
+function TableRole() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCategory());
+        dispatch(fetchRoles());
     }, []);
 
-    const { listCategory } = useSelector((state) => state.category);
+    const { list } = useSelector((state) => state.role);
  
 
-    console.log(listCategory);
+    console.log(list);
 
     return (
         <main className="table">
 
 
             <table>
-                <caption>Liste des catégories <Link to={"/admin/categorie/ajout"}>Ajouter une catégorie</Link></caption>
+                <caption>Liste des rôles <Link to={"/admin/role/ajout"}>Ajouter un rôle</Link></caption>
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Actions</th>
-                        <th>Nom</th>
+                        <th>Nom des rôles</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    {listCategory.map((item) => (                  
+                    {list.map((item) => (                  
                     <tr key={item.id}>
                         
                         <td>{item.id}</td> 
@@ -44,7 +43,7 @@ function TableCategories() {
                             <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link> 
                         
                         </td>
-                        <td>{item?.name_cat}</td>
+                        <td>{item?.name_role}</td>
 
                     </tr>   
                    ))}
@@ -54,4 +53,4 @@ function TableCategories() {
     )
 }
 
-export default TableCategories;
+export default TableRole;

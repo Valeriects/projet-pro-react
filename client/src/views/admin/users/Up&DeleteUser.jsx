@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import { fetchUsers } from "../../../store/slices/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -86,6 +86,7 @@ function UpDeleteUser() {
 
     return (
         <main className="detail">
+            <Link to={"/admin/membre"}>Retour à la liste des membres</Link>
             <form className="datas">
                  <fieldset>
                     <legend>Données du membre n°{ user?.id }</legend>
@@ -129,7 +130,7 @@ function UpDeleteUser() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
- 
+            <Link to={"/admin/membre"}>Retour à la liste des membres</Link>
         </main>
     )
 }

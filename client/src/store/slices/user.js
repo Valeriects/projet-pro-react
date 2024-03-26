@@ -15,13 +15,6 @@ const initialState = {
     listUser: [],
     isLogged: false,
     user: "",
-    // roleUser:  "",
-    // id: '',
-    // roleUser:  "",
-    // firstname: "",
-    // resUser: [
-    //     firstname= ""
-    // ],
     loading: false,
     error: null
 };
@@ -37,10 +30,6 @@ const userSlice = createSlice({
         },
         logout(state) {
             state.isLogged = false;
-            // state.email = "";
-            // state.id = "";
-            // state.firstname = "";
-            // state.roles_id = "";
 
         }
     },

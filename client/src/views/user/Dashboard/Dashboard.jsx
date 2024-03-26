@@ -21,17 +21,30 @@ function Dashboard() {
     
     console.log("id :",id);
     
-    useEffect(() => {
-        dispatch(fetchUsers());
-    }, [dispatch]);
     
     const infoUser = listUser.find(user => user.id === Number(id));
     
     const [userUp, setUserUp] = useState({ firstname: infoUser?.firstname || "", lastname: infoUser?.lastname || "", email: infoUser?.email || "", password: infoUser?.password || "", phone: infoUser?.phone || "", address: infoUser?.address || "", birthday: infoUser?.birthday || "" });
     
     console.log("infoUser :", infoUser);
-    console.log(listUser);
+    // console.log(listUser);
     console.log("user : ", user);
+
+    useEffect(() => {
+        dispatch(fetchUsers());
+
+        // if (infoUser) {
+        //     setUserUp({
+        //         firstname: infoUser.firstname || "",
+        //         lastname: infoUser.lastname || "",
+        //         email: infoUser.email || "",
+        //         password: infoUser.password || "",
+        //         phone: infoUser.phone || "",
+        //         address: infoUser.address || "",
+        //         birthday: infoUser.birthday || ""
+        //     });
+        // }
+    }, [dispatch]);
     
     const handleChange = (e) => setUserUp({
         ...userUp, //je spread un nouveau tableau, avec les infos de userUp
@@ -44,7 +57,7 @@ function Dashboard() {
 
     const btnUp = async () => {
         try {
-            const res = await fetch(`/api/v1/admin/user/${user.id}`, {
+            const res = await fetch(`/api/v1/app/user/${user.id}`, {
                 method: "PATCH",
                 headers: {
                 "Content-Type": "application/json",
@@ -54,7 +67,7 @@ function Dashboard() {
 
             if (res.ok) {
                 console.log(res);
-                navigate("/admin/membre");
+                navigate("utilisateur/compte");
             }
               
         } catch (err) {

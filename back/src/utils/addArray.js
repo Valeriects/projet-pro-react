@@ -15,11 +15,11 @@ function addArray (datas_1, datas_2, datas_3) { //todo refaire
     }
 
     const mediaByMovieId = datas_3.reduce(
-        (acc, { movieId, src_media, alt, type_media }) => {
+        (acc, { movieId, src_img, alt_img, src_video, alt_video }) => {
             if (!acc[movieId]) {
                 acc[movieId] = [];
             }
-            acc[movieId].push({ "src": src_media, "alt": alt, "type": type_media });
+            acc[movieId].push({ "src_img": src_img, "alt_img": alt_img, "src_video": src_video, "alt_video": alt_video });
             return acc;
         },
         {}

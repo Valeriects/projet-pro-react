@@ -6,7 +6,7 @@ function Register() {
     const pwdRef = useRef();
     const navigate = useNavigate();
 
-    //je récupère les donées du formulaire:
+    //je récupère les données du formulaire:
     const [msg, setMsg] = useState("");
 
     useEffect(() => {

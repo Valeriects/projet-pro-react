@@ -3,7 +3,7 @@ import Query from "../../model/Query.js";
 //le CRUD pour la table movies_media
 const getMovieMedias = async (req, res) => {
     try {
-        const query = "SELECT * FROM movies_media";
+        const query = "SELECT movies_media.id, movies_id, media_id, movies.title, media.src_img, media.alt_img FROM movies_media JOIN movies ON movies_media.movies_id = movies.id JOIN media ON movies_media.media_id = media.id";
 
         const listMovieMedia = await Query.run(query);
 
@@ -30,18 +30,16 @@ const addMovieMedia = async (req, res) => {
     }
 };
 
-//todo update ne marche pas err         "message": "Malformed communication packet.",
-        // todo "code": "ER_MALFORMED_PACKET",
-        //todo  "errno": 1835,
+
 const upMovieMedia = async (req, res) => {
     try {
         const { movies_id, media_id  } = req.params;
 
-        const query = "UPDATE movies_media SET media_id = ? WHERE movies_id = ? AND media_id = ?";
+        const query = "UPDATE movies_media SET media_id = ?, movies_id = ? WHERE id = ?";
 
-        await Query.runByParams(query, [ movies_id, media_id, movies_id, media_id ]);
+        await Query.runByParams(query, [ movies_id, media_id, movies_id, id ]);
             
-        res.json({ movies_id, media_id  });
+        res.json({ movies_id, media_id, id  });
 
     } catch (err) {
         res.status(500).json({ msg: err });
@@ -49,12 +47,12 @@ const upMovieMedia = async (req, res) => {
 };
 const delMovieMedia = async (req, res) => {
     try {
-        const { movies_id, media_id  } = req.params;
-        const query = "DELETE FROM movies_media WHERE movies_id =? AND media_id = ? ";
+        const { id  } = req.params;
+        const query = "DELETE FROM movies_media WHERE id = ? ";
 
-        await Query.runByParams(query, [movies_id, media_id ]);
+        await Query.runByParams(query, [ id ]);
 
-        res.json({ msg : "Association entre movie et media, bien supprimé", movies_id, media_id  });
+        res.json({ msg : "Association entre movie et media, bien supprimé", id  });
 
     } catch (err) {
         res.status(500).json({ msg: err });
@@ -77,14 +75,19 @@ const getMedias = async (req, res) => {
         res.status(500).json({ msg: err });
     }
 };
+
 const addMedia = async (req, res) => {
     try {
-        const { src_media, alt, type_media } = req.body;
-        const query = "INSERT INTO media (src_media, alt, type_media) VALUES (?, ?, ?)";
+        const { alt_img, alt_video, src_video } = req.body;
+        // const { src_img, alt_img, alt_video, src_video } = req.body;
+        const { filename } = req.file;
+        const query = "INSERT INTO media (src_img, alt_img, alt_video, src_video) VALUES (?, ?, ?, ?)";
 
-        const role = await Query.runByParams(query, [src_media, alt, type_media]);
+        const role = await Query.runByParams(query, [filename, alt_img, alt_video, src_video]);
+        // const role = await Query.runByParams(query, [src_img, alt_img, alt_video, src_video]);
 
-        res.json({ id: role.insertId, src_media, alt, type_media });
+        res.json({ id: role.insertId, filename, alt_img, alt_video, src_video });
+        // res.json({ id: role.insertId, src_img, alt_img, alt_video, src_video });
 
     } catch (err) {
         res.status(500).json({ msg: err });
@@ -93,13 +96,16 @@ const addMedia = async (req, res) => {
 const upMedia = async (req, res) => {
     try {
         const { id } = req.params;
-        const { src_media, alt, type_media } = req.body;
+        const { alt_img, alt_video, src_video} = req.body;
+        // const { src_img, alt_img, alt_video, src_video} = req.body;
 
-        const query = "UPDATE media SET src_media = ?, alt = ?, type_media = ? WHERE id= ?";
+        const { filename } = req.file;
 
-        await Query.runByParams(query, [src_media, alt, type_media, id]);
+        const query = "UPDATE media SET src_img = ?, alt_img = ?, alt_video = ?, src_video = ? WHERE id= ?";
+
+        await Query.runByParams(query, [filename, alt_img, alt_video, src_video, id]);
             
-        res.json({ id, src_media, alt, type_media });
+        res.json({ id, filename, alt_img, alt_video, src_video});
 
     } catch (err) {
         res.status(500).json({ msg: err });
@@ -123,7 +129,7 @@ const delMedia = async (req, res) => {
 //le CRUD pour la table CATEGORY_MOVIE
 const getCatMovies = async (req, res) => {
     try {
-        const query = "SELECT * FROM categories_movies";
+        const query = "SELECT categories_movies.id, categories_id, movies_id, categories.name_cat, movies.title FROM categories_movies JOIN categories ON categories_movies.categories_id = categories.id JOIN movies ON movies.id = categories_movies.movies_id";
 
         const listCatMovie = await Query.run(query);
 
@@ -137,6 +143,7 @@ const getCatMovies = async (req, res) => {
 const addCatMovie = async (req, res) => {
     try {
         const { categories_id, movies_id } = req.body;
+
         const query = "INSERT INTO categories_movies (categories_id, movies_id) VALUES (?, ?)";
 
         await Query.runByParams(query, [categories_id, movies_id]);
@@ -151,14 +158,13 @@ const addCatMovie = async (req, res) => {
 //todo marche pas
 const upCatMovie = async (req, res) => {
     try {
-        const { categories_id, movies_id } = req.params;
-        // const { categories_id, movies_id } = req.body;
+        const { id } = req.params;
 
-        const query = "UPDATE categories_movies SET categories_id = ?, movies_id = ? WHERE categories_id= ? AND movies_id = ?";
+        const query = "UPDATE categories_movies SET categories_id = ?, movies_id = ? WHERE id = ?";
 
-        await Query.runByParams(query, [categories_id, movies_id, categories_id, movies_id]);
+        await Query.runByParams(query, [categories_id, movies_id, id]);
             
-        res.json({ categories_id, movies_id });
+        res.json({ id, categories_id, movies_id });
 
     } catch (err) {
         res.status(500).json({ msg: err });
@@ -166,12 +172,12 @@ const upCatMovie = async (req, res) => {
 };
 const deleteCatMovie = async (req, res) => {
     try {
-        const { categories_id, movies_id } = req.params;
-        const query = "DELETE FROM categories_movies WHERE categories_id = ? AND movies_id = ?";
+        const { id } = req.params;
+        const query = "DELETE FROM categories_movies WHERE id = ?";
 
-        await Query.runByParams(query, [categories_id, movies_id]);
+        await Query.runByParams(query, [id]);
 
-        res.json({ categories_id, movies_id });
+        res.json({ id });
 
     } catch (err) {
         res.status(500).json({ msg: err });
