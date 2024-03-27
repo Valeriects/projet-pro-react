@@ -1,7 +1,7 @@
-
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function Apropos() {
-
+    useMenuToggle();
 
     return (
         <p>Cinéma Le Comœdia

@@ -1,4 +1,8 @@
+import useMenuToggle from "../../../hook/useMenuToggle";
+
 function Confidentiality() {
+    useMenuToggle();
+    
     return (
         <main id="Confidential"  className="infos">
             <section>

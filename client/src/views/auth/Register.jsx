@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function Register() {
+    useMenuToggle();
     const userMailRef = useRef();
     const pwdRef = useRef();
     const navigate = useNavigate();

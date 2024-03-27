@@ -1,4 +1,7 @@
+import useMenuToggle from "../../../hook/useMenuToggle";
 function Cgu() {
+    useMenuToggle();
+    
     return (
         <main id="Cgu" className="infos">
             <section>

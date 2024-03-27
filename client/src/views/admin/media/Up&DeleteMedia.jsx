@@ -6,9 +6,10 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchMedia } from "../../../store/slices/media";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function UpDeleteMedia() {
-    
+    useMenuToggle();
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  

@@ -3,9 +3,10 @@ import { useRef, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { login } from "../../store/slices/user";
+import useMenuToggle from "../../hook/useMenuToggle";
 
 function Login() {
-
+    useMenuToggle();
     const userMailref = useRef();
     const navigate = useNavigate();
     const dispatch = useDispatch();

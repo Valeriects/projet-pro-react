@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchSessions} from "../../../store/slices/session";
+import { fetchSessions } from "../../../store/slices/session";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableSessions() {
+    useMenuToggle();
     const dispatch = useDispatch();
 
     useEffect(() => {

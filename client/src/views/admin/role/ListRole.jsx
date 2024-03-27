@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchRoles} from "../../../store/slices/role";
+import { fetchRoles } from "../../../store/slices/role";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableRole() {
+    useMenuToggle();
     const dispatch = useDispatch();
 
     useEffect(() => {

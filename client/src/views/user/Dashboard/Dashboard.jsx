@@ -6,9 +6,10 @@ import { fetchUsers } from "../../../store/slices/user.js";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
+import useMenuToggle from "../../../hook/useMenuToggle.jsx";
 
 function Dashboard() {
-    
+    useMenuToggle()
     const navigate = useNavigate();
     const dispatch = useDispatch();
 

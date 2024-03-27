@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function Home() {
-
+    useMenuToggle()
     const {list} = useSelector((state) => state.movie);
 
     console.log(list);

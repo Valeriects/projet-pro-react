@@ -1,20 +1,22 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBars, faMagnifyingGlass, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../../store/slices/user";
+import { toggleMenu, toggleMenuMember } from "../../store/slices/menu";
 import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 
 function Header() {
 
-    const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-    const [isMemberOpen, setIsMemberOpen] = useState(false);
+    // const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+    // const [isMemberOpen, setIsMemberOpen] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const { isMenuOpen, isUserOpen } = useSelector((state) => state.menu);
     const { isLogged, user} = useSelector((state) => state.user);
     // const { isLogged, resUser : {id, firstname, roleUser}} = useSelector((state) => state.user);
 
@@ -25,11 +27,13 @@ function Header() {
     // console.log(listUser);
     
     function toggleBurger() {
-        setIsBurgerOpen(!isBurgerOpen);
+        // setIsBurgerOpen(!isBurgerOpen);
+        dispatch(toggleMenu());
     }
     
     function toggleMember() {
-        setIsMemberOpen(!isMemberOpen);
+        // setIsMemberOpen(!isMemberOpen);
+        dispatch(toggleMenuMember());
     }
     
     async function userLogout() {
@@ -41,7 +45,8 @@ function Header() {
         if (response.ok) {
             dispatch(logout());
             // dispatch(toggleBurger());
-            dispatch(toggleMember());
+            // dispatch(toggleMember());
+            dispatch(toggleMenu());
             navigate("/");
         }
     }
@@ -62,7 +67,8 @@ function Header() {
                 <span>Cinéma FUN</span>
             </NavLink>
 
-            {isBurgerOpen && (
+            {/* {isBurgerOpen && ( */}
+            {isMenuOpen && (
 
                 <nav id="menu" aria-label="Menu de navigation">
                     <NavLink to={"/"}>accueil</NavLink>
@@ -94,7 +100,8 @@ function Header() {
                     <div>
                         <FontAwesomeIcon onClick={toggleMember} id="iconUser" className="icon" icon={faCircleUser} />
                     
-                        {isMemberOpen && (
+                        {/* {isMemberOpen && ( */}
+                        {isUserOpen && (
                             <nav className="menu" aria-label="Menu de connexion">
                                 <NavLink to={"utilisateur/compte"} >votre compte</NavLink>
                                 <button onClick={userLogout} className="btnDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>

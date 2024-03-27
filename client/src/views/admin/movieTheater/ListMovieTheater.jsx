@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
-import { fetchMovieTheaters} from "../../../store/slices/movieTheater";
+import { fetchMovieTheaters } from "../../../store/slices/movieTheater";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableMovieTheater() {
+    useMenuToggle();
     const dispatch = useDispatch();
 
     useEffect(() => {

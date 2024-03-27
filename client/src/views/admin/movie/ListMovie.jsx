@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
 import { fetchMovies } from "../../../store/slices/movie";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableMovie() {
+    useMenuToggle();
     // const navigate = useNavigate();
     const dispatch = useDispatch();
 

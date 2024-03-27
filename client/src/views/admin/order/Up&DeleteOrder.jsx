@@ -6,9 +6,10 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchOrders } from "../../../store/slices/orders";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function UpDeleteOrder() {
-    
+    useMenuToggle();
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  

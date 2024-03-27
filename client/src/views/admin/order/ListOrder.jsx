@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
 import { fetchOrders } from "../../../store/slices/orders";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableOrder() {
+    useMenuToggle();
     const dispatch = useDispatch();
 
     useEffect(() => {

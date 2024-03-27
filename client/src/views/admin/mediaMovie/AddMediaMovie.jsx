@@ -3,8 +3,10 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function AddMediaMovie() {
+    useMenuToggle();
     const navigate = useNavigate();
     const [mediaMovie, setMediaMovie] = useState("");
 

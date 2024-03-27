@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function MovieDetail() {
+    useMenuToggle();
     const { id } = useParams();
 
     const { list } = useSelector((state) => state.movie);

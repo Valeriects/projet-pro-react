@@ -12,6 +12,7 @@ import sessionReducer from "./slices/session";
 import timeTableReducer from "./slices/timetable";
 import movieTheaterReducer from "./slices/movieTheater";
 import categoryMovieReducer from "./slices/categoryMovie";
+import menuReducer from "./slices/menu";
 
 const store = configureStore({
     reducer: {
@@ -27,6 +28,7 @@ const store = configureStore({
         timeTable: timeTableReducer,
         movieTheater: movieTheaterReducer,
         categoryMovie: categoryMovieReducer,
+        menu: menuReducer,
 
     }
 

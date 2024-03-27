@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 import { logout } from "../../store/slices/user";
+import { toggleMenu } from "../../store/slices/menu";
 
 function HeaderAd() {
 
-    const [isBurgerOpen, setIsBurgerOpen] = useState(false);
+    const { isMenuOpen } = useSelector((state) => state.menu);
+    // const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const [isListOpen, setIsListOpen] = useState(false);
-
     // const [listUsersOpen, setListUsersOpen] = useState(false);
     // function toggleListUsers() {
     //     setListUsersOpen(!listUsersOpen);
@@ -27,7 +28,8 @@ function HeaderAd() {
 
 
     function toggleBurger() {
-        setIsBurgerOpen(!isBurgerOpen);
+        // setIsBurgerOpen(!isBurgerOpen);
+         dispatch(toggleMenu());
     }
 
     async function userLogout() {
@@ -58,7 +60,8 @@ function HeaderAd() {
         
                 <FontAwesomeIcon onClick={toggleBurger} id="iconUser" className="icon" icon={faBars} />
             
-                {isBurgerOpen && (
+                {/* {isBurgerOpen && ( */}
+                {isMenuOpen && (
                     <nav className="menu" aria-label="Menu de connexion">
                         <NavLink to={"/admin"} >accueil administrateur</NavLink>
 

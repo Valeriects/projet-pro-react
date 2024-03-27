@@ -6,8 +6,10 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchSessions } from "../../../store/slices/session";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function UpDeleteSession() {
+    useMenuToggle();
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
     const [session, setSession] = useState(null);

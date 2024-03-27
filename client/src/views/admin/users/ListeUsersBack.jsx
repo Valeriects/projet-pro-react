@@ -6,9 +6,11 @@ import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
 
 import { fetchUsers } from "../../../store/slices/user";
+import useMenuToggle from "../../../hook/useMenuToggle";
 // import CardMsgDelete from "./CardMsgDelete";
 // import convertDate from "../../../utils/formatDate.js";
 function ListUsers() {
+    useMenuToggle();
     const dispatch = useDispatch();
     const { listUser } = useSelector((state) => state.user);
     // const [newListUser, setNewListUser] = useState(listUser);

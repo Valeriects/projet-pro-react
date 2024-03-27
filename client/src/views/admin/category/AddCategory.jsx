@@ -3,8 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
-
+import useMenuToggle from "../../../hook/useMenuToggle";
 function AddCategory() {
+    useMenuToggle();
     const navigate = useNavigate();
     const [category, setCategory] = useState({ name_cat: "" });
     

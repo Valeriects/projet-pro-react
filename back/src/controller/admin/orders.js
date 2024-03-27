@@ -3,6 +3,7 @@ import Query from "../../model/Query.js";
 //le CRUD pour la table orders
 const getOrders = async (req, res) => {
     try {
+        //todo faire un JOIN avec une séance
         const query = "SELECT * FROM orders";
 
         const listOrders = await Query.run(query);

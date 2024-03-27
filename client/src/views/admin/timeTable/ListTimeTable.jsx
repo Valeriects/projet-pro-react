@@ -5,8 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
 import { fetchTimes } from "../../../store/slices/timetable";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableTimeTables() {
+    useMenuToggle();
     const dispatch = useDispatch();
 
     useEffect(() => {

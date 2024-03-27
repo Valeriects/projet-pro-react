@@ -3,10 +3,12 @@
 
 // import { fetchUsers } from "../../store/slices/user";
 // import TableUsers from './users/ListeUsersBack';
+import useMenuToggle from "../../hook/useMenuToggle";
 
 function AdminBack() {
+    useMenuToggle();
     // const dispatch = useDispatch();
-        
+         
     // const { listUser } = useSelector((state) => state.user);
 
     // useEffect(() => {

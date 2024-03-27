@@ -6,9 +6,10 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { fetchUsers } from "../../../store/slices/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
+import useMenuToggle from "../../../hook/useMenuToggle";
 
 function UpDeleteUser() {
-    
+    useMenuToggle();
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
     const [roles_id, setRoles_id] = useState("2");
