@@ -64,7 +64,6 @@ function ListUsers() {
                         <th>email</th>
                         <th>téléphone</th>
                         <th>adresse postale</th>
-                        <th>mot de passe</th>
                         <th>date de création</th>
                     </tr>
                 </thead>
@@ -93,7 +92,6 @@ function ListUsers() {
                             <td>{item.email}</td>
                             <td>{item.phone}</td>
                             <td>{item.address}</td>
-                            <td>{item.password}</td>
                             <td>{item.created_date}</td>
 
                         </tr>   

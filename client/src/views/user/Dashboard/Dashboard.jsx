@@ -19,8 +19,7 @@ function Dashboard() {
     
     const  listUser  = useSelector((state) => state.user.listUser );
     
-    console.log("id :",id);
-    
+    // console.log("id :",id);
     
    const infoUser = listUser.find(user => user.id === Number(id));
     
@@ -29,19 +28,12 @@ function Dashboard() {
     
     // console.log("infoUser :", infoUser);
     // console.log("listUser :", listUser);
-    console.log("user : " , user);
-    console.log("userUp : ", userUp);
+    // console.log("user : " , user);
+    // console.log("userUp : ", userUp);
     
     useEffect(() => {
         dispatch(fetchUsers());
     }, [dispatch]);
-    
-    // useEffect(() => {
-    //     console.log("cc 2");
-    //     infoUser = listUser.find(user => user.id === Number(id));
-    //     console.log("infoUser 2 :", infoUser);
-        
-    // }, [])
     
     const handleChange = (e) => setUserUp({
         ...userUp, //je spread un nouveau tableau, avec les infos de userUp
@@ -59,7 +51,11 @@ function Dashboard() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(userUp),
-            }).then(res => res.json()).then(dispatch(fetchUsers()));
+            }).then(res => res.json())
+                .then(
+                    dispatch(fetchUsers()),
+                    console.log("res :", res)
+                );
 
             // console.log("res :", res);
             // if (res.ok) {
@@ -97,13 +93,13 @@ function Dashboard() {
                         <input onChange={handleChange} type="email" id="email" name="email" placeholder={infoUser?.email}/>
                     </label>
 
-                    <label htmlFor="newPassword">Mot de passe: 
-                        <input onChange={handleChange} type="password" id="newPassword" name="newPassword"/>
+                    <label htmlFor="password">Mot de passe: 
+                        <input onChange={handleChange} type="password" id="password" name="password"/>
                         {/* <input onChange={handleChange} type="password" id="password" name="password" placeholder={infoUser?.password}/> */}
                     </label>
 
                     <label htmlFor="phone">Votre numéro de téléphone: 
-                        <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone"/>
+                        <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone"placeholder={infoUser?.phone}/>
                         {/* <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone" placeholder={infoUser?.phone}/> */}
                     </label>
 

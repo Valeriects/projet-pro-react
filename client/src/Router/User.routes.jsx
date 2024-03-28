@@ -9,13 +9,13 @@ import Dashboard from "../views/user/Dashboard/Dashboard.jsx";
 import Cgu from "../views/user/Infos/Cgu.jsx";
 import Confidentiality from "../views/user/Infos/Confidentiality.jsx";
 import Cgv from "../views/user/Infos/Cgv.jsx";
-import requireAuth from "../HOC/ProtectedUserRoutes";
+// import requireAuth from "../HOC/ProtectedUserRoutes";
 // import "../assets/styles/index.scss";
 
 
 function UserRoutes() {
     //todo mettre le hoc de protection des routes
-     const DashboardWithAuth = requireAuth(Dashboard);
+    //  const DashboardWithAuth = requireAuth(Dashboard);
 
     return (
         <Routes>
@@ -39,7 +39,6 @@ function UserRoutes() {
                     <Route path="CGV" element={<Cgv />} />
                     
                     <Route path="politique-confidentialité" element={ <Confidentiality/>} />
-             
 
             </Route>
 
