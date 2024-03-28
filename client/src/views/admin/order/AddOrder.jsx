@@ -55,7 +55,7 @@ function AddOrder() {
                         </label>
 
                         <label htmlFor="email">Email :
-                            <input onChange={handleChange} type="text" id="email" name="email" value={order.email}/>
+                            <input onChange={handleChange} type="texemailt" id="email" name="email" value={order.email}/>
                         </label>
 
                         <label htmlFor="name_cb">Nom sur la CB :
@@ -63,19 +63,19 @@ function AddOrder() {
                         </label>
 
                         <label htmlFor="num_cb">Numéro de la CB :
-                            <input onChange={handleChange} type="text" id="num_cb" name="num_cb" value={order.num_cb}/>
+                            <input onChange={handleChange} type="number" id="num_cb" name="num_cb" value={order.num_cb}/>
                         </label>
 
                         <label htmlFor="cryptogramme">Cryptogramme :
-                            <input onChange={handleChange} type="text" id="cryptogramme" name="cryptogramme" value={order.cryptogramme}/>
+                            <input onChange={handleChange} type="number" id="cryptogramme" name="cryptogramme" value={order.cryptogramme}/>
                         </label>
 
                         <label htmlFor="cb_date">Date de la CB :
-                            <input onChange={handleChange} type="text" id="cb_date" name="cb_date" value={order.cb_date}/>
+                            <input onChange={handleChange} type="date" id="cb_date" name="cb_date" value={order.cb_date}/>
                         </label>
 
                         <label htmlFor="price_order">Total :
-                            <input onChange={handleChange} type="text" id="price_order" name="price_order" value={order.price_order}/>
+                            <input onChange={handleChange} type="number" id="price_order" name="price_order" value={order.price_order}/>
                         </label>
 
                         <label htmlFor="sessions_id">Id de la séance à réserver :

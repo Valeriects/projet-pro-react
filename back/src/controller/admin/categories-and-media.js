@@ -8,7 +8,6 @@ const getMovieMedias = async (req, res) => {
         const listMovieMedia = await Query.run(query);
 
         res.json(listMovieMedia);
-        
 
     } catch (err) {
         res.status(500).json({ msg: err });
@@ -29,7 +28,6 @@ const addMovieMedia = async (req, res) => {
         res.status(500).json({ msg: err });
     }
 };
-
 
 const upMovieMedia = async (req, res) => {
     try {
@@ -83,11 +81,11 @@ const addMedia = async (req, res) => {
         const { filename } = req.file;
         const query = "INSERT INTO media (src_img, alt_img, alt_video, src_video) VALUES (?, ?, ?, ?)";
 
-        const role = await Query.runByParams(query, [filename, alt_img, alt_video, src_video]);
-        // const role = await Query.runByParams(query, [src_img, alt_img, alt_video, src_video]);
+        const data = await Query.runByParams(query, [filename, alt_img, alt_video, src_video]);
+        // const data = await Query.runByParams(query, [src_img, alt_img, alt_video, src_video]);
 
-        res.json({ id: role.insertId, filename, alt_img, alt_video, src_video });
-        // res.json({ id: role.insertId, src_img, alt_img, alt_video, src_video });
+        res.json({ id: data.insertId, filename, alt_img, alt_video, src_video });
+        // res.json({ id: data.insertId, src_img, alt_img, alt_video, src_video });
 
     } catch (err) {
         res.status(500).json({ msg: err });

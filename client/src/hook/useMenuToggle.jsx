@@ -8,11 +8,9 @@ import { closeMenu } from '../store/slices/menu';
 function useMenuToggle() {
     const dispatch = useDispatch();
     const { isMenuOpen, isUserOpen } = useSelector((state) => state.menu);
-    // const { isMenuOpen } = useSelector((state) => state.menu);
 
     useEffect(() => {
         if(isMenuOpen || isUserOpen) dispatch(closeMenu())
-        // if(isUserOpen) dispatch(toggleMenuMember())
     }, []);
 }
 

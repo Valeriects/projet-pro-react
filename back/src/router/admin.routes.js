@@ -75,7 +75,7 @@ router.post("/media", upload.single('src_img'), addMedia);
 router.delete("/media/:id", delMedia);
 
 //routes CATEGORY_MOVIE
-router.get("/category-movie", getCatMovies);
+router.get("/4", getCatMovies);
 router.post("/category-movie", addCatMovie);
 router.patch("/category-movie/:id", upCatMovie);
 router.delete("/category-movie/:id", deleteCatMovie);

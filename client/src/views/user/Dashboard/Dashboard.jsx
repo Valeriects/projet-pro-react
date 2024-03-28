@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 import { fetchUsers } from "../../../store/slices/user.js";
 
@@ -10,9 +10,8 @@ import useMenuToggle from "../../../hook/useMenuToggle.jsx";
 
 function Dashboard() {
     useMenuToggle()
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const dispatch = useDispatch();
-
     
     const { user } = useSelector((state) => state.user);
     
@@ -23,29 +22,26 @@ function Dashboard() {
     console.log("id :",id);
     
     
-    const infoUser = listUser.find(user => user.id === Number(id));
+   const infoUser = listUser.find(user => user.id === Number(id));
     
-    const [userUp, setUserUp] = useState({ firstname: infoUser?.firstname || "", lastname: infoUser?.lastname || "", email: infoUser?.email || "", password: infoUser?.password || "", phone: infoUser?.phone || "", address: infoUser?.address || "", birthday: infoUser?.birthday || "" });
+    const [userUp, setUserUp] = useState("");
+    // const [userUp, setUserUp] = useState({ firstname: infoUser?.firstname || "", lastname: infoUser?.lastname || "", email: infoUser?.email || "", password: infoUser?.password || "", phone: infoUser?.phone || "", address: infoUser?.address || "", birthday: infoUser?.birthday || "" });
     
-    console.log("infoUser :", infoUser);
-    // console.log(listUser);
-    console.log("user : ", user);
-
+    // console.log("infoUser :", infoUser);
+    // console.log("listUser :", listUser);
+    console.log("user : " , user);
+    console.log("userUp : ", userUp);
+    
     useEffect(() => {
         dispatch(fetchUsers());
-
-        // if (infoUser) {
-        //     setUserUp({
-        //         firstname: infoUser.firstname || "",
-        //         lastname: infoUser.lastname || "",
-        //         email: infoUser.email || "",
-        //         password: infoUser.password || "",
-        //         phone: infoUser.phone || "",
-        //         address: infoUser.address || "",
-        //         birthday: infoUser.birthday || ""
-        //     });
-        // }
     }, [dispatch]);
+    
+    // useEffect(() => {
+    //     console.log("cc 2");
+    //     infoUser = listUser.find(user => user.id === Number(id));
+    //     console.log("infoUser 2 :", infoUser);
+        
+    // }, [])
     
     const handleChange = (e) => setUserUp({
         ...userUp, //je spread un nouveau tableau, avec les infos de userUp
@@ -53,23 +49,23 @@ function Dashboard() {
         [e.target.name]: e.target.value
     });
 
-    console.log("userUp : ", userUp);
-    
 
-    const btnUp = async () => {
+    const btnUp = async (e) => {
         try {
-            const res = await fetch(`/api/v1/app/user/${user.id}`, {
+            e.preventDefault();
+            await fetch(`/api/v1/app/user/${user.id}`, {
                 method: "PATCH",
                 headers: {
-                "Content-Type": "application/json",
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify(userUp),
-            });
+            }).then(res => res.json()).then(dispatch(fetchUsers()));
 
-            if (res.ok) {
-                console.log(res);
-                navigate("utilisateur/compte");
-            }
+            // console.log("res :", res);
+            // if (res.ok) {
+            //     // navigate(0); //pour rester sur la même page
+            //     dispatch(fetchUsers());
+            // }
               
         } catch (err) {
             console.log(err);
@@ -89,53 +85,42 @@ function Dashboard() {
 
                     <p>Date de dernière connexion: <span>{infoUser?.last_connection_date}</span></p>
                     
-                    <label htmlFor="lastname">Nom : 
-                        <input onChange={handleChange} type="text" id="lastname" name="lastname" value={infoUser?.lastname}/>
+                    <label htmlFor="lastname">Nom: 
+                        <input onChange={handleChange} type="text" id="lastname" name="lastname" placeholder={infoUser?.lastname}/>
                     </label>
 
                     <label htmlFor="firstname">Prénom : 
-                        <input onChange={handleChange} type="text" id="firstname" name="firstname" value={infoUser?.firstname}/>
+                        <input onChange={handleChange} type="text" id="firstname" name="firstname" placeholder={infoUser?.firstname}/>
                     </label>
 
-                    <label htmlFor="email">Email : 
-                        <input onChange={handleChange} type="text" id="email" name="email" value={infoUser?.email}/>
+                    <label htmlFor="email">Email: 
+                        <input onChange={handleChange} type="email" id="email" name="email" placeholder={infoUser?.email}/>
                     </label>
 
-                    <label htmlFor="password">Mot de passe: : 
-                        <input onChange={handleChange} type="password" id="password" name="password" value={infoUser?.password}/>
+                    <label htmlFor="newPassword">Mot de passe: 
+                        <input onChange={handleChange} type="password" id="newPassword" name="newPassword"/>
+                        {/* <input onChange={handleChange} type="password" id="password" name="password" placeholder={infoUser?.password}/> */}
                     </label>
 
-                    <label htmlFor="phone">Téléphone : 
-                        <input onChange={handleChange} type="text" id="phone" name="phone" value={infoUser?.phone}/>
+                    <label htmlFor="phone">Votre numéro de téléphone: 
+                        <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone"/>
+                        {/* <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone" placeholder={infoUser?.phone}/> */}
                     </label>
 
                     <label htmlFor="address">Adresse postale: 
-                        <input onChange={handleChange} type="text" id="address" name="address" value={infoUser?.address}/>
+                        <input onChange={handleChange} type="text" id="address" name="address" placeholder={infoUser?.address}/>
                     </label>
 
                     <label htmlFor="birthday">Date de naissance: 
-                        <input onChange={handleChange} type="text" id="birthday" name="birthday" value={infoUser?.birthday}/>
+                        <input onChange={handleChange} type="date" id="birthday" name="birthday" placeholder={infoUser?.birthday}/>
                     </label>
-                    
-
-                       
-                    {/* <p>Nom: <span>{infoUser?.lastname}</span></p>
-                    <p>Prénom: <span>{infoUser?.firstname}</span></p>
-                    <p>Email: <span>{infoUser?.email}</span></p>
-                    <p>Mot de passe: <span>{infoUser?.password}</span></p>
-                    <p>Date de naissance: <span>{infoUser?.birthday}</span></p>
-                    <p>Téléphone: <span>{infoUser?.phone}</span></p>
-                    <p>Adresse postale: <span>{infoUser?.address}</span></p> */}
-
-                    
+                                      
                  
                     <button type="submit">
                         <FontAwesomeIcon icon={faSquarePen} className="iconeTable" />
                     </button>
                     
                 </fieldset>
-      
-
             </form>
         </main>
     );

@@ -21,8 +21,7 @@ function UserRoutes() {
         <Routes>
 
             <Route path="/" element={<UserLayout />} >
-                
-                <Route>
+               
                     <Route path="" index element={<Home />} />
                     
                     <Route path="film/:id" element={<MovieDetail />} />
@@ -40,8 +39,7 @@ function UserRoutes() {
                     <Route path="CGV" element={<Cgv />} />
                     
                     <Route path="politique-confidentialité" element={ <Confidentiality/>} />
-                    
-                </Route>
+             
 
             </Route>
 

@@ -20,6 +20,7 @@ function App() {
     dispatch(fetchMovies());
 
     dispatch(login());
+
     // async function currentSession() {
 
     //     const tokenOk = await fetch("/api/v1/authentication/check-token", {

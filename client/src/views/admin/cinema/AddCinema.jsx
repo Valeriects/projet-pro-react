@@ -51,7 +51,7 @@ function AddCinema() {
                         </label>
 
                         <label htmlFor="email_cine">Email :
-                            <input onChange={handleChange} type="text" id="email_cine" name="email_cine" value={cine.email_cine}/>
+                            <input onChange={handleChange} type="email" id="email_cine" name="email_cine" value={cine.email_cine}/>
                         </label>
 
                         <label htmlFor="address_cine">Adresse :
@@ -63,7 +63,7 @@ function AddCinema() {
                         </label>
 
                         <label htmlFor="phone_cine">Téléphone :
-                            <input onChange={handleChange} type="text" id="phone_cine" name="phone_cine" value={cine.phone_cine}/>
+                            <input onChange={handleChange} type="tel" id="phone_cine" name="phone_cine" value={cine.phone_cine}/>
                         </label>
 
                         <label htmlFor="manager">Manager :
@@ -71,7 +71,7 @@ function AddCinema() {
                         </label>
 
                         <label htmlFor="nbr_theater">Nombre de salles :
-                            <input onChange={handleChange} type="text" id="nbr_theater" name="nbr_theater" value={cine.nbr_theater}/>
+                            <input onChange={handleChange} type="number" id="nbr_theater" name="nbr_theater" value={cine.nbr_theater}/>
                         </label>
 
                         <label htmlFor="disabled_access">Accès handicapé :

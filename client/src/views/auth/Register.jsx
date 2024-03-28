@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
-import useMenuToggle from "../../../hook/useMenuToggle";
+import useMenuToggle from "../../hook/useMenuToggle";
 
 function Register() {
     useMenuToggle();

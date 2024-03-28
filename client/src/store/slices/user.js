@@ -30,7 +30,6 @@ const userSlice = createSlice({
         },
         logout(state) {
             state.isLogged = false;
-
         }
     },
     extraReducers: (builder) => {
@@ -41,6 +40,7 @@ const userSlice = createSlice({
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.listUser = action.payload;
                 state.loading = false;
+                console.log("listUser: ", action.payload);
             })
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.error = action.error.message;

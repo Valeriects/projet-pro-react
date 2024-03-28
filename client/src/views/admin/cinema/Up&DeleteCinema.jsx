@@ -19,7 +19,6 @@ function UpDeleteCinema() {
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
- 
 
     useEffect(() => {
         dispatch(fetchCinema());
@@ -99,7 +98,7 @@ function UpDeleteCinema() {
                        
 
                         <label htmlFor="email_cine">Modifier : <span>&quot;{cine?.email_cine}&quot;</span>
-                            <input onChange={handleChange} type="text" id="email_cine" name="email_cine" value={cine.email_cine}/>
+                            <input onChange={handleChange} type="email" id="email_cine" name="email_cine" value={cine.email_cine}/>
                         </label>
 
                         
@@ -113,7 +112,7 @@ function UpDeleteCinema() {
                         </label>
 
                         <label htmlFor="phone_cine">Modifier : <span>&quot;{cine?.phone_cine}&quot;</span>
-                            <input onChange={handleChange} type="text" id="phone_cine" name="phone_cine" value={cine.phone_cine}/>
+                            <input onChange={handleChange} type="tel" id="phone_cine" name="phone_cine" value={cine.phone_cine}/>
                         </label>
 
                         <label htmlFor="manager">Modifier : <span>&quot;{cine?.manager}&quot;</span>
@@ -121,7 +120,7 @@ function UpDeleteCinema() {
                         </label>
 
                         <label htmlFor="nbr_theater">Modifier : <span>&quot;{cine?.nbr_theater}&quot;</span>
-                            <input onChange={handleChange} type="text" id="nbr_theater" name="nbr_theater" value={cine.nbr_theater}/>
+                            <input onChange={handleChange} type="number" id="nbr_theater" name="nbr_theater" value={cine.nbr_theater}/>
                         </label>
 
                         <label htmlFor="disabled_access">Modifier : <span>&quot;{cine?.disabled_access}&quot;</span>

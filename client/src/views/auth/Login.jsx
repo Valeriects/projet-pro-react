@@ -72,10 +72,8 @@ function Login() {
 
                     <label htmlFor="password">Votre mot de passe:</label>
                     <input  id="password" name="password" type="password" onChange={inputChangeHandler}/>
-
                     
                     <input type="submit"  value="Validez"/>
-                    
                
                 </fieldset>
                     <Link to="/authentification/inscription">Inscription</Link>
