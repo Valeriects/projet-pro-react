@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { useNavigate } from "react-router-dom";
 
 import { fetchUsers } from "../../../store/slices/user.js";
 
@@ -10,26 +9,21 @@ import useMenuToggle from "../../../hook/useMenuToggle.jsx";
 
 function Dashboard() {
     useMenuToggle()
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
     
     const { user } = useSelector((state) => state.user);
     
     const id = user ? user.id : null;
     
-    const  listUser  = useSelector((state) => state.user.listUser );
+    const  {listUser}  = useSelector((state) => state.user );
+    // const  listUser  = useSelector((state) => state.user.listUser );
     
     // console.log("id :",id);
     
+//    const infoUser = listUser.find(user => user.id === Number(id));
    const infoUser = listUser.find(user => user.id === Number(id));
     
     const [userUp, setUserUp] = useState("");
-    // const [userUp, setUserUp] = useState({ firstname: infoUser?.firstname || "", lastname: infoUser?.lastname || "", email: infoUser?.email || "", password: infoUser?.password || "", phone: infoUser?.phone || "", address: infoUser?.address || "", birthday: infoUser?.birthday || "" });
-    
-    // console.log("infoUser :", infoUser);
-    // console.log("listUser :", listUser);
-    // console.log("user : " , user);
-    // console.log("userUp : ", userUp);
     
     useEffect(() => {
         dispatch(fetchUsers());
@@ -41,7 +35,6 @@ function Dashboard() {
         [e.target.name]: e.target.value
     });
 
-
     const btnUp = async (e) => {
         try {
             e.preventDefault();
@@ -51,17 +44,7 @@ function Dashboard() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(userUp),
-            }).then(res => res.json())
-                .then(
-                    dispatch(fetchUsers()),
-                    console.log("res :", res)
-                );
-
-            // console.log("res :", res);
-            // if (res.ok) {
-            //     // navigate(0); //pour rester sur la même page
-            //     dispatch(fetchUsers());
-            // }
+            }).then(res => res.json()).then(dispatch(fetchUsers()));
               
         } catch (err) {
             console.log(err);
@@ -95,12 +78,10 @@ function Dashboard() {
 
                     <label htmlFor="password">Mot de passe: 
                         <input onChange={handleChange} type="password" id="password" name="password"/>
-                        {/* <input onChange={handleChange} type="password" id="password" name="password" placeholder={infoUser?.password}/> */}
                     </label>
 
                     <label htmlFor="phone">Votre numéro de téléphone: 
-                        <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone"placeholder={infoUser?.phone}/>
-                        {/* <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone" placeholder={infoUser?.phone}/> */}
+                        <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone" placeholder={infoUser?.phone}/>
                     </label>
 
                     <label htmlFor="address">Adresse postale: 

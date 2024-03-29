@@ -30,52 +30,21 @@ const upUser = async (req, res) => {
         }
 
         const query = `UPDATE users SET ${Object.keys(req.body)
-            //.filter(key => key === "password" ? "password = ?" : `${key} = ?`) //j'exclue le password de la mise à jour
             .map((key) => key !== "password" ? `${key} = ?` : "password = ?" )
             .join(", ")
             } WHERE id = ?`;
         
         
         const queryParams = Object.keys(req.body)
-            //.filter(key => key !== "password") //j'exlue la valeur de l'input du password de la mise à jour
             .map(key => key !== "password" ? req.body[key] : hashPassword || null)
             .concat([id]);
-        
-        // const queryPwd = "UPDATE users SET password = ? WHERE id = ?";
         
         console.log("query password :", query);
 
         console.log("hashPassword :", hashPassword)
 
-        // if (Object.keys(req.body) === password) {
         await Query.runByParams(query, queryParams);
-            // await Query.runByParams(queryPwd, [firstname, lastname, hashPassword, address, email, phone, birthday, id]);
-        // } else {
-        //         await Query.runByParams(query, [...Object.values(req.body), id]);
-
-        // }
-        // else {
-        //     //on met à jour uniquement les clefs d'un objet qui sont associés au req.body envoyé dans le formulaire
-        //     const query = `UPDATE users SET ${Object.keys(req.body)
-        //         .map((key) => `${key} = ?`)
-        //         .join(", ")
-        //         } WHERE id = ?`;
-        //     console.log("query: ", query);
-        //     //en paramètre on a la valeur de l'objet, associé au valeur de req.body
-        //     await Query.runByParams(query, [...Object.values(req.body), id]);
-        // }
-
-        // if (newPassword) {
-        //     const salt = Number(process.env.BCRYPT_SALT);
-        //     const queryPwd = "UPDATE users SET firstname = ?, lastname = ?, password = ?, address = ?, email = ?, phone = ?, birthday = ? WHERE id = ?";
-            
-        //     const hashPassword = await bcrypt.hash(newPassword, salt);
-        //     await Query.runByParams(queryPwd, [firstname, lastname, hashPassword, address, email, phone, birthday, id]);
-        // } else {
-        //     const queryUser = "UPDATE users SET firstname = ?, lastname = ?, address = ?, email = ?, phone = ?, birthday = ? WHERE id = ?";
-
-        //     await Query.runByParams(queryUser, [firstname, lastname, address, email, phone, birthday, id]);
-        // }
+          
 
         const queryUser = "SELECT id, firstname, lastname, address, email, phone, birthday, created_date, last_connection_date, roles_id FROM users WHERE id = ?";
 
