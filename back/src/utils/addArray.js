@@ -1,4 +1,6 @@
-function addArray (datas_1, datas_2, datas_3) { //todo refaire
+
+function addArray (datas_1, datas_2, datas_3, datas_4) { //todo refaire
+    //ajout des catégories
     const categoryBymovieId = datas_2.reduce(
         (acc, { movieId, name_cat }) => {
             if (!acc[movieId]) {
@@ -10,10 +12,7 @@ function addArray (datas_1, datas_2, datas_3) { //todo refaire
         {}
     );
 
-    for (const data of datas_1) {
-        data.categories = categoryBymovieId[data.id] || [];
-    }
-
+    //ajout des médias
     const mediaByMovieId = datas_3.reduce(
         (acc, { movieId, src_img, alt_img, src_video, alt_video }) => {
             if (!acc[movieId]) {
@@ -24,9 +23,23 @@ function addArray (datas_1, datas_2, datas_3) { //todo refaire
         },
         {}
     );
+ 
+    //ajout des horaires
+    const timeByMovieId = datas_4.reduce(
+        (acc, { movieId, hours_timetable, timetableId }) => {
+            if (!acc[movieId]) {
+                acc[movieId] = [];
+            }
+            acc[movieId].push({"id":timetableId, "horaire":hours_timetable});
+            return acc;
+        },
+        {}
+    );
 
     for (const data of datas_1) {
+        data.categories = categoryBymovieId[data.id] || []; //j'ajoute une nouvelle clef avec les valeur dans un tableau
         data.media = mediaByMovieId[data.id] || [];
+        data.timeTables = timeByMovieId[data.id] || [];
     }
 
     return datas_1;

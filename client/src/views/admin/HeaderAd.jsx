@@ -65,7 +65,7 @@ function HeaderAd() {
                     <nav className="menu" aria-label="Menu de connexion">
                         <NavLink to={"/admin"} >accueil administrateur</NavLink>
 
-                        <button onClick={toggleList} aria-label="Menu de tableau des données">Tableaux de données</button>
+                        <button onClick={toggleList} className="btnList" aria-label="Menu de tableau des données">Tableaux de données</button>
 
                         {isListOpen && (
                             <>

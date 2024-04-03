@@ -5,10 +5,13 @@ import { getMovies, addMovie, upMovie, deleteMovie } from "../controller/admin/m
 import { getCinemas, addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js";
 import { getSessions, addSession, upSession, deleteSession, delTimetable, upTimetable, addTimetable, getTimetables } from "../controller/admin/sessionTime.js";
 import { getOrders, addOrder, upOrder, deleteOrder } from "../controller/admin/orders.js";
-import { getMovieMedias, addMovieMedia, upMovieMedia, delMovieMedia, getMedias, addMedia, upMedia, delMedia,getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
+import { getMovieMedias, addMovieMedia, upMovieMedia, delMovieMedia, getMedias, addMedia, upMedia, delMedia, getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
+import { getCount } from "../controller/admin/adminBack.js";
 
 // import { multerStorage, storage } from "../middlewares/multer-config.js";
 import { storage, upload } from "../middlewares/multer-config.js";
+
+import { uploadFile } from "../middlewares/fileUpload-config.js";
 
 const router = Router();
 
@@ -67,10 +70,13 @@ router.delete("/movie-media/:id", delMovieMedia);
 
 //routes MEDIA
 router.get("/media", getMedias);
-// router.post("/media", multerStorage, addMedia);
-// router.patch("/media/:id", multerStorage, upMedia);
-router.post("/media", upload.single('src_img'), addMedia);
-// router.post("/media",storage, upload.single('src_img'), addMedia);
+router.post("/media", upload.single('src_img'), addMedia); //avec multer
+
+
+// router.post("/media", uploadFile, addMedia); //avec fileupload
+
+router.patch("/media/:id", upload.single('src_img'), upMedia); //avec multer
+
 // router.patch("/media/:id", storage, upload.single('src_img'), upMedia);
 router.delete("/media/:id", delMedia);
 
@@ -85,6 +91,10 @@ router.get("/category", getCategories);
 router.post("/category", addCategory);
 router.patch("/category/:id", upCategory);
 router.delete("/category/:id", delCategory);
+
+//routes des stats 
+router.get("/stats", getCount);
+
 
 
 

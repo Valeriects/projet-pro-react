@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import CardTime from "../Movie/Components/CardTime";
 
 function Home() {
     useMenuToggle()
@@ -34,8 +35,6 @@ function Home() {
                             <figure className="picture">
                                 
                                 <img src={`http://localhost:9000/img/${item.media[0]?.src_img}`} alt={item.media[0]?.alt_img} />
-
-                                {/* <iframe width="560" height="315" src={item.media[1].src} title={item.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
                                 
                                 {/* mettre une légende ???? pour lorsqu'on survole les affiches */}
                                 {/* <figcaption>{item.media[0].alt_img}</figcaption> */}
@@ -64,7 +63,11 @@ function Home() {
                             <p>durée : <span>{item.time}</span></p>
 
                         </figcaption>
+                        
                         <Link to={`/film/${item.id}`} className="clearfix">Voir plus...</Link>
+
+                        <CardTime item={item} />
+                        
                     </figure>
 
                 ))}

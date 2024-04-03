@@ -1,85 +1,56 @@
 // import { useSelector, useDispatch } from "react-redux";
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 
-// import { fetchUsers } from "../../store/slices/user";
-// import TableUsers from './users/ListeUsersBack';
 import useMenuToggle from "../../hook/useMenuToggle";
 
 function AdminBack() {
     useMenuToggle();
     // const dispatch = useDispatch();
+    const [stats, setStats] = useState(null);
          
-    // const { listUser } = useSelector((state) => state.user);
 
-    // useEffect(() => {
-    //     dispatch(fetchUsers());
-    // }, []);
-
-
-    // console.log(listUser);
-
-    // const [listUsersOpen, setListUsersOpen] = useState(false);
-    // const [listImgOpen, setListImgOpen] = useState(false);
-    // const [listCategoryOpen, setListCategoryOpen] = useState(false);
-
-    // function toggleListUsers() {
-    //     setListUsersOpen(!listUsersOpen);
-    // }
-    // function toggleListImg() {
-    //     setListImgOpen(!listImgOpen);
-    // }
-    // function toggleListCategory() {
-    //     setListCategoryOpen(!listCategoryOpen);
-    // }
-
+    useEffect(() => {
+        document.title = "Panneau d'administration";
+        // dispatch(fetchUsers());
+             async function fetchStats() {
+            try {
+                const response = await fetch("/api/v1/admin/stats");
+                if (response.ok) {
+                    const {count} = await response.json();
+					setStats(count)
+                } else
+                    console.log(
+                        "Erreur lors de la récupération des statistiques"
+                    );
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchStats();
+    }, []);
+   
 
     return (
         // <h1>Back OFFICE</h1>
          <main id="admin">
-            <h1>Bienvenue sur page accueil admin</h1>
+            <h1>Bienvenue sur page accueil de l&apos;admin</h1>
 
             <h2>Rubriques:</h2>
 
-
-            {/* <ul>
-                <li onClick={toggleListUsers}>Membres
-                    
-                </li>
-
-                <li onClick="">articles
-
-                </li>
-
-                <li>
-                <button onClick={toggleListCategory}>Categories</button>
-
-                </li>
-
-                <li>
-                <button >Roles des membres</button>
-
-                </li>
-
-                <li>
-                <button onClick={toggleListImg}>Images des articles</button>
-                </li>
-
-                <li>
-                <button >Commentaires des articles</button>
-                 </li>
-            </ul> */}
-
-
-            {/* <button >Articles</button> */}
-
-            {/* <ModifArticle /> */}
             <div id="userBack">
-
-                {/* {listUsersOpen && <TableUsers />} */}
-{/* 
-                {listImgOpen && <TableImages/>}
-                
-                {listCategoryOpen && <TableCategories/>} */}
+                {
+					stats ? (
+						<>
+							<p>Nombre de membres : {stats.nombre_d_utilisateurs}</p>
+							<p>Nombre de réservations : {stats.nombre_de_réservations}</p>
+							<p>Nombre de films : {stats.nombre_de_films}</p>
+							<p>Nombre de séances : {stats.nombre_de_séances}</p>
+						</>
+					) : (
+						<p>Chargement des statistiques...</p>
+					)
+				}
+            
                 
             </div>
                 

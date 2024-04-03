@@ -119,11 +119,11 @@ function UpDeleteSession() {
             </form>
           
 
-            <button onClick={toggleMsgDelete} ><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button> 
+            <button onClick={toggleMsgDelete} className="btnDelete"><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button> 
 
             {deleteMsgOpen && (
                <article className="msgDelete">
-                    <p>Voulez-vous vraiment supprimer cet utilisateur ?</p>
+                    <p>Voulez-vous vraiment supprimer cette séance ?</p>
                     <button onClick={btnDelete}>OUI</button>
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>

@@ -5,17 +5,13 @@ import { faSquareTwitter, faSquareFacebook, faSquareInstagram } from "@fortaweso
 import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 
 
-
-
-
 function Footer() {
- 
 
     return (
         <footer>
 
-            <article>
-                <h3 id="contact">Contact</h3>
+            <article id="contact">
+                <h3>Contact</h3>
 
                 <address>
                      <NavLink to={"/"}>

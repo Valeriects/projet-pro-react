@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllMovies, getAllSessions, getCinemas } from "../controller/site.js";
+import { getAllMovies, getSession, getCinemas } from "../controller/site.js";
 import { upUser, getUsers } from "../controller/dashboard/user.js"
 
 
@@ -8,7 +8,8 @@ const router = Router();
 
 router.get("/movie", getAllMovies);
 
-router.get("/session-movie", getAllSessions);
+router.get("/movie/:id/session/:idSession", getSession);
+// router.get("/session-movie", getSession);
 
 router.get("/cinema", getCinemas);
 

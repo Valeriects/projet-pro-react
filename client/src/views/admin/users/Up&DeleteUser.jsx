@@ -122,7 +122,7 @@ function UpDeleteUser() {
             </form>
           
 
-            <button onClick={toggleMsgDelete} ><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button> 
+            <button onClick={toggleMsgDelete} className="btnDelete"><FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></button> 
 
             {deleteMsgOpen && (
                <article className="msgDelete">

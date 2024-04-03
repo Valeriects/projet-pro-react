@@ -18,6 +18,9 @@
 npm init -y
 npm install nodemon -D
 npm i dotenv mysql2 express bcrypt cors jsonwebtoken cookie-parser multer
+
+# remplacement de multer
+npm i express-fileupload  
 ```
 - Dans le fichier `package.json`:   
 On va ajouter ceci: 

@@ -6,6 +6,7 @@ import { fetchUsers } from "../../../store/slices/user.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import useMenuToggle from "../../../hook/useMenuToggle.jsx";
+import { convertDate, convertTime} from "../../../utils/formatDate.js";
 
 function Dashboard() {
     useMenuToggle()
@@ -21,11 +22,28 @@ function Dashboard() {
     // console.log("id :",id);
     
 //    const infoUser = listUser.find(user => user.id === Number(id));
-   const infoUser = listUser.find(user => user.id === Number(id));
+    const infoUser = listUser.find(user => user.id === Number(id));
+
+    
+    // const { newDate, time } = convertDate(infoUser?.created_date);
+ 
+    
+    // const date = new Date(infoUser?.created_date);
+    
+    // const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    
+    // const newDate = date.toLocaleDateString('fr-FR', options);
+    
+    
+    // console.log("convertDAte :", convertDate(infoUser?.created_date));
+    // console.log("date :", newDate);
+    // console.log("time :", time);
+
     
     const [userUp, setUserUp] = useState("");
     
     useEffect(() => {
+        document.title = "Votre compte";
         dispatch(fetchUsers());
     }, [dispatch]);
     
@@ -51,18 +69,20 @@ function Dashboard() {
         }
     }
 
+
     return (
         <main id="dash">
-            <h1>Bienvenue {infoUser?.firstname}</h1>         
+            <h1>Bienvenue {infoUser?.firstname}</h1>      
+            
 
             <form className="datas" onSubmit={btnUp}>
                 <fieldset>
                     
                     <legend>Vos données</legend>
 
-                    <p>Date de création du compte: <span>{infoUser?.created_date}</span></p>
+                    <p>Date de création du compte: <span>le {convertDate(infoUser?.created_date)} à {convertTime(infoUser?.created_date)}</span></p>
 
-                    <p>Date de dernière connexion: <span>{infoUser?.last_connection_date}</span></p>
+                    <p>Date de dernière connexion: <span>le {convertDate(infoUser?.last_connection_date)} à {convertTime(infoUser?.last_connection_date)}</span></p>
                     
                     <label htmlFor="lastname">Nom: 
                         <input onChange={handleChange} type="text" id="lastname" name="lastname" placeholder={infoUser?.lastname}/>

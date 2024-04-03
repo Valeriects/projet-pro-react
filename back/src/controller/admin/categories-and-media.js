@@ -79,34 +79,86 @@ const addMedia = async (req, res) => {
         const { alt_img, alt_video, src_video } = req.body;
         // const { src_img, alt_img, alt_video, src_video } = req.body;
         const { filename } = req.file;
+
+        console.log(req.file);
         const query = "INSERT INTO media (src_img, alt_img, alt_video, src_video) VALUES (?, ?, ?, ?)";
 
         const data = await Query.runByParams(query, [filename, alt_img, alt_video, src_video]);
-        // const data = await Query.runByParams(query, [src_img, alt_img, alt_video, src_video]);
 
         res.json({ id: data.insertId, filename, alt_img, alt_video, src_video });
-        // res.json({ id: data.insertId, src_img, alt_img, alt_video, src_video });
+
+        // todo DEBUT CODE pour fileUpload
+        // const { alt_img, alt_video, src_video } = req.body;
+        // const { name } = req.files.src_img;
+        // console.log("req.body : ", req.body);
+        // // console.log("req.files.foo :", req.files.src_img);
+        // console.log("req.files.foo.name :", name);
+       
+        // let uploadPath;
+
+        // const query = "INSERT INTO media (src_img, alt_img, alt_video, src_video) VALUES (?, ?, ?, ?)";
+
+        // console.log(__dirname);
+        // const __dirname = require('path').dirname(new URL(import.meta.url).pathname);
+
+        // uploadPath = __dirname + 'public/assets/images/' + name;
+        
+        // if (!req.files || Object.keys(req.files).length === 0) {
+        //     return res.status(400).send('No files were uploaded.');
+        // }
+
+        // req.files.src_img.mv(uploadPath, function(err) {
+        //     if (err){
+        //         return res.status(500).send(err);
+        //     }
+        //     res.send('File uploaded!');
+        // });
+        
+        // const data = await Query.runByParams(query, [name, alt_img, alt_video, src_video]);
+
+        // res.json({ id: data.insertId, src_img: name, alt_img, alt_video, src_video });
+        // todo FIN code pour file Upload
+
 
     } catch (err) {
-        res.status(500).json({ msg: err });
+        // res.status(500).json({ msg: err });
+        console.log(err);
     }
 };
+
 const upMedia = async (req, res) => {
     try {
         const { id } = req.params;
         const { alt_img, alt_video, src_video} = req.body;
         // const { src_img, alt_img, alt_video, src_video} = req.body;
 
-        const { filename } = req.file;
+        // const { filename } = req.file;
+        const filename = req.file ? req.file.filename : undefined;
+        console.log("filename :", filename);
 
-        const query = "UPDATE media SET src_img = ?, alt_img = ?, alt_video = ?, src_video = ? WHERE id= ?";
-
-        await Query.runByParams(query, [filename, alt_img, alt_video, src_video, id]);
+        const query = `UPDATE media SET ${Object.keys(req.body)
+            .filter((key) => key !== "src_img")
+            .map((key) => `${key} = ?`)
+            .join(", ")
+            }${filename ? ", src_img = ?" : ""} WHERE id = ?`;
+        
+        
+        const queryParams = Object.keys(req.body)
+            .filter((key) => key !== "src_img")
+            .map(key => req.body[key])
+            .concat(filename ? [filename, id] : [id])
             
-        res.json({ id, filename, alt_img, alt_video, src_video});
+        const up = await Query.runByParams(query, queryParams);
+
+        // const query = "UPDATE media SET src_img = ?, alt_img = ?, alt_video = ?, src_video = ? WHERE id= ?";
+
+        // await Query.runByParams(query, [filename, alt_img, alt_video, src_video, id]);
+            
+        res.json({ up});
 
     } catch (err) {
-        res.status(500).json({ msg: err });
+        // res.status(500).json({ msg: err });
+        console.log(err);
     }
 };
 const delMedia = async (req, res) => {

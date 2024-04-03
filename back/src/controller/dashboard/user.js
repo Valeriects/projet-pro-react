@@ -55,8 +55,8 @@ const upUser = async (req, res) => {
         res.json(read);
 
     } catch (err) {
-        // res.status(500).json({ msg: err });
-        console.log(err);
+        res.status(500).json({ msg: err });
+        // console.log(err);
     }
 };
 

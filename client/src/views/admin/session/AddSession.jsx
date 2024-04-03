@@ -51,7 +51,7 @@ function AddSession() {
                             <input onChange={(e) => setSession({...session, price: e.target.value})} type="text" id="price" name="price"/>
                         </label>
                         <label htmlFor="session_date">Date de la séance :
-                            <input onChange={(e) => setSession({...session, session_date: e.target.value})} type="text" id="session_date" name="session_date"/>
+                            <input onChange={(e) => setSession({...session, session_date: e.target.value})} type="date" id="session_date" name="session_date"/>
                         </label>
                         <label htmlFor="timetables_id">Id de l&apos;horaire :
                             <input onChange={(e) => setSession({...session, timetables_id: e.target.value})} type="text" id="timetables_id" name="timetables_id"/>

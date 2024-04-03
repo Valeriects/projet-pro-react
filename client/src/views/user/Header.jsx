@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { NavLink, useNavigate, Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -7,9 +7,10 @@ import { faBars, faMagnifyingGlass, faCircleUser } from "@fortawesome/free-solid
 import { logout } from "../../store/slices/user";
 import { toggleMenu, toggleMenuMember } from "../../store/slices/menu";
 import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
-
+// import scrollToSectionOnMount from "../../utils/scrollSection.js";
 function Header() {
 
+    // scrollToSectionOnMount(); //todo ne marche pas
     // const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     // const [isMemberOpen, setIsMemberOpen] = useState(false);
 
@@ -54,6 +55,18 @@ function Header() {
     // console.log(id);
     // console.log(firstname);
     // console.log(roleUser);
+
+//      const history = useHistory();
+
+//   const handleNavLinkClick = (sectionId) => {
+//     const section = document.getElementById(sectionId);
+//     if (section) {
+//       section.scrollIntoView({ behavior: 'smooth' });
+//       // Update the URL without causing a full page refresh
+//       history.push(`/#${sectionId}`);
+//     }
+//   };
+
     
     return (
         
@@ -80,7 +93,8 @@ function Header() {
                     {/* <NavLink to={""}>films à l&rsquo;affiche</NavLink> */}
                     <NavLink to={""}>infos pratiques</NavLink>
 
-                    <Link href="#contact">nous contacter</Link>
+                    <NavLink to="/#contact">nous contacter</NavLink>
+                    {/* <NavLink to="/#contact"  onClick={() => handleNavLinkClick('contact')}>nous contacter</NavLink> */}
 
                     <NavLink to={""}>à propos</NavLink>
 

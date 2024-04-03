@@ -1,21 +1,21 @@
 import multer from "multer";
+import path from 'path';
 
-// const MIME_TYPES = {
-//   'image/jpg': 'jpg',
-//   'image/jpeg': 'jpg',
-//   'image/png': 'png'
-// };
+import { dateFile } from "../utils/formatDate.js";
 
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, '/assets/images');
+        callback(null, 'public/assets/images');
     },
     filename: (req, file, callback) => {
         // const name = file.originalname.split(' ').join('_');
         // const extension = MIME_TYPES[file.mimetype];
         // callback(null, name + Date.now() + '.' + extension);
-        callback(null, Date.now() + extname(file.originalname));
+        const date = dateFile(Date.now());
+        callback(null, date + '_' + file.originalname);
+        // callback(null, Date.now() + '-' + file.originalname);
+        // callback(null, Date.now() + path.extname(file.originalname));
     }
 });
 
@@ -28,7 +28,7 @@ const upload = multer({
         const filetypes = /png|jpg|jpeg/; // extension de fichiers acceptées
         // test permet de vérifier si l'extension du fichier correspond à l'expression régulière
         const isExtnameValid = filetypes.test(
-            extname(file.originalname).toLowerCase()
+            path.extname(file.originalname).toLowerCase()
         );
 
         // test permet de vérifier si le type MIME du fichier correspond à l'expression régulière
@@ -43,7 +43,7 @@ const upload = multer({
             callback("Images en png, jpg ou jpeg uniquement");
         }
     },
-}); // src_img est le nom de l'input type file -> attribut name, 10 est le nombre de fichiers acceptés maximum
+}); 
 // }).array("src_img", 10); // src_img est le nom de l'input type file -> attribut name, 10 est le nombre de fichiers acceptés maximum
 
 // const multerStorage = multer({storage: storage}).single('src_img');

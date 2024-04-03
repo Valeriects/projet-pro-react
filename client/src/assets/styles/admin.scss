@@ -27,6 +27,7 @@ body {
     width: 100%;
     min-height: 100vh;
     // max-width: 400px;
+    // position: relative;
 
 }
 
@@ -54,8 +55,30 @@ button {
     border-radius: 0.3rem;
     background-color: $marron;
     color: $beigeClair;
-
+    
+    &:hover {
+        background-color: $gris;
+    }
 }
+
+//liste des tables
+.btnList {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid $beigeClair;
+    padding: .5rem;
+
+    &:hover {
+        background-color: $gris;
+    }
+}
+
+.btnDeco {
+    border-top: 1px solid $beigeClair;
+    padding: .5rem 0;
+}
+//fin liste des tables
 
 .icon {
     color: $beigeClair;
@@ -175,6 +198,61 @@ button {
 
         article {
             position:absolute;
+        }
+    }
+}
+
+.detail {
+    position: relative;
+    padding: 2rem 0;
+
+    a {
+        margin-left: 2rem;
+        font-style: italic;
+    }
+
+    .iconeTable {
+        font-size: 4rem;
+
+    }
+
+    [type="submit"] {
+        width: 100%;
+        padding: .5rem;
+    }
+
+    .btnDelete {
+        @include display(row, center);
+        padding: .5rem;
+        width: 40%;
+        margin: 2rem auto;
+    }
+    
+    .msgDelete {
+        @include display(row, space-evenly);
+        flex-wrap: wrap;
+        color: $orange;
+        font-weight: bold;
+        background-color: $grisClair;
+        border: 1px solid $gris;
+        position: absolute;
+        // inset: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        padding: 3rem;
+        text-align: center;
+        font-size: 2rem;
+        
+        p {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 4rem;
+        }
+
+        button {
+            padding: 2rem;
+            font-weight: 900;
         }
     }
 }

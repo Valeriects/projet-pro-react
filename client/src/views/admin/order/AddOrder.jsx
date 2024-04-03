@@ -8,7 +8,7 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 function AddOrder() {
     useMenuToggle();
     const navigate = useNavigate();
-    const [order, setOrder] = useState("");
+    const [order, setOrder] = useState({});
     
     const handleChange = (e) => {
         setOrder({

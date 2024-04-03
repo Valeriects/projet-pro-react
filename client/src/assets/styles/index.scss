@@ -72,6 +72,32 @@ button {
             }
 }
 
+.horaire {
+    @include display(row, space-around);
+    padding-left:0;
+
+    li {
+        background-color: $orange;
+        list-style: none;
+        display: inline-block;
+        gap: 5%;
+        text-align: center;
+        padding: .5rem;
+        border-radius: .5rem;
+        border: 1px solid $marron;
+        font-weight: bold;
+
+        &:hover {
+            background-color: $marron;
+            color: $beige;
+        }
+
+        a {
+            color: $marron;
+        }
+    }
+}
+
 header, footer {
     @include display(row, space-evenly);
     align-items: center;
@@ -295,11 +321,8 @@ form {
 
 // style de la page home
 .home {
-
     .carousel {
         .slick-arrow {
-            // z-index: 9;
-
             &::before {
                 color: $marron;
                 font-size: 3rem;
