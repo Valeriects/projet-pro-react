@@ -10,8 +10,6 @@ function MovieDetail() {
     
     const movie = list.find((movie) => movie.id === parseInt(id));
     
-    console.log(movie);
-    
     return (
         <main id="movieDetail">
             {movie && (
@@ -35,15 +33,12 @@ function MovieDetail() {
                     <article className="video">
 
                         <iframe src={movie.media[0].src_video} title={movie.media[0].alt_video} allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-                        {/* <iframe width="560" height="315" src={movie.media[1].src} title={movie.media[1].alt} frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> */}
                     </article>
 
                     <article className="synopsys">
                         <p>Résumé:</p>
 
                         <strong>{movie.synopsis}</strong>
-                        
 
                     </article>
 

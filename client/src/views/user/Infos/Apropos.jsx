@@ -16,6 +16,7 @@ function Apropos() {
 
     return (
         <main className="infos">
+            {listCine[0] && (
             <section >
                 <h2>{listCine[0].name_cinema}</h2>
 
@@ -32,7 +33,8 @@ function Apropos() {
 
                 <p>Infos accès handicapés: {listCine[0].disabled_access}</p>
               
-            </section>
+                </section>
+                 )}
           
         </main>
     );

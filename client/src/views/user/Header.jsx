@@ -28,10 +28,10 @@ function Header() {
     
     const roleUser = user ? user.roleUser : null;
     
-    console.log(user);
+    // console.log(user);
     console.log("roleUser : ", roleUser);
-    console.log(isLogged);
-    console.log("search :", useSearch);
+    // console.log(isLogged);
+    // console.log("search :", useSearch);
     
     useEffect(() => {
         if (!list.length) {
@@ -41,7 +41,7 @@ function Header() {
     
     function toggleBurger() {
         dispatch(toggleMenu());
-        setIsSearching(false);
+        setIsSearching(false);//quanb le menu burger s'ouvre, la barre de recherche se ferme
     }
     
     function toggleMember() {
@@ -57,7 +57,7 @@ function Header() {
         
         if (response.ok) {
             dispatch(logout());
-            dispatch(toggleMenu());
+            dispatch(closeMenu());
             navigate("/");
         }
     }
@@ -69,7 +69,7 @@ function Header() {
             setMsg(""); // Effacez le message d'erreur
         } else {
             setIsSearching(true); // Sinon, activez la recherche
-            dispatch(closeMenu());
+            dispatch(closeMenu()); // quand la barre de recherche s'ouvre, les menus se ferment
         }
     }
 

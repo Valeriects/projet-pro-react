@@ -9,7 +9,7 @@ import useMenuToggle from "../../../hook/useMenuToggle.jsx";
 import { convertDate, convertTime} from "../../../utils/formatDate.js";
 
 function Dashboard() {
-    useMenuToggle()
+    useMenuToggle();
     const dispatch = useDispatch();
     
     const { user } = useSelector((state) => state.user);

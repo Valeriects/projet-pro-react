@@ -37,14 +37,16 @@ import AddCategoryMovie from "../views/admin/categoryMovie/AddCategoryMovie.jsx"
 import TableOrder from "../views/admin/order/ListOrder.jsx";
 import UpDeleteOrder from "../views/admin/order/Up&DeleteOrder.jsx";
 import AddOrder from "../views/admin/order/AddOrder.jsx";
-
+import RequireAuth from "../HOC/ProtectedAdminRoutes.jsx";
 
 function AdminRoutes() {
     //todo mettre le hoc de protection des routes
+    const AdminWithAuth = RequireAuth(AdminLayout);
     
     return (
         <Routes>
-            <Route path="/admin" element={<AdminLayout/>}>
+            <Route path="/admin" element={<AdminWithAuth/>}>
+            {/* <Route path="/admin" element={<AdminLayout/>}> */}
                 
                 <Route index element={<AdminBack />} />
                 

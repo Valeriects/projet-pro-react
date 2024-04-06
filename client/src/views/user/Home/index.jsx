@@ -10,7 +10,7 @@ function Home() {
     useMenuToggle()
     const {list} = useSelector((state) => state.movie);
 
-    console.log(list);
+    // console.log(list);
     
     const settings = {
         dots: true,

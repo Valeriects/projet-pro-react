@@ -20,8 +20,10 @@ function RequireAuth(Component) {
 
                 const authJson = await response.json();
 
+                console.log("user.role: ",authJson);
+
                 // si le token est valide et que l'utilisateur est a un role d'utilisateur on retourne le composant
-                if (response.ok && authJson.user.role === "user") {
+                if (response.ok && authJson.user.roleUser === "user") {
                     return setIsAuthenticated(true);
                 }
 

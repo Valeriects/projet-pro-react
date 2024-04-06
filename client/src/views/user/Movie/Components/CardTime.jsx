@@ -4,15 +4,12 @@ import { formattedTime } from "../../../../utils/formatDate.js";
 
 function CardTime({ item }) {
     
-    console.log("item : ", item);
-    
     return (
         <>
             <ul className="horaire">
                 {item.timeTables.map((timeTable) => (
                     <li key={timeTable.id}>
                         <Link to={`/film/${item.id}/seance/${timeTable.id}`}>
-                            {/* {timeTable.horaire} */}
                             {formattedTime(timeTable.horaire)}
                         </Link>
                     </li>
@@ -29,7 +26,6 @@ CardTime.propTypes = {
         timeTables: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number.isRequired,
         })).isRequired,
-        // timeTables: PropTypes.arrayOf(PropTypes.string).isRequired,
     }).isRequired,
 };
 
