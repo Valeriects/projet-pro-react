@@ -10,6 +10,7 @@ import Cgu from "../views/user/Infos/Cgu.jsx";
 import Confidentiality from "../views/user/Infos/Confidentiality.jsx";
 import Cgv from "../views/user/Infos/Cgv.jsx";
 import Session from "../views/user/Movie/Session.jsx";
+import Apropos from "../views/user/Infos/Apropos.jsx";
 
 // import requireAuth from "../HOC/ProtectedUserRoutes";
 // import "../assets/styles/index.scss";
@@ -41,6 +42,8 @@ function UserRoutes() {
                     <Route path="CGU" element={<Cgu />} />
                     
                     <Route path="CGV" element={<Cgv />} />
+                
+                    <Route path="a-propos" element={<Apropos />} />
                     
                     <Route path="politique-confidentialité" element={ <Confidentiality/>} />
 

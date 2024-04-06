@@ -1,16 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import { fetchMedia } from "../../../store/slices/media.js";
+import { fetchMovies } from "../../../store/slices/movie.js";
 
 function AddMediaMovie() {
     useMenuToggle();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [mediaMovie, setMediaMovie] = useState("");
+    const { listMedia } = useSelector((state) => state.media);
+    const { list } = useSelector((state) => state.movie);
 
+    console.log(listMedia);
 
+    useEffect(() => {
+        dispatch(fetchMedia());
+        dispatch(fetchMovies());
+
+    }, []);
+
+    const handleChange = (e) => {
+        setMediaMovie({
+            ...mediaMovie,
+            [e.target.name]: e.target.value
+        });
+    }
+    
     async function submitAdd(e) {
         e.preventDefault();
         try {
@@ -39,12 +59,27 @@ function AddMediaMovie() {
                  <fieldset>
                         <legend>Création du lien entre le média et le film</legend>
                         
-                        <label htmlFor="movies_id">Modifier l&apos;ID du film :
-                            <input onChange={(e) => setMediaMovie({...mediaMovie, movies_id: e.target.value})} type="text" id="movies_id" name="movies_id" value={mediaMovie?.movies_id}/>
+                        <label htmlFor="movies_id">Modifier l&apos;ID du film :                        
+                            <select onChange={handleChange} name="movies_id" id="movies_id">
+                                <option value="">Choisir le film</option>
+                            
+                                {list.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.title}</option>
+                                    
+                                ))}
+                            </select>
+                        
                         </label>
 
                         <label htmlFor="media_id">Modifier l&apos;ID du média:
-                            <input onChange={(e) => setMediaMovie({...mediaMovie, media_id: e.target.value})} type="text" id="media_id" name="media_id" value={mediaMovie?.media_id}/>
+                            <select onChange={handleChange} name="media_id" id="media_id">
+                                <option value="">Choisir l&apos;affiche</option>
+                            
+                                {listMedia.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.alt_img}</option>
+                                    
+                                ))}
+                            </select>
                         </label>
                         
                         <button type="submit" >

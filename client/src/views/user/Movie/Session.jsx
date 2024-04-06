@@ -31,7 +31,7 @@ function Session() {
     console.log("session :", session);
 
     return (
-        <>
+        <main className="session">
             <h2>Séance du film</h2>
             {session &&
                 
@@ -56,7 +56,7 @@ function Session() {
             
                 </article>
             }
-        </>
+        </main>
     );
 }
 

@@ -17,6 +17,7 @@ const getMovieMedias = async (req, res) => {
 const addMovieMedia = async (req, res) => {
     try {
         const { movies_id, media_id } = req.body;
+
         const query = "INSERT INTO movies_media (movies_id, media_id ) VALUES (?, ?)";
 
         //todo ne pas CREER si ça existe déjà !!!
@@ -43,6 +44,7 @@ const upMovieMedia = async (req, res) => {
         res.status(500).json({ msg: err });
     }
 };
+
 const delMovieMedia = async (req, res) => {
     try {
         const { id  } = req.params;

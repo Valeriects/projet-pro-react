@@ -8,6 +8,7 @@ function Confidentiality() {
             <section>
 
                 <h2>Politique de Confidentialité</h2>
+                
                 <p>
                     Nous respectons votre vie privée et nous nous engageons à la protéger. Cette politique de confidentialité explique comment nous recueillons, utilisons et protégeons vos informations personnelles.
                 </p>

@@ -30,7 +30,7 @@ function Footer() {
             <nav>
                 <h3>Infos</h3>
 
-                <NavLink to="">à propos</NavLink>
+                <NavLink to="a-propos">à propos</NavLink>
                 <NavLink to="CGU">CGU</NavLink>
                 <NavLink to="CGV">CGV</NavLink>
                 <NavLink to="politique-confidentialité">Politique de confidentialité</NavLink>

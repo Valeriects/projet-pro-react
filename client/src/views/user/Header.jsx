@@ -1,40 +1,52 @@
-// import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useState, useRef, useEffect } from "react";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faBars, faMagnifyingGlass, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { logout } from "../../store/slices/user";
-import { toggleMenu, toggleMenuMember } from "../../store/slices/menu";
+import { fetchMovies } from "../../store/slices/movie";
+import { toggleMenu, toggleMenuMember, closeMenu } from "../../store/slices/menu";
 import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 // import scrollToSectionOnMount from "../../utils/scrollSection.js";
 function Header() {
 
     // scrollToSectionOnMount(); //todo ne marche pas
-    // const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-    // const [isMemberOpen, setIsMemberOpen] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    
     const { isMenuOpen, isUserOpen } = useSelector((state) => state.menu);
-    const { isLogged, user} = useSelector((state) => state.user);
-    // const { isLogged, resUser : {id, firstname, roleUser}} = useSelector((state) => state.user);
+    const { isLogged, user } = useSelector((state) => state.user);
+    const { list } = useSelector((state) => state.movie);
+    
+    const [msg, setMsg] = useState("");
+    const [useSearch, setUseSearch] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
 
+    const ref = useRef(null);
+    
     const roleUser = user ? user.roleUser : null;
-    // console.log(resUser);
+    
     console.log(user);
-    console.log("roleUser : ",roleUser);
-    // console.log(listUser);
+    console.log("roleUser : ", roleUser);
+    console.log(isLogged);
+    console.log("search :", useSearch);
+    
+    useEffect(() => {
+        if (!list.length) {
+            dispatch(fetchMovies());
+        }
+    }, []);
     
     function toggleBurger() {
-        // setIsBurgerOpen(!isBurgerOpen);
         dispatch(toggleMenu());
+        setIsSearching(false);
     }
     
     function toggleMember() {
-        // setIsMemberOpen(!isMemberOpen);
         dispatch(toggleMenuMember());
+        setIsSearching(false);
     }
     
     async function userLogout() {
@@ -45,31 +57,54 @@ function Header() {
         
         if (response.ok) {
             dispatch(logout());
-            // dispatch(toggleBurger());
-            // dispatch(toggleMember());
             dispatch(toggleMenu());
             navigate("/");
         }
     }
-    console.log(isLogged);
-    // console.log(id);
-    // console.log(firstname);
-    // console.log(roleUser);
 
-//      const history = useHistory();
+    function toggleSearch() {
+        if (isSearching) {
+            setIsSearching(false);
+            setUseSearch([]); // Effacez les résultats de recherche
+            setMsg(""); // Effacez le message d'erreur
+        } else {
+            setIsSearching(true); // Sinon, activez la recherche
+            dispatch(closeMenu());
+        }
+    }
 
-//   const handleNavLinkClick = (sectionId) => {
-//     const section = document.getElementById(sectionId);
-//     if (section) {
-//       section.scrollIntoView({ behavior: 'smooth' });
-//       // Update the URL without causing a full page refresh
-//       history.push(`/#${sectionId}`);
-//     }
-//   };
+    function searchMovie(e) {
+        const valueInput = e.target.value.toLowerCase();
 
-    
-    return (
+        if (valueInput.length > 0) { 
+            setIsSearching(true);
+        } else if (valueInput.length === 0) {
+            setIsSearching(false);
+            setUseSearch([]);
+            setMsg(""); 
+            return;
+        }
+
+        const useSearch = list.filter((item) => {
+            return item.title.toLowerCase().includes(valueInput);
+        });
+
+        if (!useSearch.length) {
+            setMsg("Aucun résultat");
+            setUseSearch([]);
+            return;
+        } 
+            setMsg("");
+            setUseSearch([...useSearch]);
         
+    }
+
+    function handleSearchClick() {
+        setIsSearching(false);
+        ref.current.value = "";
+    }
+    
+    return (        
         <header>
             <button onClick={toggleBurger} className="btnBurger" title="Accéder au menu de navigation" aria-label="Accéder au menu de navigation">
                 <FontAwesomeIcon className="icon menuBurger" icon={faBars} />    
@@ -80,7 +115,6 @@ function Header() {
                 <span>Cinéma FUN</span>
             </NavLink>
 
-            {/* {isBurgerOpen && ( */}
             {isMenuOpen && (
 
                 <nav id="menu" aria-label="Menu de navigation">
@@ -91,14 +125,10 @@ function Header() {
                         <NavLink to={"authentification/connexion"}>connexion</NavLink>
                     )}
                     {/* <NavLink to={""}>films à l&rsquo;affiche</NavLink> */}
-                    <NavLink to={""}>infos pratiques</NavLink>
+                    <NavLink to={"a-propos"}>infos pratiques</NavLink>
 
                     <NavLink to="/#contact">nous contacter</NavLink>
                     {/* <NavLink to="/#contact"  onClick={() => handleNavLinkClick('contact')}>nous contacter</NavLink> */}
-
-                    <NavLink to={""}>à propos</NavLink>
-
-                    <NavLink to={""}>paramètres</NavLink>
                     
                     {isLogged && (
                         <button onClick={userLogout} className="btnDeco burgerDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>
@@ -107,14 +137,37 @@ function Header() {
 
             )}
 
+            {/* début input de recherche */}
+            {isSearching && (
+                <div className="divSearch">
+
+                    <input ref={ref} className="inputSearch" type="search" onChange={searchMovie} placeholder="Rechercher un film" />
+                    
+                        <div className="searchList">
+                            <ul>
+                                {msg && !useSearch.length && <li className="msgSearch">{msg}</li>}
+                                {isSearching && useSearch &&
+                                useSearch.map((item) => (
+                                    <li key={item.id} onClick={handleSearchClick}>
+                                        <Link to={`/film/${item.id}`}>
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                                
+                            </ul>
+                        </div>
+                </div>
+            )} 
+            {/* Fin input recherche */}
+
             <div id="wrapIcon">
-                <FontAwesomeIcon id="iconGlass" className="icon" icon={faMagnifyingGlass} />
+                <FontAwesomeIcon onClick={toggleSearch} id="iconGlass" className="icon" icon={faMagnifyingGlass} />
 
                 {isLogged ? (
                     <div>
                         <FontAwesomeIcon onClick={toggleMember} id="iconUser" className="icon" icon={faCircleUser} />
                     
-                        {/* {isMemberOpen && ( */}
                         {isUserOpen && (
                             <nav className="menu" aria-label="Menu de connexion">
                                 <NavLink to={"utilisateur/compte"} >votre compte</NavLink>
@@ -122,17 +175,12 @@ function Header() {
                             </nav>
                         )}
                     </div>
-                    
-
                 ) : (
                     <NavLink to={"authentification/connexion"}>
                         <FontAwesomeIcon id="iconUser" className="icon" icon={faCircleUser} />
                     </NavLink>
-                        
                 )}
-
             </div>
-
         </header>
     );
 }

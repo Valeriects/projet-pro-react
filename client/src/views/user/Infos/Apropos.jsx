@@ -1,22 +1,40 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import useMenuToggle from "../../../hook/useMenuToggle";
+import { fetchCinema } from "../../../store/slices/cinema";
 
 function Apropos() {
     useMenuToggle();
+    const dispatch = useDispatch();
+    const { listCine } = useSelector((state) => state.cinema);
+    console.log("listCine : ", listCine[0]);
+
+    useEffect(() => {
+        dispatch(fetchCinema());
+    }, []);
 
     return (
-        <p>Cinéma Le Comœdia
-            Rue Paul Vaillant Couturier, 13140 Miramas
+        <main className="infos">
+            <section >
+                <h2>{listCine[0].name_cinema}</h2>
 
-            Billetterie : 04 90 50 14 74 caissecomoedia@scenesetcines.fr
+                <address>
+                    {listCine[0].address_cine}, {listCine[0].city}
+                </address>
+                <p>Nous sommes: {listCine[0].infos_cine}</p>
+                <p>Manager: {listCine[0].manager}</p>
+                <p>Adresse mail : {listCine[0].email_cine}</p>
+                <p>Billetterie : +33 {listCine[0].phone_cine}</p>
+                <p>Heures d&apos;ouverture : Ouvert du lundi au dimanche de 17h à 23h.</p>
+                <p>Tarif  plein : 12,50 € </p>
+                <p>Nombre de salles : {listCine[0].nbr_theater} </p>
 
-            Heures d’ouverture : Ouvert du lundi au vendredi de 9h à 12h30 et de 14h à 23h, samedi et dimanche de 14h à 22h30.
-
-            Tarif  plein : 5,50 €
-            Tarif  réduit : 4,50 €
-            Enfants moins de 14 ans : 3,60 €
-            Tous les jeudis, tarif super réduit : 3,60 €
-            Tous les mercredis, tarif réduit : 4,50€
-            Abonnement 10 séances : 36 €</p>
+                <p>Infos accès handicapés: {listCine[0].disabled_access}</p>
+              
+            </section>
+          
+        </main>
     );
 }
 

@@ -110,6 +110,7 @@ header, footer {
 
 header {
     padding-bottom: .5rem;
+    position: relative;
 
     .btnBurger {
         .menuBurger{
@@ -186,6 +187,48 @@ header {
         }
     }
 
+    .divSearch {
+        z-index: 999;
+        position: absolute;
+        bottom: -100%;
+        left: 0;
+        right: 0;
+        
+        .inputSearch {
+            height: 4rem;
+            width: 100%;
+            border-radius: 0;
+            border: none;
+            font-size: 2rem;
+            padding-left: .5rem;
+            
+            &::placeholder {
+                font-family: $monserrat;
+                font-weight: bold;
+                padding-left: 2rem;
+            }
+        }
+
+        .searchList {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background-color: $white;
+            
+            li, .msgSearch {
+                list-style: none;
+                line-height: 3rem;
+                font-weight: bold;
+                a {
+                    display: inline-block;
+                    width: 100%;
+                    color: $marron;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -251,8 +294,11 @@ footer {
             margin-top: 1rem;
         }
     }
+}
 
-    
+main {
+    @include display(column, space-around);
+    padding: 2rem
 }
 
 
@@ -383,7 +429,6 @@ form {
                         span {
                             font-style: italic;
                             font-family: $monserrat;
-                            // font-weight: bold;
                         }
                     }
                 }
@@ -481,6 +526,9 @@ form {
         h2 {
             margin: 0;
         }
+        address {
+            margin-top: 1rem;
+        }
 
         dt {
             font-weight: bold;
@@ -495,6 +543,20 @@ form {
             strong {
                 font-weight: normal;
             }
+        }
+    }
+}
+
+.session {
+    padding: 5rem;
+
+    article {
+        background-color: $white;
+        padding: 2rem;
+
+        img {
+            float: left;
+            width: 40%;
         }
     }
 }
