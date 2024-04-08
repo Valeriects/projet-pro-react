@@ -12,9 +12,7 @@ router.use("/app", siteRoutes);
 
 router.use("/authentication", authRoutes);
 
-//todo remettre la ligne de dessous pour sécuriser admin
-// router.use("/admin", authJwtAdmin, adminRoutes);
-router.use("/admin", adminRoutes);
+router.use("/admin", authJwtAdmin, adminRoutes); //ajout du middleware de protection de la route admin
 
 
 export default router;

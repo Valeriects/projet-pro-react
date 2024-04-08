@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -11,15 +11,14 @@ import { toggleMenu } from "../../store/slices/menu";
 function HeaderAd() {
 
     const { isMenuOpen } = useSelector((state) => state.menu);
-    // const [isBurgerOpen, setIsBurgerOpen] = useState(false);
     const [isListOpen, setIsListOpen] = useState(false);
-    // const [listUsersOpen, setListUsersOpen] = useState(false);
-    // function toggleListUsers() {
-    //     setListUsersOpen(!listUsersOpen);
-    // }
+    const { isLogged, user } = useSelector((state) => state.user);
+ 
+    console.log(isLogged);
+    console.log("user :",user);
+    console.log("userRole :",user.roleUser);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
 
     function toggleList() {
@@ -28,7 +27,6 @@ function HeaderAd() {
 
 
     function toggleBurger() {
-        // setIsBurgerOpen(!isBurgerOpen);
          dispatch(toggleMenu());
     }
 
@@ -40,9 +38,7 @@ function HeaderAd() {
 
         if (response.ok) {
             dispatch(logout());
-            dispatch(toggleBurger());
-            
-            navigate("/");
+            window.location.href = "/";
         }
     }
 
@@ -50,7 +46,7 @@ function HeaderAd() {
 
         <header id="adHead">
 
-            <NavLink to={"/"} className="logoTitle">
+            <NavLink to={"/admin"} className="logoTitle">
                 <img className="logo" src={logoCinema} alt="Logo couleur du cinéma FUN" />
                 <span>Cinéma FUN</span>
             </NavLink>
@@ -60,7 +56,6 @@ function HeaderAd() {
         
                 <FontAwesomeIcon onClick={toggleBurger} id="iconUser" className="icon" icon={faBars} />
             
-                {/* {isBurgerOpen && ( */}
                 {isMenuOpen && (
                     <nav className="menu" aria-label="Menu de connexion">
                         <NavLink to={"/admin"} >accueil administrateur</NavLink>

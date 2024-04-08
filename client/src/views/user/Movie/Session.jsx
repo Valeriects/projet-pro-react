@@ -32,30 +32,44 @@ function Session() {
 
     return (
         <main className="session">
+
+            <section>
+
             <h2>Séance du film</h2>
             {session &&
                 
                 <article>
-                    <img src={`http://localhost:9000/img/${session.src_img}`} alt={session.alt_img} />
-                    <p>{session.title}</p>
-                    <p>{session.director}</p>
-                    <p>{session.actor}</p>
-                    <p>{session.time}</p>
-                    <p>{session.version_2D_3D}</p>
+                    <figure>
+                        <img src={`http://localhost:9000/img/${session.src_img}`} alt={session.alt_img} />
 
-                    <p>{formattedTime(session.hours_timetable)}</p>
+                        <figcaption>
+                            <p>{session.title}</p>
+                            <p>{session.director}</p>
+                            <p>{session.actor}</p>
+                            <p>Durée: {session.time}</p>
+                            <p>{session.version_2D_3D}</p>
 
-                    <p>{session.language}</p>
-                    <p>{session.name_theater}</p>
-                    <p>{session.nbre_seats}</p>
-                    <p>{session.price}</p>
+                            <p>{formattedTime(session.hours_timetable)}</p>
 
-                    <p>{convertDate(session.session_date)}</p>
+                            <p>{session.language}</p>
 
-                    <p>{session.name_cinema}</p>
+                        </figcaption>
+
+                    </figure>
+                    <div>
+                        <p>Cinéma: {session.name_cinema}, {session.address_cine}</p>
+ 
+                        <p>Salle n° {session.name_theater}</p>
+                        <p>Nombre de place: {session.nbre_seats}</p>
+                        <p>{session.price}</p>
+
+                        <p>{convertDate(session.session_date)}</p>
+                    </div>
+
             
                 </article>
             }
+            </section>
         </main>
     );
 }

@@ -9,8 +9,6 @@ import CardTime from "../Movie/Components/CardTime";
 function Home() {
     useMenuToggle()
     const {list} = useSelector((state) => state.movie);
-
-    // console.log(list);
     
     const settings = {
         dots: true,
@@ -64,10 +62,11 @@ function Home() {
 
                         </figcaption>
                         
-                        <Link to={`/film/${item.id}`} className="clearfix">Voir plus...</Link>
 
+                        <p>Horaires :</p>
                         <CardTime item={item} />
                         
+                        <Link to={`/film/${item.id}`} className="clearfix">Voir plus...</Link>
                     </figure>
 
                 ))}

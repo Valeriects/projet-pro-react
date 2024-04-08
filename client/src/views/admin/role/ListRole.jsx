@@ -11,12 +11,11 @@ function TableRole() {
     useMenuToggle();
     const dispatch = useDispatch();
 
+    const { list } = useSelector((state) => state.role);
+
     useEffect(() => {
         dispatch(fetchRoles());
-    }, []);
-
-    const { list } = useSelector((state) => state.role);
- 
+    }, [dispatch]);
 
     console.log(list);
 

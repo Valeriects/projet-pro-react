@@ -9,7 +9,6 @@ const router = Router();
 router.get("/movie", getAllMovies);
 
 router.get("/movie/:id/session/:idSession", getSession);
-// router.get("/session-movie", getSession);
 
 router.get("/cinema", getCinemas);
 

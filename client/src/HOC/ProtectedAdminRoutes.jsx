@@ -7,7 +7,7 @@ function RequireAuth(Component) {
         useEffect(() => {
             async function updateAuth() {
                 const response = await fetch(
-                    "/api/v1/authentification/check-token",
+                    "/api/v1/authentication/check-token",
                     {
                         credentials: "include",
                     }

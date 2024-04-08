@@ -12,26 +12,27 @@ function AdminBack() {
     useEffect(() => {
         document.title = "Panneau d'administration";
         // dispatch(fetchUsers());
-             async function fetchStats() {
+        async function fetchStats() {
             try {
                 const response = await fetch("/api/v1/admin/stats");
+                console.log("response ;", response);
                 if (response.ok) {
                     const {count} = await response.json();
 					setStats(count)
                 } else
-                    console.log(
-                        "Erreur lors de la récupération des statistiques"
+                console.log(
+                    "Erreur lors de la récupération des statistiques"
                     );
-            } catch (error) {
-                console.log(error);
+                } catch (error) {
+                    console.log(error);
+                }
             }
-        }
+            // console.log("stats:", stats);
         fetchStats();
     }, []);
    
 
     return (
-        // <h1>Back OFFICE</h1>
          <main id="admin">
             <h1>Bienvenue sur page accueil de l&apos;admin</h1>
 

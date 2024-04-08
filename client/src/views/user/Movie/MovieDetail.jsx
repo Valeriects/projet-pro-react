@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import CardTime from "./Components/CardTime";
 
 function MovieDetail() {
     useMenuToggle();
@@ -9,6 +10,9 @@ function MovieDetail() {
     const { list } = useSelector((state) => state.movie);
     
     const movie = list.find((movie) => movie.id === parseInt(id));
+
+    const item = movie;
+    console.log(movie);
     
     return (
         <main id="movieDetail">
@@ -29,6 +33,9 @@ function MovieDetail() {
                         <p className="timeMovie">Durée: <strong>{movie.time}</strong></p>
 
                     </article>
+
+                    <p>Horaires de séances :</p>
+                    <CardTime item={item} />
                     
                     <article className="video">
 
