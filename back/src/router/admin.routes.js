@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { delUser, getRoles, addRole, upRole, delRole } from "../controller/admin/users.js";
-import { upUser, getUsers } from "../controller/dashboard/user.js";
+import { upUser, delUser, getRoles, addRole, upRole, delRole } from "../controller/admin/users.js";
+import { getUsers } from "../controller/dashboard/user.js";
 import { getMovies, addMovie, upMovie, deleteMovie } from "../controller/admin/movies.js";
 import { getCinemas, addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js";
 import { getSessions, addSession, upSession, deleteSession, delTimetable, upTimetable, addTimetable, getTimetables } from "../controller/admin/sessionTime.js";
@@ -8,7 +8,7 @@ import { getOrders, addOrder, upOrder, deleteOrder } from "../controller/admin/o
 import { getMovieMedias, addMovieMedia, upMovieMedia, delMovieMedia, getMedias, addMedia, upMedia, delMedia, getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
 import { getCount } from "../controller/admin/adminBack.js";
 
-import { storage, upload } from "../middlewares/multer-config.js";
+import { upload } from "../middlewares/multer-config.js";
 
 import { uploadFile } from "../middlewares/fileUpload-config.js";
 
@@ -16,7 +16,7 @@ const router = Router();
 
 //routes USER
 router.get("/user", getUsers);
-// router.patch("/user/:id", upUser); //dans site.routes
+router.patch("/user/:id", upUser);
 router.delete("/user/:id", delUser);
 
 //routes MOVIE 

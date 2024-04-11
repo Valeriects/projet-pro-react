@@ -9,7 +9,6 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableMediaMovie() {
     useMenuToggle();
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {

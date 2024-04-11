@@ -37,7 +37,6 @@ const authJwtAdmin = (req, res, next) => {
         }
         
         req.user = decoded;
-
         next();
     });
 

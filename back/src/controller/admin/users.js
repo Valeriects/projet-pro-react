@@ -16,25 +16,24 @@ import Query from "../../model/Query.js";
 // };
 
 
-// const upUser = async (req, res) => {
-//     try {
-//         const { firstname, lastname, password, address, email, phone, birthday } = req.body;
-//         const { id } = req.params;
+const upUser = async (req, res) => {
+    try {
+        const { roles_id } = req.body;
+        const { id } = req.params;
 
-//         const queryUser = "UPDATE users SET firstname = ?, lastname = ?, password = ?, address = ?, email = ?, phone = ?, birthday = ? WHERE id = ?";
+        // console.log(req.body);
 
-//         //on hash le password
-//         const salt = Number(process.env.BCRYPT_SALT);
-//         const hashPassword = await bcrypt.hash(password, salt);
+        const queryUser = "UPDATE users SET roles_id = ? WHERE id = ?";
 
-//         const user = await Query.runByParams(queryUser, [firstname, lastname, hashPassword, address, email, phone, birthday, id]);
+        await Query.runByParams(queryUser, [roles_id, id]);
 
-//         res.json({ id, firstname, lastname, password: hashPassword, address, email, phone, birthday });
+        // console.log();
+        res.json({roles_id, id});
 
-//     } catch (err) {
-//         res.status(500).json({ msg: err });
-//     }
-// };
+    } catch (err) {
+        res.status(500).json({ msg: err });
+    }
+};
 
 const delUser = async (req, res) => {
     try {
@@ -125,4 +124,4 @@ const delRole = async (req, res) => {
     }
 };
 
-export { delUser, getRoles, addRole, upRole, delRole };
+export { upUser, delUser, getRoles, addRole, upRole, delRole };

@@ -44,10 +44,5 @@ const upload = multer({
         }
     },
 }); 
-// }).array("src_img", 10); // src_img est le nom de l'input type file -> attribut name, 10 est le nombre de fichiers acceptés maximum
 
-// const multerStorage = multer({storage: storage}).single('src_img');
-// const upload = multer({ storage: storage });
-
-// export {storage, multerStorage};
-export {storage, upload};
+export { upload};

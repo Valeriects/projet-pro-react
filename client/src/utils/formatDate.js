@@ -20,7 +20,7 @@ function convertTime(date_time) {
 }
 
 function formattedTime(time) {
-      const [heures, minutes] = time.split(':'); // Séparer l'heure, les minutes et les secondes
+    const [heures, minutes] = time.split(':'); // Séparer l'heure, les minutes et les secondes
     return `${heures}H${minutes}`;
 }
 

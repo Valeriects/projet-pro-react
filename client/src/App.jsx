@@ -19,8 +19,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchMovies());
 
-    // dispatch(login());
-
     async function currentSession() {
 
         const tokenOk = await fetch("/api/v1/authentication/check-token", {
@@ -30,12 +28,9 @@ function App() {
 
         const authentication = await tokenOk.json();
 
-        console.log("auth :", authentication);
-
         if (tokenOk.error) return;
 
         if (tokenOk.ok) {
-        
           dispatch(login(authentication.user));
           setUserType(authentication.user.roleUser);
 
@@ -43,24 +38,15 @@ function App() {
             navigate("/admin");
           }
         }
-      }
-      currentSession();
-    }, [userType]);
-  // }, []);
-
-  // console.log(userType);
+    }
+    currentSession();
+  }, [userType]);
 
       // si l'état est sur visiteur OU un utilisateur (données récupéré de son token grace au useEffect au-dessus), on retourne le routeur de l'utilisateur
   if (userType === "visitor" || userType === "user") return <UserRoutes />;
    // si l'état est sur admin, on retourne le routeur de l'admin
-    if (userType === "admin") return <AdminRoutes />;
-
-  // return (
-  //   <>
-  //   <UserRoutes />
-  //   <AdminRoutes />
-  //   </>
-  // )
+  if (userType === "admin") return <AdminRoutes />;
+ 
   
 }
 

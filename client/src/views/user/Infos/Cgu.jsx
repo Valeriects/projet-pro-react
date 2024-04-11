@@ -3,7 +3,7 @@ function Cgu() {
     useMenuToggle();
     
     return (
-        <main id="Cgu" className="infos">
+        <main id="cgu" className="infos">
             <section>
                 <h2>Conditions d&apos;Utilisation</h2>
                 <p>

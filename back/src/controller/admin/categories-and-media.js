@@ -32,13 +32,15 @@ const addMovieMedia = async (req, res) => {
 
 const upMovieMedia = async (req, res) => {
     try {
-        const { movies_id, media_id  } = req.params;
+        const { movies_id, media_id } = req.body;
+        // console.log(req.body);
+
 
         const query = "UPDATE movies_media SET media_id = ?, movies_id = ? WHERE id = ?";
 
-        await Query.runByParams(query, [ movies_id, media_id, movies_id, id ]);
-            
-        res.json({ movies_id, media_id, id  });
+        const up = await Query.runByParams(query, [ media_id, movies_id, id ]);
+        console.log("up :", up);
+        res.json(up);
 
     } catch (err) {
         res.status(500).json({ msg: err });

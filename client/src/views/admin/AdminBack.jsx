@@ -1,21 +1,17 @@
-// import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 
 import useMenuToggle from "../../hook/useMenuToggle";
 
 function AdminBack() {
     useMenuToggle();
-    // const dispatch = useDispatch();
     const [stats, setStats] = useState(null);
-         
 
     useEffect(() => {
         document.title = "Panneau d'administration";
-        // dispatch(fetchUsers());
         async function fetchStats() {
             try {
                 const response = await fetch("/api/v1/admin/stats");
-                console.log("response ;", response);
+
                 if (response.ok) {
                     const {count} = await response.json();
 					setStats(count)
@@ -27,7 +23,6 @@ function AdminBack() {
                     console.log(error);
                 }
             }
-            // console.log("stats:", stats);
         fetchStats();
     }, []);
    
@@ -36,24 +31,29 @@ function AdminBack() {
          <main id="admin">
             <h1>Bienvenue sur page accueil de l&apos;admin</h1>
 
-            <h2>Rubriques:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Statistiques des données:</th>
+                    </tr>
+                </thead>
 
-            <div id="userBack">
-                {
-					stats ? (
-						<>
-							<p>Nombre de membres : {stats.nombre_d_utilisateurs}</p>
-							<p>Nombre de réservations : {stats.nombre_de_réservations}</p>
-							<p>Nombre de films : {stats.nombre_de_films}</p>
-							<p>Nombre de séances : {stats.nombre_de_séances}</p>
-						</>
+                {stats ? (
+                    <tbody>
+                        <tr>
+                            <td>Nombre de membres : {stats.nombre_d_utilisateurs}</td>
+                        </tr>
+                        <tr><td>Nombre de réservations : {stats.nombre_de_réservations}</td></tr>
+                        <tr><td>Nombre de films : {stats.nombre_de_films}</td></tr>
+                        <tr><td>Nombre de séances : {stats.nombre_de_séances}</td></tr>
+                    </tbody>
 					) : (
 						<p>Chargement des statistiques...</p>
 					)
 				}
             
                 
-            </div>
+            </table>
                 
         </main>
     )

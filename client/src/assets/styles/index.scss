@@ -72,7 +72,7 @@ button {
             }
 }
 
-.horaire {
+.horaire { //le cardTime
     @include display(row, space-around);
     padding-left:0;
 
@@ -490,9 +490,6 @@ form {
     }
 
     .synopsys {
-        // background-color: $white;
-        // border-radius: 0.2rem;
-        // border: 1px solid $marron;
         padding: 1rem;
 
         p{
@@ -514,7 +511,7 @@ form {
     }
 }
 
-.infos {
+.infos { //les pages d'informations (cgu/cgv/confidentialité/a propos)
     padding: 1rem;
     
     section {

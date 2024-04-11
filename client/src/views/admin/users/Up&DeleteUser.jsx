@@ -12,21 +12,22 @@ function UpDeleteUser() {
     useMenuToggle();
     const { id } = useParams();
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
-    const [roles_id, setRoles_id] = useState("2");
-
-    const radioChange = e => {
-        setRoles_id(e.target.value)
-    }
-
     const { listUser } = useSelector((state) => state.user);
-
-
     const [user, setUser] = useState();
+    
+    const handleChange = (e) => {
+        
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value
+        })
+    }   
+    
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
- 
-
+    
+    
     useEffect(() => {
         dispatch(fetchUsers());
         if (!user) {
@@ -43,7 +44,6 @@ function UpDeleteUser() {
               if (res.ok) {
                   console.log(res);
                   navigate("/admin/membre");
-
               }
               
           } catch (err) {
@@ -59,12 +59,12 @@ function UpDeleteUser() {
                 headers: {
                 "Content-Type": "application/json",
                 },
-                body: JSON.stringify(),
+                body: JSON.stringify(user),
             });
 
             if (res.ok) {
-                console.log(res);
-                navigate("/admin/membre");
+                console.log("res :", res);
+                navigate(`/admin/membre/${user.id}`);
 
             }
               
@@ -88,7 +88,7 @@ function UpDeleteUser() {
     return (
         <main className="detail">
             <Link to={"/admin/membre"}>Retour à la liste des membres</Link>
-            <form className="datas">
+            <form className="datas" onSubmit={btnUp}>
                  <fieldset>
                     <legend>Données du membre n°{ user?.id }</legend>
                        
@@ -103,18 +103,30 @@ function UpDeleteUser() {
                     <p>Date de dernière connexion: <span>{user?.last_connection_date}</span></p>
 
                     
-                    <label htmlFor="member">Rôle membre:
-                        <input type="radio" name="roles_id" id="member" value="2" checked={roles_id === "2"} onChange={radioChange}/>
-                        {/* <input type="text" id="roles_id" name="roles_id" value={user?.roles_id} /> */}
+                    <select name="roles_id" id="roles_id" onChange={handleChange}>
+                        
+                        <option value="">Rôle du membre { user?.roles_id }</option>
+                        <option value="2">Membre</option>
+                        <option value="1">Admin</option>
+                        <option value="5">Manager</option>
+                    </select>
+
+                    {/* <div>Rôle:
+
+                    <label htmlFor="member">Membre:
+                        <input type="radio" name="roles_id" id="member" value="2" checked={user.roles_id === "2"} onChange={handleChange}/>
                     </label>
-                    <label htmlFor="admin">Rôle admin:
-                        <input type="radio" name="roles_id" id="admin" value="1" checked={roles_id === "1"} onChange={radioChange} />
-                        {/* <input type="text" id="roles_id" name="roles_id" value={user?.roles_id} /> */}
+                    <label htmlFor="admin">Admin:
+                        <input type="radio" name="roles_id" id="admin" value="1" checked={user.roles_id === "1"} onChange={handleChange} />
                     </label>
-                        <button onClick={btnUp} >
-                            <FontAwesomeIcon icon={faSquarePen} className="iconeTable" />
-                        </button>
-                    <select name="" id=""></select>
+                    <label htmlFor="manager">Manager:
+                        <input type="radio" name="roles_id" id="manager" value="5" checked={user.roles_id === "5"} onChange={handleChange} />
+                    </label>
+                    </div> */}
+
+                    <button type="submit">
+                        <FontAwesomeIcon icon={faSquarePen} className="iconeTable" />
+                    </button>
                     
                 </fieldset>
       

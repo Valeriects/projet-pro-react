@@ -52,6 +52,7 @@ a {
 
 button {
     border: none;
+    //ajout pour qdmin uniquement
     border-radius: 0.3rem;
     background-color: $marron;
     color: $beigeClair;
@@ -95,41 +96,7 @@ button {
     padding: .5rem 1rem;
 }
 
-#admin, #membre {
-    color: $marron;
-    padding: 1rem;
-
-    div,
-    ul {
-        @include display(row, none);
-        flex-wrap: wrap;
-        gap: 2rem;
-
-        a:not .tdIcone a {
-            color: $marron;
-            border: 1px solid $marron;
-            border-radius: .3rem;
-            padding: 1rem;
-            cursor: pointer;
-
-            &:hover {
-                color: $marron;
-                background-color: $marron;
-            }
-        }
-
-        li {
-            // text-decoration: none;  
-            list-style: none;
-
-            button {
-                padding: 1rem;
-            }
-        }
-    }
-}
-
-#userBack, #membre, .table {
+.table, #admin {
     padding: 2rem, 0;
     max-height: 70%;
     overflow-y: auto;
@@ -145,10 +112,10 @@ button {
 
     table {
         display: block;
-        color: $marron;
+        color: $black;
+        background-color: $white;
         border-collapse: collapse;
         overflow-x: scroll;
-
         border: 2px solid $gris;
         max-width: 95%;
         margin: auto;
@@ -162,21 +129,16 @@ button {
                 font-style: italic;
                 font-weight: bold;
                 font-size: 1.4rem;
-                
             }
+        }
+
+        tr:nth-child(even), th {
+            background-color: $grisExtraLight;
         }
 
         th, td, tr {
             border: .5px solid $gris;
             padding: 1rem;
-        }
-
-
-        td:nth-child(7), th:nth-child(7) {
-            max-width: 150px;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
         }
 
         .tdIcone {
@@ -195,10 +157,6 @@ button {
                 border: none;
             }
         }
-
-        article {
-            position:absolute;
-        }
     }
 }
 
@@ -213,7 +171,6 @@ button {
 
     .iconeTable {
         font-size: 4rem;
-
     }
 
     [type="submit"] {
@@ -236,7 +193,6 @@ button {
         background-color: $grisClair;
         border: 1px solid $gris;
         position: absolute;
-        // inset: 0;
         bottom: 0;
         right: 0;
         left: 0;

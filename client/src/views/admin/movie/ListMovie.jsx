@@ -45,7 +45,6 @@ function TableMovie() {
                 </thead>
 
                 <tbody>
-
                     {list.map((item) => (                  
                     <tr key={item.id}>
                         

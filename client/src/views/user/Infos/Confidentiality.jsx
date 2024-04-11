@@ -4,7 +4,7 @@ function Confidentiality() {
     useMenuToggle();
     
     return (
-        <main id="Confidential"  className="infos">
+        <main id="confidential"  className="infos">
             <section>
 
                 <h2>Politique de Confidentialité</h2>

@@ -18,18 +18,20 @@ function UpDeleteRole() {
  
     const [mediaMovie, setMediaMovie] = useState(null);
     const { listMediaMovie} = useSelector((state) => state.mediaMovie);
-    const { listMedia} = useSelector((state) => state.media);
+    const { listMedia } = useSelector((state) => state.media);
     const { list} = useSelector((state) => state.movie);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
  
 
+    console.log("listMedia :", listMedia);
+
     useEffect(() => {
         dispatch(fetchMediaMovie());
         dispatch(fetchMedia());
         dispatch(fetchMovies());
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         if (!mediaMovie) {
@@ -43,18 +45,15 @@ function UpDeleteRole() {
             ...mediaMovie,
             [e.target.name]: e.target.value,
         });
-
-        console.log(e.target.value)
     }
 
-    // console.log("mediaMovie :", mediaMovie);
+    console.log("mediaMovie :", mediaMovie);
 
     const btnDelete = async () => {
         try {
             const res = await fetch(`/api/v1/admin/movie-media/${mediaMovie.id}`, {
                 method: "DELETE"
             });
-            console.log("2222");
   
             if (res.ok) {
                 console.log(res);
@@ -77,7 +76,7 @@ function UpDeleteRole() {
 
             if (res.ok) {
                 console.log(res);
-                // navigate(`/admin/média-film/${mediaMovie.id}`);
+                navigate(`/admin/média-film/${mediaMovie.id}`);
             }
         } catch (err) {
             console.log(err);
@@ -101,10 +100,11 @@ function UpDeleteRole() {
                     <fieldset>
                         <legend>Données du média lié au film n°{ mediaMovie?.id }</legend>
                         
-                        <p>Titre du film: <span>&quot;{mediaMovie?.title}&quot;</span></p>
-                        <p>Nom du média: <span>&quot;{mediaMovie?.alt_img}&quot;</span></p>
+                        {/* <p>Titre du film: <span>&quot;{mediaMovie?.title}&quot;</span></p>
+                        <p>Nom du média: <span>&quot;{mediaMovie?.alt_img}&quot;</span></p> */}
 
                         <label htmlFor="movies_id">Modifier l&apos;ID du film {mediaMovie?.title}:
+                            {/* <input onChange={handleChange} type="text" id="movies_id" name="movies_id" value={mediaMovie?.movies_id}/> */}
                             {/* <input onChange={(e) => setMediaMovie({...mediaMovie, movies_id: e.target.value})} type="text" id="movies_id" name="movies_id" value={mediaMovie?.movies_id}/> */}
                              <select onChange={handleChange} name="movies_id" id="movies_id">
                                 <option value="">Choisir le film</option>
@@ -125,6 +125,7 @@ function UpDeleteRole() {
                                     
                                 ))}
                             </select>
+                            {/* <input onChange={handleChange} type="text" id="media_id" name="media_id" value={mediaMovie?.media_id}/> */}
                             {/* <input onChange={(e) => setMediaMovie({...mediaMovie, media_id: e.target.value})} type="text" id="media_id" name="media_id" value={mediaMovie?.media_id}/> */}
                         </label>
                         

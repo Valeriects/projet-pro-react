@@ -22,8 +22,6 @@ function TableTimeTables() {
 
     return (
         <main className="table">
-
-
             <table>
                 <caption>Liste des horaires <Link to={"/admin/horaire/ajout"}>Ajouter un horaire</Link></caption>
                 <thead>

@@ -12,14 +12,8 @@ function HeaderAd() {
 
     const { isMenuOpen } = useSelector((state) => state.menu);
     const [isListOpen, setIsListOpen] = useState(false);
-    const { isLogged, user } = useSelector((state) => state.user);
- 
-    console.log(isLogged);
-    console.log("user :",user);
-    console.log("userRole :",user.roleUser);
 
     const dispatch = useDispatch();
-
 
     function toggleList() {
         setIsListOpen(!isListOpen);

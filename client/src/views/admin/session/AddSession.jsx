@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,7 +9,10 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 function AddSession() {
     useMenuToggle();
     const navigate = useNavigate();
+    
     const [session, setSession] = useState("");
+    const { list } = useSelector((state) => state.session);
+    console.log("list :", list);
 
     async function submitAdd(e) {
         e.preventDefault();
