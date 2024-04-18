@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faSquareTwitter, faSquareFacebook, faSquareInstagram } from "@fortawesome/free-brands-svg-icons";
@@ -37,10 +37,16 @@ function Footer() {
 
             <div>
                 <h3>Réseaux sociaux</h3>
-
-                <FontAwesomeIcon className="icon" icon={faSquareTwitter} />
-                <FontAwesomeIcon className="icon" icon={faSquareInstagram} />
-                <FontAwesomeIcon className="icon" icon={faSquareFacebook} />
+                <Link to="https://twitter.com/">
+                    <FontAwesomeIcon className="icon" icon={faSquareTwitter} />
+                </Link>
+                <Link to="https://www.instagram.com">
+                    <FontAwesomeIcon className="icon" icon={faSquareInstagram} />
+                </Link>
+                <Link to="https://www.facebook.com/">
+                    <FontAwesomeIcon className="icon" icon={faSquareFacebook} />
+                </Link>
+             
             </div>
             
         </footer>
