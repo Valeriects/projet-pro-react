@@ -16,15 +16,12 @@ function TableOrder() {
     }, []);
 
     const { list } = useSelector((state) => state.order);
- 
-
-    console.log(list);
 
     return (
         <main className="table">
 
             <table>
-                <caption>Liste des réservations <Link to={"/admin/réservation/ajout"}>Ajouter une réservation</Link></caption>
+                <caption>Liste des réservations</caption>
                 <thead>
                     <tr>
                         <th>id</th>

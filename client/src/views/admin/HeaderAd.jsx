@@ -48,36 +48,34 @@ function HeaderAd() {
 
             <div id="wrapIcon">
         
-                <FontAwesomeIcon onClick={toggleBurger} id="iconUser" className="icon" icon={faBars} />
+                <FontAwesomeIcon onClick={toggleBurger} id="iconUser" className={`icon ${isMenuOpen ? 'open' : ''}`} icon={faBars} />
             
-                {isMenuOpen && (
-                    <nav className="menu" aria-label="Menu de connexion">
+                    <nav className={`menu ${isMenuOpen ? 'open' : ''}`} aria-label="Menu de connexion">
                         <NavLink to={"/admin"} >accueil administrateur</NavLink>
 
                         <button onClick={toggleList} className="btnList" aria-label="Menu de tableau des données">Tableaux de données</button>
 
                         {isListOpen && (
-                            <>
+                            <div>
                                 <NavLink to={"membre"}>membres</NavLink>
                                 <NavLink to={"role"}>role</NavLink>
                                 <NavLink to={"film"}>film</NavLink>
-                                <NavLink to={"réservation"}>réservation</NavLink>
+                                <NavLink to={"média"}>média</NavLink>
                                 <NavLink to={"séance"}>séance</NavLink>
                                 <NavLink to={"salle"}>salle</NavLink>
+                                <NavLink to={"réservation"}>réservation</NavLink>
                                 <NavLink to={"cinéma"}>cinéma</NavLink>
                                 <NavLink to={"categorie"}>catégorie</NavLink>
-                                <NavLink to={"média"}>média</NavLink>
                                 <NavLink to={"média-film"}>média-film</NavLink>
                                 <NavLink to={"catégorie-film"}>catégorie-film</NavLink>
                                 <NavLink to={"horaire"}>horaire</NavLink>
-                            </>
+                            </div>
                         )}
 
                         
                         <button onClick={userLogout} className="btnDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>
                         
                     </nav>
-                )}
 
             </div>
 

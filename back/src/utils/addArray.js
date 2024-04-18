@@ -1,5 +1,5 @@
 
-function addArray (datas_1, datas_2, datas_3, datas_4) { //todo refaire
+function addArray (datas_1, datas_2, datas_3, datas_4) { 
     //ajout des catégories
     const categoryBymovieId = datas_2.reduce(
         (acc, { movieId, name_cat }) => {
@@ -26,11 +26,11 @@ function addArray (datas_1, datas_2, datas_3, datas_4) { //todo refaire
  
     //ajout des horaires
     const timeByMovieId = datas_4.reduce(
-        (acc, { movieId, hours_timetable, timetableId }) => {
+        (acc, { movieId, hours_timetable, timetableId, sessionId }) => {
             if (!acc[movieId]) {
                 acc[movieId] = [];
             }
-            acc[movieId].push({"id":timetableId, "horaire":hours_timetable});
+            acc[movieId].push({"id":timetableId, "horaire":hours_timetable, "sessionId":sessionId});
             return acc;
         },
         {}
@@ -45,24 +45,7 @@ function addArray (datas_1, datas_2, datas_3, datas_4) { //todo refaire
     return datas_1;
 };
 
-function addArray2 (datas_1, datas_2) { //todo refaire
-    const timetableBySessionId = datas_2.reduce(
-        (acc, { movieId, name_cat }) => {
-            if (!acc[movieId]) {
-                acc[movieId] = [];
-            }
-            acc[movieId].push(name_cat);
-            return acc;
-        },
-        {}
-    );
-
-    for (const data of datas_1) {
-        data.timetables = timetableBySessionId[data.id] || [];
-    }
-
-    return datas_1;
-};
 
 
-export { addArray, addArray2 };
+
+export { addArray };

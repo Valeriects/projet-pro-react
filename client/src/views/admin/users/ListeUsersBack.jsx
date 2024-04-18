@@ -17,9 +17,7 @@ function ListUsers() {
     useEffect(() => {
         dispatch(fetchUsers());
     }, []);
-  
 
-    console.log(listUser);
 
     return (
 

@@ -37,7 +37,6 @@ function UpDeleteRole() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/role");
               }
               
@@ -58,7 +57,6 @@ function UpDeleteRole() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/role/:id");
             }
               
@@ -77,7 +75,7 @@ function UpDeleteRole() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/role"}>Retour à la liste des rôles</Link>
+            <Link className="aBack" to={"/admin/role"}>Retour à la liste des rôles</Link>
             <form className="datas" onSubmit={btnUp}>
                 {role && (
                 
@@ -110,7 +108,7 @@ function UpDeleteRole() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/role"}>Retour à la liste des rôles</Link>
+            <Link className="aBack" to={"/admin/role"}>Retour à la liste des rôles</Link>
  
         </main>
     )

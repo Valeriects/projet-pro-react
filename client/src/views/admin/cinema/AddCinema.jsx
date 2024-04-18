@@ -17,7 +17,6 @@ function AddCinema() {
         });
     }
 
-
     async function submitAdd(e) {
         e.preventDefault();
         try {
@@ -30,7 +29,6 @@ function AddCinema() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/cinéma");
             }
 
@@ -41,7 +39,7 @@ function AddCinema() {
 
     return (
         <>
-            <Link to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
+            <Link className="aBack" to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
             <form onSubmit={submitAdd}>
                  <fieldset>
                         <legend>Création des données d&apos;un cinéma</legend>
@@ -76,11 +74,9 @@ function AddCinema() {
 
                         <label htmlFor="disabled_access">Accès handicapé :
                             <input onChange={handleChange} type="text" id="disabled_access" name="disabled_access" value={cine.disabled_access}/>
-                            {/* <textarea onChange={handleChange} name="disabled_access" id="disabled_access" cols="30" rows="10"></textarea> */}
                         </label>
 
-                        <label htmlFor="infos_cine">Infos :
-                        {/* <input onChange={handleChange} type="text" id="infos_cine" name="infos_cine" value={cine.infos_cine} /> */}
+                        <label htmlFor="infos_cine">Infos supplémentaires :
                         <textarea onChange={handleChange} name="infos_cine" id="infos_cine" cols="30" rows="10"></textarea>
                         </label>
                         
@@ -90,7 +86,7 @@ function AddCinema() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
+            <Link className="aBack" to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
         </>
     );
 }

@@ -10,7 +10,6 @@ const authJwt = (req, res, next) => {
 
     jwt.verify(TOKEN, process.env.SECRET_TOKEN, (err, decoded) => {
         if(err){
-            console.log(err)
             return res.status(401).json({error: "Invalid token"});
         }
         req.user = decoded;
@@ -28,7 +27,6 @@ const authJwtAdmin = (req, res, next) => {
 
     jwt.verify(TOKEN, process.env.SECRET_TOKEN, (err, decoded) => {
         if(err){
-            console.log("err :", err);
             return res.status(401).json({error: "Invalid token"});
         }
 

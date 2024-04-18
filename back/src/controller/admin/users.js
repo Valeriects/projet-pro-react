@@ -1,33 +1,14 @@
 import Query from "../../model/Query.js";
-// import bcrypt from "bcrypt";
-
-
-// const getUsers = async (req, res) => {  
-//     try {
-//         const queryUsers = "SELECT * FROM users ORDER BY last_connection_date DESC";
-
-//         const listUsers = await Query.run(queryUsers);
-
-//         res.json(listUsers);
-
-//     } catch (err) {
-//         res.status(500).json({ msg: err });
-//     }
-// };
-
 
 const upUser = async (req, res) => {
     try {
         const { roles_id } = req.body;
         const { id } = req.params;
 
-        // console.log(req.body);
-
         const queryUser = "UPDATE users SET roles_id = ? WHERE id = ?";
 
         await Query.runByParams(queryUser, [roles_id, id]);
 
-        // console.log();
         res.json({roles_id, id});
 
     } catch (err) {
@@ -41,25 +22,9 @@ const delUser = async (req, res) => {
 
         const queryDel = "DELETE FROM users WHERE id = ?";
 
-
-        //todo à faire avec les cookies 
-        //on ne peut pas supprimer l'administrateur qui est le seul a avoir le role 1
-        // const queryRoleAdmin = "SELECT roles_id FROM users WHERE id = ?";
-
-        // const roleAdmin = await Query.run(queryRoleAdmin, [id]);
-
-        // if(roleAdmin !== 1){
-            await Query.runByParams(queryDel, [id]);
-            
-            res.json({ msg: "Bien supprimé", id })
-            // }
-            
-            // if(req.user.roles_id === 1){
-    
-            //     res.json({ msg: "Vous ne pouvez pas supprimer le compte administrateur", id })
-            // }
+        await Query.runByParams(queryDel, [id]);
         
-
+        res.json({ msg: "Bien supprimé", id })
 
     } catch (err) {
         res.status(500).json({ msg: err });

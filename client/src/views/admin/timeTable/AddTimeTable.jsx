@@ -24,7 +24,6 @@ function AddTimeTable() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/horaire");
             }
 
@@ -35,7 +34,7 @@ function AddTimeTable() {
 
     return (
         <>
-            <Link to={"/admin/horaire"}>Retour à la liste des horaires</Link>
+            <Link className="aBack" to={"/admin/horaire"}>Retour à la liste des horaires</Link>
             <form onSubmit={submitAdd}>
                  <fieldset>
                         <legend>Création de l&apos;horaire</legend>
@@ -51,7 +50,7 @@ function AddTimeTable() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/horaire"}>Retour à la liste des horaires</Link>
+            <Link className="aBack" to={"/admin/horaire"}>Retour à la liste des horaires</Link>
         </>
     );
 }

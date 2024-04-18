@@ -14,13 +14,6 @@ function UpDeleteMedia() {
     const [deleteMsgOpen, setDeleteMsgOpen] = useState(false);
  
     const [media, setMedia] = useState();
-    // const [media, setMedia] = useState({
-    //     src_img: media?.src_img,
-    //     alt_img: media?.alt_img,
-    //     src_video: media?.src_video,
-    //     alt_video: media?.alt_video,
-
-    // });
 
     const { listMedia } = useSelector((state) => state.media);
     
@@ -33,26 +26,15 @@ function UpDeleteMedia() {
         if (!media && listMedia.length > 0) {
             setMedia(listMedia.find((media) => media.id === Number(id)));
         }
-        console.log("media :" , media)
         
     }, [dispatch, media]);
-    // }, [dispatch, listMedia]);
 
-    console.log("media.src_img :" , media?.src_img)
-    console.log("media.src_video :" , media?.src_video)
-
-    // const handleChange = (e) => {
-    //     setMedia({
-    //         ...media,
-    //         [e.target.name]: e.target.value
-    //     });
-    // }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        //si le nom de l'input équivaut à src_img, alors la valeur sera un fichier, sinon, c'est la valeur normal de l'input
         const newValue = name === "src_img" ? e.target.files[0] : value;
     
-        console.log("name :", name);
         setMedia({
             ...media,
             [name]: newValue
@@ -66,7 +48,6 @@ function UpDeleteMedia() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/média");
               }
               
@@ -105,21 +86,18 @@ function UpDeleteMedia() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/média"}>Retour à la liste des médias</Link>
+            <Link className="aBack" to={"/admin/média"}>Retour à la liste des médias</Link>
             <form className="datas" onSubmit={btnUp} encType="multipart/form-data">
                 {media && (
                 
                     <fieldset>
                         <legend>Données du cinéma n°{ media?.id }</legend>
                         
-                        {/* todo afficher le nom du fichier au chargement de la page */}
                         <label htmlFor="src_img">Modifier le fichier : &quot;<span>{
                             (btnUp && media.src_img.name) ?
                                 media?.src_img && media.src_img.name
                                 : media?.src_img 
-                            // media?.src_img && media.src_img.name
                         }</span>&quot;
-                        {/* <label htmlFor="src_img">Modifier le nom du fichier : &quot;<span>{media?.src_img}</span>&quot; */}
                             <input onChange={handleChange} type="file" id="src_img" name="src_img"/>
                         </label>
 
@@ -157,7 +135,7 @@ function UpDeleteMedia() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/média"}>Retour à la liste des médias</Link>
+            <Link className="aBack" to={"/admin/média"}>Retour à la liste des médias</Link>
         </main>
     )
 }

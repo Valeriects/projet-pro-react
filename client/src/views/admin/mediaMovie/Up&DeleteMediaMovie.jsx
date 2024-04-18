@@ -23,9 +23,6 @@ function UpDeleteRole() {
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
- 
-
-    console.log("listMedia :", listMedia);
 
     useEffect(() => {
         dispatch(fetchMediaMovie());
@@ -47,8 +44,6 @@ function UpDeleteRole() {
         });
     }
 
-    console.log("mediaMovie :", mediaMovie);
-
     const btnDelete = async () => {
         try {
             const res = await fetch(`/api/v1/admin/movie-media/${mediaMovie.id}`, {
@@ -56,7 +51,6 @@ function UpDeleteRole() {
             });
   
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/média-film");
             }
         } catch (err) {
@@ -75,7 +69,6 @@ function UpDeleteRole() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate(`/admin/média-film/${mediaMovie.id}`);
             }
         } catch (err) {
@@ -93,7 +86,7 @@ function UpDeleteRole() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
+            <Link className="aBack" to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
             <form className="datas" onSubmit={btnUp}>
                 {mediaMovie && (
                 
@@ -149,7 +142,7 @@ function UpDeleteRole() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
+            <Link className="aBack" to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
  
         </main>
     )

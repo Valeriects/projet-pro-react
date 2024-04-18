@@ -8,7 +8,6 @@ function Apropos() {
     useMenuToggle();
     const dispatch = useDispatch();
     const { listCine } = useSelector((state) => state.cinema);
-    console.log("listCine : ", listCine[0]);
 
     useEffect(() => {
         dispatch(fetchCinema());

@@ -16,7 +16,6 @@ function AddMediaMovie() {
     const { listMedia } = useSelector((state) => state.media);
     const { list } = useSelector((state) => state.movie);
 
-    console.log(listMedia);
 
     useEffect(() => {
         dispatch(fetchMedia());
@@ -43,7 +42,6 @@ function AddMediaMovie() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/média-film");
             }
 
@@ -54,7 +52,7 @@ function AddMediaMovie() {
 
     return (
         <>
-            <Link to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
+            <Link className="aBack" to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
             <form onSubmit={submitAdd}>
                  <fieldset>
                         <legend>Création du lien entre le média et le film</legend>
@@ -88,7 +86,7 @@ function AddMediaMovie() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
+            <Link className="aBack" to={"/admin/média-film"}>Retour à la liste des Médias en lien avec les films</Link>
         </>
     );
 }

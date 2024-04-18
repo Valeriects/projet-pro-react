@@ -37,7 +37,6 @@ function UpDeleteCategory() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/categorie");
               }
               
@@ -58,7 +57,6 @@ function UpDeleteCategory() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/categorie/:id");
             }
               
@@ -77,7 +75,7 @@ function UpDeleteCategory() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link className="aBack" to={"/admin/categorie"}>Retour à la liste des catégories</Link>
             <form className="datas" onSubmit={btnUp}>
                 {category && (
                 
@@ -110,7 +108,7 @@ function UpDeleteCategory() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link className="aBack" to={"/admin/categorie"}>Retour à la liste des catégories</Link>
  
         </main>
     )

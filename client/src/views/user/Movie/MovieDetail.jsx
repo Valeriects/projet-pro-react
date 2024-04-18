@@ -12,7 +12,6 @@ function MovieDetail() {
     const movie = list.find((movie) => movie.id === parseInt(id));
 
     const item = movie;
-    console.log(movie);
     
     return (
         <main id="movieDetail">
@@ -34,7 +33,7 @@ function MovieDetail() {
 
                     </article>
 
-                    <p>Horaires de séances :</p>
+                    <p className="titleHoraire">Horaires de séances :</p>
                     <CardTime item={item} />
                     
                     <article className="video">

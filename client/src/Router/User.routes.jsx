@@ -13,11 +13,10 @@ import Session from "../views/user/Movie/Session.jsx";
 import Apropos from "../views/user/Infos/Apropos.jsx";
 
 import requireAuth from "../HOC/ProtectedUserRoutes";
-// import "../assets/styles/index.scss";
 
 
 function UserRoutes() {
-    //todo mettre le hoc de protection des routes
+    //le hoc de protection des routes
      const DashboardWithAuth = requireAuth(Dashboard);
 
     return (
@@ -25,32 +24,33 @@ function UserRoutes() {
 
             <Route path="/" element={<UserLayout />} >
                
-                    <Route path="" index element={<Home />} />
-                    
-                    <Route path="film/:id" element={<MovieDetail />} />
+                <Route path="" index element={<Home />} />
                 
-                    <Route path="/film/:id/seance/:idSession" element={<Session />} />
+                <Route path="film/:id" element={<MovieDetail />} />
+            
+                <Route path="/film/:id/seance/:sessionId/horaire/:idTimetable" element={<Session />} />
 
-                    <Route path="authentification/connexion" element={<Login />} />
+            
+                <Route path="authentification/connexion" element={<Login />} />
 
-                    <Route path="authentification/inscription" element={<Register />} />
+                <Route path="authentification/inscription" element={<Register />} />
+            
 
-                    {/* route d'un membre vers son dashboard */}
-                    {/* <Route path="utilisateur/compte" element={<Dashboard />} /> */}
-                    <Route path="utilisateur/compte" element={<DashboardWithAuth />} />
+                {/* route d'un membre vers son dashboard */}
+                <Route path="utilisateur/compte" element={<DashboardWithAuth />} />
 
-                    <Route path="CGU" element={<Cgu />} />
-                    
-                    <Route path="CGV" element={<Cgv />} />
+                <Route path="CGU" element={<Cgu />} />
                 
-                    <Route path="a-propos" element={<Apropos />} />
-                    
-                    <Route path="politique-confidentialité" element={ <Confidentiality/>} />
+                <Route path="CGV" element={<Cgv />} />
+            
+                <Route path="a-propos" element={<Apropos />} />
+                
+                <Route path="politique-confidentialité" element={ <Confidentiality/>} />
 
             </Route>
 
-            {/* todo affiche 404 sur la page /admin */}
-            {/* <Route path="*" element={<h1>404</h1>} /> */}
+            {/* affiche 404 sur la page /admin */}
+            <Route path="*" element={<h1>404</h1>} />
 
         </Routes>
     );

@@ -8,16 +8,18 @@ import CardTime from "../Movie/Components/CardTime";
 
 function Home() {
     useMenuToggle()
-    const {list} = useSelector((state) => state.movie);
+    const { list } = useSelector((state) => state.movie);
     
     const settings = {
         dots: true,
         lazyLoad: true,
         infinite: true,
-        speed: 500,
+        speed: 2000,
         slidesToShow: 1,
         slidesToScroll: 1,
-        initialSlide: 2
+        initialSlide: 0,
+        autoplay: true,
+        autoplaySpeed: 1000,
     };
     
     return (
@@ -63,7 +65,7 @@ function Home() {
                         </figcaption>
                         
 
-                        <p>Horaires :</p>
+                        <p >Horaires :</p>
                         <CardTime item={item} />
                         
                         <Link to={`/film/${item.id}`} className="clearfix">Voir plus...</Link>

@@ -8,16 +8,12 @@ import { logout } from "../../store/slices/user";
 import { fetchMovies } from "../../store/slices/movie";
 import { toggleMenu, toggleMenuMember, closeMenu } from "../../store/slices/menu";
 import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
-// import scrollToSectionOnMount from "../../utils/scrollSection.js";
 function Header() {
-
-    // scrollToSectionOnMount(); //todo ne marche pas
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const { isMenuOpen, isUserOpen } = useSelector((state) => state.menu);
-    const { isLogged, user } = useSelector((state) => state.user);
+    const { isLogged} = useSelector((state) => state.user);
     const { list } = useSelector((state) => state.movie);
     
     const [msg, setMsg] = useState("");
@@ -25,13 +21,6 @@ function Header() {
     const [isSearching, setIsSearching] = useState(false);
 
     const ref = useRef(null);
-    
-    const roleUser = user ? user.roleUser : null;
-    
-    // console.log(user);
-    console.log("roleUser : ", roleUser);
-    // console.log(isLogged);
-    // console.log("search :", useSearch);
     
     useEffect(() => {
         if (!list.length) {
@@ -41,7 +30,7 @@ function Header() {
     
     function toggleBurger() {
         dispatch(toggleMenu());
-        setIsSearching(false);//quanb le menu burger s'ouvre, la barre de recherche se ferme
+        setIsSearching(false);//quand le menu burger s'ouvre, la barre de recherche se ferme
     }
     
     function toggleMember() {
@@ -96,7 +85,6 @@ function Header() {
         } 
             setMsg("");
             setUseSearch([...useSearch]);
-        
     }
 
     function handleSearchClick() {
@@ -106,7 +94,7 @@ function Header() {
     
     return (        
         <header>
-            <button onClick={toggleBurger} className="btnBurger" title="Accéder au menu de navigation" aria-label="Accéder au menu de navigation">
+            <button onClick={toggleBurger} className={`btnBurger ${isMenuOpen ? "open" : ""}`} title="Accéder au menu de navigation" aria-label="Accéder au menu de navigation">
                 <FontAwesomeIcon className="icon menuBurger" icon={faBars} />    
             </button>
 
@@ -115,27 +103,21 @@ function Header() {
                 <span>Cinéma FUN</span>
             </NavLink>
 
-            {isMenuOpen && (
 
-                <nav id="menu" aria-label="Menu de navigation">
-                    <NavLink to={"/"}>accueil</NavLink>
-                    {isLogged ? (
-                        <NavLink to={"utilisateur/compte"} >votre compte</NavLink>
-                    ): (
-                        <NavLink to={"authentification/connexion"}>connexion</NavLink>
-                    )}
-                    {/* <NavLink to={""}>films à l&rsquo;affiche</NavLink> */}
-                    <NavLink to={"a-propos"}>infos pratiques</NavLink>
+            <nav id="menu" className={isMenuOpen ? 'open' : ''} aria-label="Menu de navigation">
+                <NavLink to={"/"}>accueil</NavLink>
+                {isLogged ? (
+                    <NavLink to={"utilisateur/compte"} >votre compte</NavLink>
+                ): (
+                    <NavLink to={"authentification/connexion"}>connexion</NavLink>
+                )}
+                <NavLink to={"a-propos"}>infos pratiques</NavLink>
+                
+                {isLogged && (
+                    <button onClick={userLogout} className="btnDeco burgerDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>
+                )}
+            </nav>
 
-                    <NavLink to="/#contact">nous contacter</NavLink>
-                    {/* <NavLink to="/#contact"  onClick={() => handleNavLinkClick('contact')}>nous contacter</NavLink> */}
-                    
-                    {isLogged && (
-                        <button onClick={userLogout} className="btnDeco burgerDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>
-                    )}
-                </nav>
-
-            )}
 
             {/* début input de recherche */}
             {isSearching && (

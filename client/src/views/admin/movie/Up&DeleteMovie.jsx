@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchMovies } from "../../../store/slices/movie";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import { convertDate } from "../../../utils/formatDate.js";
 
 function UpDeleteMovie() {
     useMenuToggle();
@@ -44,7 +45,6 @@ function UpDeleteMovie() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/film");
               }
               
@@ -65,8 +65,7 @@ function UpDeleteMovie() {
             });
 
             if (res.ok) {
-                console.log(res);
-                navigate("/admin/film/:id");
+                window.location.href = `/admin/film/${movie.id}`;
             }
               
         } catch (err) {
@@ -84,7 +83,7 @@ function UpDeleteMovie() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/film"}>Retour à la liste des films</Link>
+            <Link className="aBack" to={"/admin/film"}>Retour à la liste des films</Link>
             <form className="datas" onSubmit={btnUp}>
                 {movie && (
                 
@@ -92,45 +91,29 @@ function UpDeleteMovie() {
                         <legend>Données du film n°{ movie?.id }</legend>
                         
                         
-                        <label htmlFor="title">Modifier : <span>&quot;{movie?.title}&quot;</span>
+                        <label htmlFor="title">Titre : <span>&quot;{movie?.title}&quot;</span>
                             <input onChange={handleChange} type="text" id="title" name="title" value={movie.title}/>
                         </label>
 
-                       
-
-                        <label htmlFor="categories">Modifier : <span>&quot;{movie?.categories}&quot;</span>
-                            <input onChange={handleChange} type="text" id="categories" name="categories" value={movie.categories}/>
-                        </label>
-
-                        
-
-                        <label htmlFor="director">Modifier : <span>&quot;{movie?.director}&quot;</span>
+                        <label htmlFor="director">Réalisateur : <span>&quot;{movie?.director}&quot;</span>
                             <input onChange={handleChange} type="text" id="director" name="director" value={movie.director}/>
                         </label>
 
-                        <label htmlFor="actors">Modifier : <span>&quot;{movie?.actors}&quot;</span>
-                            <input onChange={handleChange} type="text" id="actors" name="actors" value={movie.actors}/>
+                        <label htmlFor="actor">3 acteurs principaux :<span>&quot;{movie?.actor}&quot;</span>
+                            <input onChange={handleChange} type="text" id="actor" name="actor" value={movie.actor}/>
                         </label>
 
-                        <label htmlFor="release_date">Modifier : <span>&quot;{movie?.release_date}&quot;</span>
-                            <input onChange={handleChange} type="text" id="release_date" name="release_date" value={movie.release_date}/>
+                        <label htmlFor="release_date">Date de réalisation : <span>&quot;{convertDate(movie?.release_date)}&quot;</span>
+                            <input onChange={handleChange} type="date" id="release_date" name="release_date" value={movie.release_date}/>
                         </label>
 
-                        <label htmlFor="time">Modifier : <span>&quot;{movie?.time}&quot;</span>
-                            <input onChange={handleChange} type="text" id="time" name="time" value={movie.time}/>
+                        <label htmlFor="time">Durée : <span>&quot;{movie?.time}&quot;</span>
+                            <input onChange={handleChange} type="time" id="time" name="time" value={movie.time}/>
                         </label>
 
-                        <label htmlFor="synopsis">Modifier : <span>&quot;{movie?.synopsis}&quot;</span>
-                            <input onChange={handleChange} type="text" id="synopsis" name="synopsis" value={movie.synopsis}/>
+                        <label htmlFor="synopsis">Synopsis : <span>&quot;{movie?.synopsis}&quot;</span>
+                            <textarea onChange={handleChange} name="synopsis" id="synopsis" cols="50" rows="30"></textarea>
                         </label>
-
-                        {/* <label htmlFor="disabled_access">Modifier : <span>&quot;{movie?.disabled_access}&quot;</span>
-                            <input onChange={handleChange} type="text" id="disabled_access" name="disabled_access" value={movie.disabled_access}/>
-                        </label>
-
-                        <label htmlFor="infos_cine">Modifier : <span>&quot;{movie?.infos_cine}&quot;</span>
-                            <textarea onChange={handleChange} name="infos_cine" id="infos_cine" cols="30" rows="10"></textarea>
-                        </label> */}
 
                         
                         <button type="submit" >
@@ -147,13 +130,16 @@ function UpDeleteMovie() {
 
             {deleteMsgOpen && (
                 <article className="msgDelete">
-                    <p>Voulez-vous vraiment supprimer ce film ?</p>
+                    <p>Voulez-vous vraiment supprimer ce film ? Si oui, alors il faudra d&apos;abord surrpimer le lien entre le film et son média : 
+                        <Link to={"/admin/média-film"}>média-film</Link>.
+                    </p>
+                    
                     <button onClick={btnDelete}>OUI</button>
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
  
-            <Link to={"/admin/film"}>Retour à la liste des films</Link>
+            <Link className="aBack" to={"/admin/film"}>Retour à la liste des films</Link>
         </main>
     )
 }

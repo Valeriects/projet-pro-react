@@ -16,9 +16,6 @@ function TableTimeTables() {
     }, []);
 
     const { list } = useSelector((state) => state.timeTable);
- 
-
-    console.log(list);
 
     return (
         <main className="table">

@@ -17,28 +17,8 @@ function Dashboard() {
     const id = user ? user.id : null;
     
     const  {listUser}  = useSelector((state) => state.user );
-    // const  listUser  = useSelector((state) => state.user.listUser );
     
-    // console.log("id :",id);
-    
-//    const infoUser = listUser.find(user => user.id === Number(id));
     const infoUser = listUser.find(user => user.id === Number(id));
-
-    
-    // const { newDate, time } = convertDate(infoUser?.created_date);
- 
-    
-    // const date = new Date(infoUser?.created_date);
-    
-    // const options = { day: 'numeric', month: 'long', year: 'numeric' };
-    
-    // const newDate = date.toLocaleDateString('fr-FR', options);
-    
-    
-    // console.log("convertDAte :", convertDate(infoUser?.created_date));
-    // console.log("date :", newDate);
-    // console.log("time :", time);
-
     
     const [userUp, setUserUp] = useState("");
     
@@ -73,7 +53,6 @@ function Dashboard() {
     return (
         <main id="dash">
             <h1>Bienvenue {infoUser?.firstname}</h1>      
-            
 
             <form className="datas" onSubmit={btnUp}>
                 <fieldset>
@@ -108,7 +87,7 @@ function Dashboard() {
                         <input onChange={handleChange} type="text" id="address" name="address" placeholder={infoUser?.address}/>
                     </label>
 
-                    <label htmlFor="birthday">Date de naissance: 
+                    <label htmlFor="birthday">Date de naissance: {convertDate(infoUser?.birthday)}
                         <input onChange={handleChange} type="date" id="birthday" name="birthday" placeholder={infoUser?.birthday}/>
                     </label>
                                       

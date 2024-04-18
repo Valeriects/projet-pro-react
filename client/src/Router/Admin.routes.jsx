@@ -36,17 +36,15 @@ import UpDeleteCategoryMovie from "../views/admin/categoryMovie/Up&DeleteCategor
 import AddCategoryMovie from "../views/admin/categoryMovie/AddCategoryMovie.jsx";
 import TableOrder from "../views/admin/order/ListOrder.jsx";
 import UpDeleteOrder from "../views/admin/order/Up&DeleteOrder.jsx";
-import AddOrder from "../views/admin/order/AddOrder.jsx";
 import RequireAuth from "../HOC/ProtectedAdminRoutes.jsx";
 
 function AdminRoutes() {
-    //todo mettre le hoc de protection des routes
+    //le hoc de protection des routes
     const AdminWithAuth = RequireAuth(AdminLayout);
     
     return (
         <Routes>
             <Route path="/admin" element={<AdminWithAuth/>}>
-            {/* <Route path="/admin" element={<AdminLayout/>}> */}
                 
                 <Route index element={<AdminBack />} />
                 
@@ -107,7 +105,6 @@ function AdminRoutes() {
                 {/* routes des orders */}
                 <Route path={"réservation"} element={<TableOrder />} />
                 <Route path={"réservation/:id"} element={<UpDeleteOrder />} />
-                <Route path={"réservation/ajout"} element={<AddOrder />} />
 
                 {/* route non trouvée */}
                 <Route path="*" element={<h1>404</h1>} />

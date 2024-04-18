@@ -17,8 +17,6 @@ function TableRole() {
         dispatch(fetchRoles());
     }, [dispatch]);
 
-    console.log(list);
-
     return (
         <main className="table">
 

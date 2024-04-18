@@ -9,7 +9,6 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableCinema() {
     useMenuToggle();
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,9 +16,6 @@ function TableCinema() {
     }, []);
 
     const { listCine } = useSelector((state) => state.cinema);
- 
-
-    console.log(listCine);
 
     return (
         <main className="table">

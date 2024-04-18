@@ -43,7 +43,6 @@ function UpDeleteCinema() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/cinéma");
               }
               
@@ -64,7 +63,6 @@ function UpDeleteCinema() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/cinema/:id");
             }
               
@@ -83,7 +81,7 @@ function UpDeleteCinema() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
+            <Link className="aBack" to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
             <form className="datas" onSubmit={btnUp}>
                 {cine && (
                 
@@ -91,43 +89,43 @@ function UpDeleteCinema() {
                         <legend>Données du cinéma n°{ cine?.id }</legend>
                         
                         
-                        <label htmlFor="name_cinema">Modifier : <span>&quot;{cine?.name_cinema}&quot;</span>
+                        <label htmlFor="name_cinema">Nom du cinéma : <span>&quot;{cine?.name_cinema}&quot;</span>
                             <input onChange={handleChange} type="text" id="name_cinema" name="name_cinema" value={cine.name_cinema}/>
                         </label>
 
                        
 
-                        <label htmlFor="email_cine">Modifier : <span>&quot;{cine?.email_cine}&quot;</span>
+                        <label htmlFor="email_cine">Email : <span>&quot;{cine?.email_cine}&quot;</span>
                             <input onChange={handleChange} type="email" id="email_cine" name="email_cine" value={cine.email_cine}/>
                         </label>
 
                         
 
-                        <label htmlFor="address_cine">Modifier : <span>&quot;{cine?.address_cine}&quot;</span>
+                        <label htmlFor="address_cine">Adresse postale : <span>&quot;{cine?.address_cine}&quot;</span>
                             <input onChange={handleChange} type="text" id="address_cine" name="address_cine" value={cine.address_cine}/>
                         </label>
 
-                        <label htmlFor="city">Modifier : <span>&quot;{cine?.city}&quot;</span>
+                        <label htmlFor="city">Ville : <span>&quot;{cine?.city}&quot;</span>
                             <input onChange={handleChange} type="text" id="city" name="city" value={cine.city}/>
                         </label>
 
-                        <label htmlFor="phone_cine">Modifier : <span>&quot;{cine?.phone_cine}&quot;</span>
-                            <input onChange={handleChange} type="tel" id="phone_cine" name="phone_cine" value={cine.phone_cine}/>
+                        <label htmlFor="phone_cine">Téléphone : <span>&quot;{cine?.phone_cine}&quot;</span>
+                            <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone_cine" name="phone_cine" value={cine.phone_cine}/>
                         </label>
 
-                        <label htmlFor="manager">Modifier : <span>&quot;{cine?.manager}&quot;</span>
+                        <label htmlFor="manager">Manager : <span>&quot;{cine?.manager}&quot;</span>
                             <input onChange={handleChange} type="text" id="manager" name="manager" value={cine.manager}/>
                         </label>
 
-                        <label htmlFor="nbr_theater">Modifier : <span>&quot;{cine?.nbr_theater}&quot;</span>
+                        <label htmlFor="nbr_theater">Nombre de salles : <span>&quot;{cine?.nbr_theater}&quot;</span>
                             <input onChange={handleChange} type="number" id="nbr_theater" name="nbr_theater" value={cine.nbr_theater}/>
                         </label>
 
-                        <label htmlFor="disabled_access">Modifier : <span>&quot;{cine?.disabled_access}&quot;</span>
+                        <label htmlFor="disabled_access">Accès handicapé : <span>&quot;{cine?.disabled_access}&quot;</span>
                             <input onChange={handleChange} type="text" id="disabled_access" name="disabled_access" value={cine.disabled_access}/>
                         </label>
 
-                        <label htmlFor="infos_cine">Modifier : <span>&quot;{cine?.infos_cine}&quot;</span>
+                        <label htmlFor="infos_cine">Infos supplémentaires : <span>&quot;{cine?.infos_cine}&quot;</span>
                             <textarea onChange={handleChange} name="infos_cine" id="infos_cine" cols="30" rows="10"></textarea>
                         </label>
 
@@ -153,7 +151,7 @@ function UpDeleteCinema() {
                 </article>
             )}
  
-            <Link to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
+            <Link className="aBack" to={"/admin/cinéma"}>Retour à la liste des cinémas</Link>
         </main>
     )
 }

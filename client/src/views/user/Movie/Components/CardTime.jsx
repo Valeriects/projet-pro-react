@@ -9,7 +9,7 @@ function CardTime({ item }) {
             <ul className="horaire">
                 {item.timeTables.map((timeTable) => (
                     <li key={timeTable.id}>
-                        <Link to={`/film/${item.id}/seance/${timeTable.id}`}>
+                        <Link to={`/film/${item.id}/seance/${timeTable.sessionId}/horaire/${timeTable.id}`}>
                             {formattedTime(timeTable.horaire)}
                         </Link>
                     </li>
@@ -25,6 +25,7 @@ CardTime.propTypes = {
         id: PropTypes.number.isRequired,
         timeTables: PropTypes.arrayOf(PropTypes.shape({
             id: PropTypes.number.isRequired,
+            sessionId: PropTypes.number.isRequired,
         })).isRequired,
     }).isRequired,
 };

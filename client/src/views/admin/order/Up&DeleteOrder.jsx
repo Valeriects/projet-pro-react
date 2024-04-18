@@ -44,7 +44,6 @@ function UpDeleteOrder() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/réservation");
               }
               
@@ -65,7 +64,6 @@ function UpDeleteOrder() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/réservation/:id");
             }
               
@@ -84,39 +82,45 @@ function UpDeleteOrder() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/réservation"}>Retour à la liste des réservations</Link>
+            <Link className="aBack" to={"/admin/réservation"}>Retour à la liste des réservations</Link>
             <form className="datas" onSubmit={btnUp}>
                 {order && (
                 
                     <fieldset>
                         <legend>Données du réservation n°{ order?.id }</legend>
-                        
-                        
-                        <label htmlFor="lastname">Modifier : <span>&quot;{order?.lastname}&quot;</span>
+                        <label htmlFor={"sessions_id"}>id de la séance : <span>&quot;{order?.sessions_id}&quot;</span>
+                            <input name={"sessions_id"} id={"sessions_id"} type="hidden" value={order.session_id}/>
+                        </label>
+
+                        <label htmlFor={"users_id"}>id utilisateur: <span>&quot;{order?.users_id}&quot;</span>
+                            <input name={"users_id"} id={"users_id"} type="number" onChange={handleChange}/>
+                        </label>
+                                
+                        <label htmlFor="lastname">Nom: <span>&quot;{order?.lastname}&quot;</span>
                             <input onChange={handleChange} type="text" id="lastname" name="lastname" value={order.lastname}/>
                         </label>
 
-                        <label htmlFor="firstname">Modifier : <span>&quot;{order?.firstname}&quot;</span>
+                        <label htmlFor="firstname">Prénom: <span>&quot;{order?.firstname}&quot;</span>
                             <input onChange={handleChange} type="text" id="firstname" name="firstname" value={order.firstname}/>
                         </label>
 
-                        <label htmlFor="email">Modifier : <span>&quot;{order?.email}&quot;</span>
+                        <label htmlFor="email">Email: <span>&quot;{order?.email}&quot;</span>
                             <input onChange={handleChange} type="text" id="email" name="email" value={order.email}/>
                         </label>
 
-                        <label htmlFor="name_cb">Modifier : <span>&quot;{order?.name_cb}&quot;</span>
+                        <label htmlFor="name_cb">Nom sur la CB: <span>&quot;{order?.name_cb}&quot;</span>
                             <input onChange={handleChange} type="text" id="name_cb" name="name_cb" value={order.name_cb}/>
                         </label>
 
-                        <label htmlFor="num_cb">Modifier : <span>&quot;{order?.num_cb}&quot;</span>
+                        <label htmlFor="num_cb">Numéro de la CB: <span>&quot;{order?.num_cb}&quot;</span>
                             <input onChange={handleChange} type="text" id="num_cb" name="num_cb" value={order.num_cb}/>
                         </label>
 
-                        <label htmlFor="cryptogramme">Modifier : <span>&quot;{order?.cryptogramme}&quot;</span>
+                        <label htmlFor="cryptogramme">Cryptogramme: <span>&quot;{order?.cryptogramme}&quot;</span>
                             <input onChange={handleChange} type="text" id="cryptogramme" name="cryptogramme" value={order.cryptogramme}/>
                         </label>
 
-                        <label htmlFor="cb_date">Modifier : <span>&quot;{order?.cb_date}&quot;</span>
+                        <label htmlFor="cb_date">Date de la CB: <span>&quot;{order?.cb_date}&quot;</span>
                             <input onChange={handleChange} type="date" id="cb_date" name="cb_date" value={order.cb_date}/>
                         </label>
 
@@ -124,17 +128,15 @@ function UpDeleteOrder() {
                             <input onChange={handleChange} type="text" id="order_date" name="order_date" value={order.order_date}/>
                         </label>
 
-                        <label htmlFor="price_order">Modifier : <span>&quot;{order?.price_order}&quot;</span>
+                        <label htmlFor="price_order">Total: <span>&quot;{order?.price_order}&quot;</span>
                             <input onChange={handleChange} type="text" id="price_order" name="price_order" value={order.price_order}/>
                         </label>
 
-                        <label htmlFor="sessions_id">Modifier : <span>&quot;{order?.sessions_id}&quot;</span>
-                            <input onChange={handleChange} type="text" id="sessions_id" name="sessions_id" value={order.sessions_id}/>
+                        <label htmlFor="nbr_seats_payed">Nombre de places: <span>&quot;{order?.nbr_seats_payed}&quot;</span>
+                            <input onChange={handleChange} type="text" id="nbr_seats_payed" name="nbr_seats_payed" value={order.nbr_seats_payed}/>
                         </label>
 
-                        <label htmlFor="users_id">Modifier : <span>&quot;{order?.users_id}&quot;</span>
-                            <input onChange={handleChange} type="text" id="users_id" name="users_id" value={order.users_id}/>
-                        </label>
+                        
 
                         
                         <button type="submit" >
@@ -158,7 +160,7 @@ function UpDeleteOrder() {
                 </article>
             )}
  
-            <Link to={"/admin/réservation"}>Retour à la liste des réservations</Link>
+            <Link className="aBack" to={"/admin/réservation"}>Retour à la liste des réservations</Link>
         </main>
     )
 }

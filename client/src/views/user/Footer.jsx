@@ -18,7 +18,6 @@ function Footer() {
                         <img className="logoFooter" src={logoCinema} alt="Logo couleur du cinéma FUN" />
                         <strong>Cinéma FUN</strong>
                     </NavLink>
-                    {/* <p><strong>Cinéma Fun</strong></p> */}
                     <p>Adresse: <strong>330 Avenue des Cyprès</strong></p>
                     <p><strong>13190 Aix en Provence</strong></p>
                     <p>Tél: +33<strong>429496795</strong></p>

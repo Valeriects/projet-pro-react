@@ -24,7 +24,6 @@ function AddRole() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/role");
             }
 
@@ -35,7 +34,7 @@ function AddRole() {
 
     return (
         <>
-            <Link to={"/admin/role"}>Retour à la liste des rôles</Link>
+            <Link className="aBack" to={"/admin/role"}>Retour à la liste des rôles</Link>
             <form onSubmit={submitAdd}>
                  <fieldset>
                         <legend>Création du rôle</legend>
@@ -51,7 +50,7 @@ function AddRole() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/role"}>Retour à la liste des rôles</Link>
+            <Link className="aBack" to={"/admin/role"}>Retour à la liste des rôles</Link>
         </>
     );
 }

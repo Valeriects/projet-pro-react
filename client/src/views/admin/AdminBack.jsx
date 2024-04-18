@@ -43,7 +43,7 @@ function AdminBack() {
                         <tr>
                             <td>Nombre de membres : {stats.nombre_d_utilisateurs}</td>
                         </tr>
-                        <tr><td>Nombre de réservations : {stats.nombre_de_réservations}</td></tr>
+                        <tr><td>Nombre de réservations : {stats.nombre_de_reservations}</td></tr>
                         <tr><td>Nombre de films : {stats.nombre_de_films}</td></tr>
                         <tr><td>Nombre de séances : {stats.nombre_de_séances}</td></tr>
                     </tbody>

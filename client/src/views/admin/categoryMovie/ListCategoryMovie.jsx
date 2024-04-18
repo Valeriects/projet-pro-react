@@ -16,9 +16,6 @@ function TableCategoryMovie() {
     }, []);
 
     const { list } = useSelector((state) => state.categoryMovie);
- 
-
-    console.log(list);
 
     return (
         <main className="table">

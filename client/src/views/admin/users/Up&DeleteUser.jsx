@@ -16,13 +16,11 @@ function UpDeleteUser() {
     const [user, setUser] = useState();
     
     const handleChange = (e) => {
-        
         setUser({
             ...user,
             [e.target.name]: e.target.value
         })
     }   
-    
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -42,7 +40,6 @@ function UpDeleteUser() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/membre");
               }
               
@@ -63,7 +60,6 @@ function UpDeleteUser() {
             });
 
             if (res.ok) {
-                console.log("res :", res);
                 navigate(`/admin/membre/${user.id}`);
 
             }
@@ -72,10 +68,6 @@ function UpDeleteUser() {
             console.log(err);
         }
     }
-    console.log(id)
-
-    console.log(user);
-    console.log("listuser: ",listUser);
 
     function toggleMsgDelete() {
         setDeleteMsgOpen(!deleteMsgOpen);
@@ -87,7 +79,7 @@ function UpDeleteUser() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/membre"}>Retour à la liste des membres</Link>
+            <Link className="aBack" to={"/admin/membre"}>Retour à la liste des membres</Link>
             <form className="datas" onSubmit={btnUp}>
                  <fieldset>
                     <legend>Données du membre n°{ user?.id }</legend>
@@ -111,25 +103,11 @@ function UpDeleteUser() {
                         <option value="5">Manager</option>
                     </select>
 
-                    {/* <div>Rôle:
-
-                    <label htmlFor="member">Membre:
-                        <input type="radio" name="roles_id" id="member" value="2" checked={user.roles_id === "2"} onChange={handleChange}/>
-                    </label>
-                    <label htmlFor="admin">Admin:
-                        <input type="radio" name="roles_id" id="admin" value="1" checked={user.roles_id === "1"} onChange={handleChange} />
-                    </label>
-                    <label htmlFor="manager">Manager:
-                        <input type="radio" name="roles_id" id="manager" value="5" checked={user.roles_id === "5"} onChange={handleChange} />
-                    </label>
-                    </div> */}
-
                     <button type="submit">
                         <FontAwesomeIcon icon={faSquarePen} className="iconeTable" />
                     </button>
                     
                 </fieldset>
-      
 
             </form>
           
@@ -143,7 +121,7 @@ function UpDeleteUser() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/membre"}>Retour à la liste des membres</Link>
+            <Link className="aBack" to={"/admin/membre"}>Retour à la liste des membres</Link>
         </main>
     )
 }

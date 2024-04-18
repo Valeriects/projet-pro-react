@@ -44,8 +44,6 @@ function Login() {
             if (response.ok) {
                 const resUser = await response.json();
                 
-                console.log("resUser : ", resUser);
-                
                 dispatch(login({id: resUser.id, firstname: resUser.firstname, roleUser: resUser.roleUser}));
 
                 if (resUser.roleUser === "admin") window.location.href = "/admin";

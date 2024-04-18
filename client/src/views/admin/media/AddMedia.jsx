@@ -21,18 +21,11 @@ function AddMedia() {
         const { name, value } = e.target;
         const newValue = name === "src_img" ? e.target.files[0] : value;
     
-        console.log(name);
         setMedia({
             ...media,
             [name]: newValue
         });
     }
-    // const handleChange = (e) => {
-    //     setMedia({
-    //         ...media,
-    //         [e.target.name]: e.target.value
-    //     });
-    // }
 
     async function submitAdd(e) {
         e.preventDefault();
@@ -44,16 +37,11 @@ function AddMedia() {
             formData.append('alt_video', media.alt_video);
 
             const res = await fetch("/api/v1/admin/media", {
-                method: "POST",            
-                // headers: {
-                // "Content-Type": "application/json",
-                // },
+                method: "POST", 
                 body: formData,
-                // body: JSON.stringify({media}),
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/média");
             }
 
@@ -64,7 +52,7 @@ function AddMedia() {
 
     return (
         <>
-            <Link to={"/admin/média"}>Retour à la liste des médias</Link>
+            <Link  className="aBack" to={"/admin/média"}>Retour à la liste des médias</Link>
             <form onSubmit={submitAdd} encType="multipart/form-data">
                  <fieldset>
                         <legend>Création des données d&apos;un média</legend>
@@ -92,7 +80,7 @@ function AddMedia() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/média"}>Retour à la liste des médias</Link>
+            <Link  className="aBack" to={"/admin/média"}>Retour à la liste des médias</Link>
         </>
     );
 }

@@ -30,7 +30,6 @@ function AddMovie() {
             });
 
             if (res.ok) {
-                console.log("res :",res);
                 navigate(`/admin/film`);
             }
             console.log(movie);
@@ -41,7 +40,7 @@ function AddMovie() {
 
     return (
         <>
-            <Link to={"/admin/film"}>Retour à la liste des films</Link>
+            <Link className="aBack" to={"/admin/film"}>Retour à la liste des films</Link>
 
             <form onSubmit={submitAdd}>
                  <fieldset>
@@ -50,10 +49,6 @@ function AddMovie() {
                         <label htmlFor="title">Titre :
                             <input onChange={handleChange} type="text" id="title" name="title" value={movie.title}/>
                         </label>
-
-                        {/* <label htmlFor="categories">Genre :
-                            <input onChange={handleChange} type="text" id="categodies" name="categodies" value={movie.categodies}/>
-                        </label> */}
 
                         <label htmlFor="director">Réalisateur :
                             <input onChange={handleChange} type="text" id="director" name="director" value={movie.director}/>
@@ -72,14 +67,9 @@ function AddMovie() {
                         </label>
 
                         <label htmlFor="synopsis">Synopsis :
-                        {/* <input onChange={handleChange} type="text" id="synopsis" name="synopsis" value={movie.synopsis} /> */}
-                            <textarea onChange={handleChange} name="synopsis" id="synopsis" cols="30" rows="10"></textarea>
+                            <textarea onChange={handleChange} name="synopsis" id="synopsis" cols="50" rows="30"></textarea>
 
                         </label>
-
-                        {/* <label htmlFor="media">Média :
-                            <input onChange={handleChange} type="text" id="media" name="media" value={movie.media}/>
-                        </label> */}
 
 
                      
@@ -92,7 +82,7 @@ function AddMovie() {
 
             <form action=""></form>
 
-            <Link to={"/admin/film"}>Retour à la liste des films</Link>
+            <Link className="aBack" to={"/admin/film"}>Retour à la liste des films</Link>
 
         </>
     );

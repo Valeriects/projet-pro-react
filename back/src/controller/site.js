@@ -1,5 +1,5 @@
 import Query from "../model/Query.js";
-import { addArray, addArray2 } from "../utils/addArray.js";
+import { addArray } from "../utils/addArray.js";
 
 const getAllMovies = async (req, res) => {
     try {
@@ -15,14 +15,12 @@ const getAllMovies = async (req, res) => {
 
         const allMedia = await Query.run(queryMedias);
 
-        const queryTime = "SELECT hours_timetable, timetables.id AS timetableId, movies.id AS movieId FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN timetables ON sessions.timetables_id = timetables.id";       
-        // const queryTime = "SELECT hours_timetable, session_date, price, language, version _2D_3D, name_theater, nrb_seats ";
+        const queryTime = "SELECT hours_timetable, timetables.id AS timetableId, movies.id AS movieId, sessions.id AS sessionId FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN timetables ON sessions.timetables_id = timetables.id WHERE timetables.id";       
 
         const allTimes = await Query.run(queryTime);
 
         const mergeDatas = addArray(allMovies, allCategories, allMedia, allTimes);
-        // const mergeDatas = addArray(allMovies, allCategories, allMedia);
-            
+
         res.json(mergeDatas);
 
     } catch (err) {
@@ -31,25 +29,36 @@ const getAllMovies = async (req, res) => {
 };
 
 
-// todo revoir la BDD pour la seance/session et le timetable
 const getSession = async (req, res) => {
     try {
 
-        const { id, idSession } = req.params;
+        const { id, idTimetable } = req.params;
       
-        // const query = "SELECT movies.id, movies.title, movies.time, movies.director, movies.actor, movies.release_date, sessions.*, movie_theaters.*, cinemas.*, timetables.* FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id JOIN timetables ON timetables.id = sessions.timetables_id JOIN cinemas ON cinemas.id = movie_theaters.cinemas_id WHERE movies.id = ? AND timetables.id = ?";
-        const query = "SELECT movies.id, movies.title, movies.time, movies.director, movies.actor, movies.release_date, sessions.*, movie_theaters.*, cinemas.*, timetables.*, media.alt_img, media.src_img FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id JOIN timetables ON timetables.id = sessions.timetables_id JOIN cinemas ON cinemas.id = movie_theaters.cinemas_id JOIN movies_media ON movies_media.movies_id = movies.id JOIN media ON media.id = movies_media.media_id WHERE movies.id = ? AND timetables.id = ?";
+        const query = "SELECT movies.id, movies.title, movies.time, movies.director, movies.actor, movies.release_date, sessions.*, sessions.id AS session_id, movie_theaters.*, cinemas.*, timetables.*, media.alt_img, media.src_img FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id JOIN timetables ON timetables.id = sessions.timetables_id JOIN cinemas ON cinemas.id = movie_theaters.cinemas_id JOIN movies_media ON movies_media.movies_id = movies.id JOIN media ON media.id = movies_media.media_id WHERE movies.id = ? AND timetables.id = ?";
         
 
-        const sessionMovie = await Query.runByParams(query, [id, idSession]);
+        const sessionMovie = await Query.runByParams(query, [id, idTimetable]);
 
         res.json(sessionMovie);
 
     } catch (err) {
         res.status(500).json({ msg: err });
-        // console.log(err);
     }
 };
+
+const getSeatsForSession = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const query = "SELECT movie_theaters.nbr_seats AS total_seats, (movie_theaters.nbr_seats - SUM(orders.nbr_seats_payed)) AS remaining_places, SUM(orders.nbr_seats_payed) AS seats_payed FROM orders JOIN sessions ON orders.sessions_id = sessions.id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id WHERE sessions.id = ?";
+
+        const sumSeatsBySession = await Query.runByParams(query, [id]);
+
+        res.json(sumSeatsBySession);
+    } catch(err) {
+        res.status(500).json({ msg: err });
+    }
+}
 
 
 const getCinemas = async (req, res) => {
@@ -65,5 +74,20 @@ const getCinemas = async (req, res) => {
     }
 };
 
+const addOrder = async (req, res) => {
+    try {
+        const { users_id, sessions_id, price_order, num_CB, cb_date, cryptogramme, lastname, firstname, email, name_cb, nbr_seats_payed } = req.body;
+        
+        const query = "INSERT INTO orders (users_id, sessions_id, order_date, price_order, num_CB, cb_date, cryptogramme, lastname, firstname, email, name_cb, nbr_seats_payed) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-export { getAllMovies, getSession, getCinemas };
+        await Query.runByParams(query, [users_id, sessions_id, price_order, num_CB, cb_date, cryptogramme, lastname, firstname, email, name_cb, nbr_seats_payed]);
+
+        res.json({ users_id, sessions_id, price_order, num_CB, cb_date, cryptogramme, lastname, firstname, email, name_cb, nbr_seats_payed });
+
+    } catch (err) {
+        res.status(500).json({ msg: err });
+    }
+};
+
+
+export { getAllMovies, getSession, getCinemas, getSeatsForSession, addOrder };

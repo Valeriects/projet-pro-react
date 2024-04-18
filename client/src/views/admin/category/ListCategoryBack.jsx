@@ -9,7 +9,6 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableCategories() {
     useMenuToggle();
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,14 +16,9 @@ function TableCategories() {
     }, []);
 
     const { listCategory } = useSelector((state) => state.category);
- 
-
-    console.log(listCategory);
 
     return (
         <main className="table">
-
-
             <table>
                 <caption>Liste des catégories <Link to={"/admin/categorie/ajout"}>Ajouter une catégorie</Link></caption>
                 <thead>

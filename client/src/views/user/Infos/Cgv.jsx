@@ -2,7 +2,6 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 
 function Cgv() {
     useMenuToggle();
-    //todo à finir
 
     return (
         <main className="infos">

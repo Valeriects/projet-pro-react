@@ -3,7 +3,7 @@ import Query from "../../model/Query.js";
 //le CRUD pour la table sessions
 const getSessions = async (req, res) => {
     try {
-        const querySession = "SELECT sessions.*, movies.title, movies.id AS movieID, movies.time, timetables.hours_timetable, timetables.id AS hoursId, movie_theaters.name_theater, movie_theaters.id AS movieTheaterId FROM sessions JOIN movies ON sessions.movies_id = movies.id JOIN timetables ON sessions.timetables_id = timetables.id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id";
+        const querySession = "SELECT sessions.*, movies.title, movies.id AS movieID, movies.time, timetables.hours_timetable, timetables.id AS hoursId, movie_theaters.name_theater, movie_theaters.id AS movieTheaterId FROM sessions JOIN movies ON sessions.movies_id = movies.id JOIN timetables ON sessions.timetables_id = timetables.id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id ORDER BY session_date DESC";
 
         const listSession = await Query.run(querySession);
 
@@ -18,6 +18,7 @@ const getSessions = async (req, res) => {
 const addSession = async (req, res) => {
     try {
         const { session_date, price, language, version_2D_3D, movies_id, timetables_id, movie_theaters_id } = req.body;
+
         const querySession = "INSERT INTO sessions (session_date, price, language, version_2D_3D, movies_id, timetables_id, movie_theaters_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         const session = await Query.runByParams(querySession, [session_date, price, language, version_2D_3D, movies_id, timetables_id, movie_theaters_id]);

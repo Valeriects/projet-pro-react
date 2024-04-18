@@ -16,9 +16,7 @@ function TableMedia() {
     }, []);
 
     const { listMedia } = useSelector((state) => state.media);
- 
 
-    console.log(listMedia);
 
     return (
         <main className="table">

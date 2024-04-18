@@ -1,16 +1,14 @@
 import { Router } from "express";
 import { upUser, delUser, getRoles, addRole, upRole, delRole } from "../controller/admin/users.js";
 import { getUsers } from "../controller/dashboard/user.js";
-import { getMovies, addMovie, upMovie, deleteMovie } from "../controller/admin/movies.js";
-import { getCinemas, addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js";
+import { addMovie, upMovie, deleteMovie } from "../controller/admin/movies.js";
+import { addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js";
 import { getSessions, addSession, upSession, deleteSession, delTimetable, upTimetable, addTimetable, getTimetables } from "../controller/admin/sessionTime.js";
-import { getOrders, addOrder, upOrder, deleteOrder } from "../controller/admin/orders.js";
+import { getOrders, upOrder, deleteOrder } from "../controller/admin/orders.js";
 import { getMovieMedias, addMovieMedia, upMovieMedia, delMovieMedia, getMedias, addMedia, upMedia, delMedia, getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
 import { getCount } from "../controller/admin/adminBack.js";
 
 import { upload } from "../middlewares/multer-config.js";
-
-import { uploadFile } from "../middlewares/fileUpload-config.js";
 
 const router = Router();
 
@@ -20,7 +18,6 @@ router.patch("/user/:id", upUser);
 router.delete("/user/:id", delUser);
 
 //routes MOVIE 
-router.get("/movie", getMovies);
 router.post("/movie", addMovie);
 router.patch("/movie/:id", upMovie);
 router.delete("/movie/:id", deleteMovie);
@@ -32,7 +29,6 @@ router.patch("/role/:id", upRole);
 router.delete("/role/:id", delRole);
 
 //routes CINEMA
-// router.get("/cinema", getCinemas); //todo dans la route site.routes.js
 router.post("/cinema", addCinema);
 router.patch("/cinema/:id", upCinema);
 router.delete("/cinema/:id", deleteCinema);
@@ -57,7 +53,6 @@ router.delete("/timetable/:id", delTimetable);
 
 //routes ORDER
 router.get("/order", getOrders);
-router.post("/order", addOrder); //TODO mettre dans site.js ?
 router.patch("/order/:id", upOrder);
 router.delete("/order/:id", deleteOrder);
 
@@ -70,17 +65,11 @@ router.delete("/movie-media/:id", delMovieMedia);
 //routes MEDIA
 router.get("/media", getMedias);
 router.post("/media", upload.single('src_img'), addMedia); //avec multer
-
-
-// router.post("/media", uploadFile, addMedia); //avec fileupload
-
 router.patch("/media/:id", upload.single('src_img'), upMedia); //avec multer
-
-// router.patch("/media/:id", storage, upload.single('src_img'), upMedia);
 router.delete("/media/:id", delMedia);
 
 //routes CATEGORY_MOVIE
-router.get("/4", getCatMovies);
+router.get("/category-movie", getCatMovies);
 router.post("/category-movie", addCatMovie);
 router.patch("/category-movie/:id", upCatMovie);
 router.delete("/category-movie/:id", deleteCatMovie);

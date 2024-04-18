@@ -1,18 +1,5 @@
 import Query from "../../model/Query.js"
 
-// todo prendrele getmovie de site.js plutot 
-const getMovies = async (req, res) => { 
-    try {
-        const queryMovies = "SELECT * FROM movies";
-
-        const listMovies = await Query.run(queryMovies);
-
-        res.json(listMovies);
-       
-    } catch (err) {
-        res.status(500).json({ msg: err });
-    }
-};
 
 const addMovie = async (req, res) => {
 
@@ -53,7 +40,7 @@ const deleteMovie = async (req, res) => {
 
         const queryDel = "DELETE FROM movies WHERE id = ?";
 
-        const deleteMov = await Query.runByParams(queryDel, [id]);
+        await Query.runByParams(queryDel, [id]);
 
         res.json({ id, msg: "Film supprimé" });
 
@@ -62,4 +49,4 @@ const deleteMovie = async (req, res) => {
     }
 };
 
-export { getMovies, addMovie, upMovie, deleteMovie };
+export { addMovie, upMovie, deleteMovie };

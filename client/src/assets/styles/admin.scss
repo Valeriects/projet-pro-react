@@ -17,7 +17,6 @@ html {
 body {
     margin: 0;
     padding: 0;
-    // background-color: $beige;
 }
 
 //la div où on met les composants
@@ -26,15 +25,10 @@ body {
     @include display(column, space-between);
     width: 100%;
     min-height: 100vh;
-    // max-width: 400px;
-    // position: relative;
-
 }
 
 img {
     max-width: 100%;
-    // height: auto;
-    // display: block;
 }
 
 a {
@@ -52,7 +46,6 @@ a {
 
 button {
     border: none;
-    //ajout pour qdmin uniquement
     border-radius: 0.3rem;
     background-color: $marron;
     color: $beigeClair;
@@ -91,17 +84,42 @@ button {
     }
 }
 
+#adFoot, #adHead {
+    background-color: $gris;
+}
+
+#adHead {
+    .menu {
+        background-color: $gris;
+        visibility:hidden;
+        div {
+            @include display(column, center);
+            a {
+                &:hover {
+                    background-color: $orange;
+                    color: $marron;
+                }
+            }
+        }
+    }
+    #iconUser {
+        color: $beigeClair;
+    }
+
+    #iconUser.open + .menu {
+        visibility: visible;
+    }
+}
 #adFoot {
     @include display(row, space-between);
     padding: .5rem 1rem;
 }
 
 .table, #admin {
-    padding: 2rem, 0;
     max-height: 70%;
     overflow-y: auto;
 
-    a:not .tdIcone a {
+    a:not(.tdIcone a, caption a) {
         color: $marron;
         font-weight: bold;
         border: 1px solid $marron;
@@ -146,6 +164,7 @@ button {
             justify-content: space-around;
             align-items: center;
             gap: 1rem;
+            border: none !important;
 
             .iconeTable {
                 color: $marron;
@@ -160,7 +179,39 @@ button {
     }
 }
 
-.detail {
+main {
+    @include display(column, space-around);
+    padding: 2rem
+}
+
+.aBack + form { //les formulaires pages ajout et modification/delete
+    fieldset {
+        legend {
+            font-size: 2rem;
+        }
+        label {
+            font-size: 1.8rem;
+            span {
+                display: inline-block;
+            }
+        }
+        background-color: $grisExtraLight;
+        select {
+            padding: .5rem;
+            option {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    button[type^="submit"] {
+        background-color: $gris;
+        border: 1px solid $gris;
+        line-height: 2.5rem;
+    }
+}
+
+.detail { 
     position: relative;
     padding: 2rem 0;
 
@@ -183,12 +234,13 @@ button {
         padding: .5rem;
         width: 40%;
         margin: 2rem auto;
+        background-color: $gris;
+           
     }
     
     .msgDelete {
         @include display(row, space-evenly);
         flex-wrap: wrap;
-        color: $orange;
         font-weight: bold;
         background-color: $grisClair;
         border: 1px solid $gris;
@@ -202,6 +254,7 @@ button {
         
         p {
             width: 100%;
+            color: $white;
             display: inline-block;
             margin-bottom: 4rem;
         }
@@ -209,6 +262,118 @@ button {
         button {
             padding: 2rem;
             font-weight: 900;
+            background-color: $grisExtraLight;
+            color: $marron;
+            &:hover {
+                background-color: $orange;
+            }
+        }
+    }
+}
+
+
+//version tablette
+@media screen and (min-width: 768px) {
+    .aBack {
+        font-size: 2rem;
+        margin: 2rem;
+    }
+
+    .aBack + form {
+        fieldset {
+            background-color: $grisExtraLight;
+            p, legend {
+                font-size: 2.5rem;
+            }
+            
+            button[type^="submit"] {
+                background-color: $gris;
+            }
+
+            input, textarea, select {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .msgDelete {
+        p{
+            font-size: 2.5rem;
+        }
+        button {
+            width: 20%;
+            font-size: 2rem;
+        }
+    }
+
+    #adHead {
+        .btnList {
+            font-size: 3rem;
+        }
+    }
+
+    .table {
+        caption{
+            font-size: 2rem;
+            a {
+                font-size: 1.8rem !important;
+            }
+        }
+        th, tr, td {
+            font-size: 2rem;
+        }
+    }
+}
+
+//version desktop
+@media screen  and (min-width: 1200px) {
+    #adHead {
+        position: relative;
+        height: 12vh;
+        .menu {
+            visibility: visible;
+            position: absolute;
+            @include display(row, space-between);
+            top: 49%;
+            
+            a, .btnDeco {
+                font-size: 2.5rem;
+            }
+
+            .btnDeco {
+                padding: .5rem !important;
+                border-top: none;
+            }
+
+            .btnList, .btnDeco {
+                &:hover {
+                    background-color: $orange;
+                    color: $marron;
+                }
+            }
+            
+            div {
+                @include display(column, space-around);
+                position: absolute;
+                background-color: $gris;
+                top:100%;
+                left: 42%;
+                width: 39%;
+            }
+        }
+
+        #iconUser {
+            display: none;
+        }
+    }
+
+    .table {
+        .tdImg{
+            @include display(row, space-around);
+            align-items: center;
+            .imgMedMovie {
+                width: 25%;
+            }
         }
     }
 }

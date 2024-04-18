@@ -8,8 +8,6 @@ function AddCategory() {
     useMenuToggle();
     const navigate = useNavigate();
     const [category, setCategory] = useState({ name_cat: "" });
-    
-
 
     async function submitAdd(e) {
         e.preventDefault();
@@ -23,7 +21,6 @@ function AddCategory() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/categorie");
             }
 
@@ -34,7 +31,7 @@ function AddCategory() {
 
     return (
         <>
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link className="aBack" to={"/admin/categorie"}>Retour à la liste des catégories</Link>
             <form onSubmit={submitAdd}>
                  <fieldset>
                         <legend>Création de la catégorie</legend>
@@ -50,7 +47,7 @@ function AddCategory() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/categorie"}>Retour à la liste des catégories</Link>
+            <Link className="aBack" to={"/admin/categorie"}>Retour à la liste des catégories</Link>
         </>
     );
 }

@@ -1,6 +1,7 @@
 import { Router } from "express";
-import { getAllMovies, getSession, getCinemas } from "../controller/site.js";
-import { upUser, getUsers } from "../controller/dashboard/user.js"
+import { getAllMovies, getSession, getCinemas, getSeatsForSession, addOrder } from "../controller/site.js";
+import { upUser, getUsers } from "../controller/dashboard/user.js";
+
 
 
 const router = Router();
@@ -8,7 +9,12 @@ const router = Router();
 
 router.get("/movie", getAllMovies);
 
-router.get("/movie/:id/session/:idSession", getSession);
+router.get("/movie/:id/timetable/:idTimetable", getSession);
+
+//afficher les places restantes pour une séance spécifique
+router.get("/session/:id", getSeatsForSession);
+
+router.post("/order", addOrder);
 
 router.get("/cinema", getCinemas);
 

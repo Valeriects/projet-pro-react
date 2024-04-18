@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { toggleMenu, toggleMenuMember } from '../store/slices/menu';
 import { closeMenu } from '../store/slices/menu';
 
 // custom hook qui permet de fermer le menu au montage du composant

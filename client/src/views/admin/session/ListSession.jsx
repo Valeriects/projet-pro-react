@@ -17,9 +17,6 @@ function TableSessions() {
     }, []);
 
     const { list } = useSelector((state) => state.session);
- 
-
-    console.log(list);
 
     return (
         <main className="table">

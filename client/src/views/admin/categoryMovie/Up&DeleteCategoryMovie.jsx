@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchCategoryMovies } from "../../../store/slices/categoryMovie";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import { fetchMovies } from "../../../store/slices/movie.js";
+import { fetchCategory } from "../../../store/slices/category.js";
 
 function UpDeleteCategoryMovie() {
     useMenuToggle();
@@ -16,6 +18,8 @@ function UpDeleteCategoryMovie() {
     const [catMovie, setCatMovie] = useState(null);
 
     const { list } = useSelector((state) => state.categoryMovie);
+    const listMovie = useSelector((state) => state.movie.list);
+    const { listCategory } = useSelector((state) => state.category);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -23,11 +27,13 @@ function UpDeleteCategoryMovie() {
 
     useEffect(() => {
         dispatch(fetchCategoryMovies());
+        dispatch(fetchMovies());
+        dispatch(fetchCategory());
         if (!catMovie) {
             setCatMovie(list.find((catMovie) => catMovie.id === Number(id)));
         }
 
-    }, [dispatch, list]);
+    }, [dispatch]);
 
     const handleChange = (e) => {
         setCatMovie({
@@ -44,7 +50,6 @@ function UpDeleteCategoryMovie() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/catégorie-film");
               }
           } catch (err) {
@@ -64,7 +69,6 @@ function UpDeleteCategoryMovie() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/catégorie-film/:id");
             }
               
@@ -83,7 +87,7 @@ function UpDeleteCategoryMovie() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
+            <Link  className="aBack" to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
             <form className="datas" onSubmit={btnUp}>
                 {catMovie && (
                 
@@ -91,13 +95,26 @@ function UpDeleteCategoryMovie() {
                         <legend>Données du lien tentre un film et sa catégorie n°{ catMovie?.id }</legend>
                         
                         
-                        <label htmlFor="movies_id">Modifier l&apos;id du film: &quot;<span>{catMovie?.movies_id}</span>&quot;
-                            <input onChange={handleChange} type="text" id="movies_id" name="movies_id" value={catMovie.movies_id}/>
+                        <label htmlFor="movies_id">Modifier l&apos;id du film: &quot;<span>{catMovie?.title}</span>&quot;
+                            <select onChange={handleChange} name="movies_id" id="movies_id">
+                                <option value="">Choisir le film</option>
+                            
+                                {listMovie.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.title}</option>
+                                    
+                                ))}
+                            </select>
                         </label>
 
-                        <label htmlFor="categories_id">Modifier l&apos;id de la catégorie: <span>&quot;{catMovie?.categories_id}&quot;</span>
-                            {/* <input  onChange={(e) => setCatMovie({...catMovie, categories_id: e.target.value})} type="text" id="categories_id" name="categories_id" value={catMovie.categories_id}/> */}
-                            <input onChange={handleChange} type="text" id="categories_id" name="categories_id" value={catMovie.categories_id}/>
+                        <label htmlFor="categories_id">Modifier l&apos;id de la catégorie: <span>&quot;{catMovie?.name_cat}&quot;</span>
+                            <select onChange={handleChange} name="categories_id" id="categories_id">
+                                <option value="">Choisir la catégorie</option>
+                            
+                                {listCategory.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.name_cat}</option>
+                                    
+                                ))}
+                            </select>
                         </label>
                  
                         
@@ -118,7 +135,7 @@ function UpDeleteCategoryMovie() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
+            <Link  className="aBack" to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
         </main>
     )
 }

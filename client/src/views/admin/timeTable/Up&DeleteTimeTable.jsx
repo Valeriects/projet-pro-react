@@ -29,7 +29,6 @@ function UpDeleteTimeTable() {
 
     }, [dispatch, list]);
 
-
     const btnDelete = async () => {
           try {
               const res = await fetch(`/api/v1/admin/timetable/${timeTable.id}`, {
@@ -37,14 +36,12 @@ function UpDeleteTimeTable() {
               });
   
               if (res.ok) {
-                  console.log(res);
                   navigate("/admin/horaire");
               }
               
           } catch (err) {
               console.log(err);
           }
-  
     }
 
     const btnUp = async () => {
@@ -58,7 +55,6 @@ function UpDeleteTimeTable() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/horaire/:id");
             }
               
@@ -77,7 +73,7 @@ function UpDeleteTimeTable() {
 
     return (
         <main className="detail">
-            <Link to={"/admin/horaire"}>Retour à la liste des horaires</Link>
+            <Link className="aBack" to={"/admin/horaire"}>Retour à la liste des horaires</Link>
             <form className="datas" onSubmit={btnUp}>
                 {timeTable && (
                 
@@ -108,7 +104,7 @@ function UpDeleteTimeTable() {
                     <button onClick={toggleMsgDelete}>NON</button>
                 </article>
             )}
-            <Link to={"/admin/horaire"}>Retour à la liste des horaires</Link>
+            <Link className="aBack" to={"/admin/horaire"}>Retour à la liste des horaires</Link>
  
         </main>
     )

@@ -24,24 +24,23 @@ body {
 }
 
 //la div où on met les composants
-#root {
-    //on fait display flex avec column et le justify, afin de pouvoir regler la hauteur
+#root {//on fait display flex avec column et le justify, afin de pouvoir regler la hauteur
     @include display(column, space-between);
     width: 100%;
     min-height: 100vh;
-    // max-width: 400px;
-
 }
 
-h1, h2, h3 {
+%titleProps {
     font-family: $varela;
     text-align: center;
 }
 
+h1 {
+    @extend %titleProps;
+}
+
 img {
     max-width: 100%;
-    // height: auto;
-    // display: block;
 }
     
 a {
@@ -57,19 +56,13 @@ a {
     }
 }
 
-button {
-    border: none;
-    background-color: $transparent;
-
-}
-
 .icon {
     color: $beigeClair;
     font-size: 3rem;
-        &:hover {
-                color: $orange;
-                cursor: pointer;
-            }
+    &:hover {
+            color: $orange;
+            cursor: pointer;
+    }
 }
 
 .horaire { //le cardTime
@@ -86,6 +79,7 @@ button {
         border-radius: .5rem;
         border: 1px solid $marron;
         font-weight: bold;
+        box-shadow: 1px 1px 3px 0 $grisClair;
 
         &:hover {
             background-color: $marron;
@@ -99,18 +93,22 @@ button {
 }
 
 header, footer {
-    @include display(row, space-evenly);
     align-items: center;
     background-color: $marron;
-
     a {
         color: $beigeClair;
     }
 }
 
 header {
+    @include display(row, space-evenly);
     padding-bottom: .5rem;
     position: relative;
+
+    button {
+        border: none;
+        background-color: $transparent;
+    }
 
     .btnBurger {
         .menuBurger{
@@ -154,9 +152,14 @@ header {
             }
         }
     }
+    // En mode mobile, si le menu burger est ouvert, affiche le menu
+    .btnBurger.open ~ #menu {
+        visibility: visible;
+    }
 
     #menu {
         left:0;
+        visibility: hidden;// Par défaut, le menu est caché
 
         .burgerDeco {
             border-top: 1.5px dotted $beigeClair;
@@ -234,18 +237,18 @@ header {
 
 footer {
     @include display(column, space-between);
-    background-color: $marron;
     color: $beigeClair;
     text-align: center;
 
     h3 {
+        @extend %titleProps;
         margin-bottom: .5rem;
         font-weight: normal;
         font-size: 1.5rem;
         text-decoration-line: underline;
     }
 
-    article {
+    article {//contact
         width: 90%;
         border-bottom: 1px dotted $beigeClair;
         padding-bottom: 1.5rem;
@@ -266,7 +269,7 @@ footer {
         }
     }
     
-    nav {
+    nav { //infos
         @include display(column, space-evenly);
         width: 90%;
         font-size: 1.2rem;
@@ -280,12 +283,13 @@ footer {
 
     }
 
-    div {
+    div { //réseaux sociaux
         @include display(row, space-around);
         flex-wrap: wrap;
         margin-bottom: 2rem;
 
         h3 {
+            @extend %titleProps;
             width: 100%
         }
 
@@ -362,7 +366,6 @@ form {
         font-size: 1.5rem;
         @include display(inline-block, center);
     }
-
 }
 
 // style de la page home
@@ -377,6 +380,7 @@ form {
 
         .slick-prev {
             left: .5rem;
+            z-index: 3;
         }
         .slick-next {
             right: 1.5rem;
@@ -386,6 +390,12 @@ form {
             button::before {
                 margin-top: -20px;
                 font-size: 1rem;
+            }
+        }
+
+        .picture {
+            img {
+                margin: auto;
             }
         }
     }
@@ -418,6 +428,7 @@ form {
                     }
 
                     h2 {
+                        @extend %titleProps;
                         margin-top: 0;
                         margin-bottom: .5rem;
                     }
@@ -447,7 +458,6 @@ form {
 
 // style page de détail d'un film:
 #movieDetail {
-
     article:not(.video) {
         width: 90%;
         margin: 1rem auto;
@@ -462,6 +472,7 @@ form {
         }
 
         h2 {
+            @extend %titleProps;
             text-align: center
         }
 
@@ -489,6 +500,14 @@ form {
         }
     }
 
+    .horaire {//le cardTime
+        li {
+            a {
+                margin: .5rem;
+                font-size: 1.5rem;
+            }
+        }
+    }
     .synopsys {
         padding: 1rem;
 
@@ -522,6 +541,7 @@ form {
 
         h2 {
             margin: 0;
+            @extend %titleProps;
         }
         address {
             margin-top: 1rem;
@@ -546,7 +566,6 @@ form {
 
 //la séance d'un film
 .session {
-    
     section {
         background-color: $white;
         padding: 2rem;
@@ -563,6 +582,7 @@ form {
                 float: left;
                 width: 40%;
                 margin-right: 2rem;
+                box-shadow: 2px 2px 3px $grisExtraLight;
             }
 
             p {
@@ -570,8 +590,564 @@ form {
             }
 
             div {
-                margin-top: 2rem;
+                margin: 2rem 0;
+            }
+
+            .reservation {
+                border: 1px solid $marron;
+                padding: .5rem;
+                background-color: $marron;
+                color: $beigeClair;
+                font-weight: bold;
+
+                &:hover {
+                    background-color: $orange;
+                    color : $marron;
+                }
+            }
+        }
+        .orderForm {
+            label {
+                font-size: 2rem;
+                input {
+                    background-color: $beigeClair;
+                    font-size: 2rem;
+                    margin-left: .5rem;
+                }
+            }
+            button {
+                font-size: 2rem;
+                padding: .5rem;
             }
         }
     }
+}
+
+
+// version tablette
+@media screen and (min-width: 768px) {
+    header {
+        padding-bottom: 1rem;
+
+        .icon {
+            font-size: 4rem;
+        }
+
+        .btnBurger {
+            .menuBurger {
+                padding-left: 1rem;
+                font-size: 4rem;
+            }
+        }
+
+        .logoTitle {
+            span {
+                font-size: 4rem;
+                margin-left: 1rem;
+            }
+        }
+
+        #menu, .menu {//menu burger et compte utilisateur
+            font-size: 3rem;
+            top: 8.5rem;
+
+            a {
+                padding: .5rem 1.5rem;
+                font-weight: bold;
+            }
+        }
+
+        .btnDeco {
+            font-size: 3rem;
+        }
+
+        .divSearch {
+            bottom: -45%;
+            .inputSearch {
+                font-size: 2.5rem;
+                padding-top: 1rem;
+            }
+        }
+    }
+
+    footer {
+        h3 {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        article { //contact
+            padding-bottom: 2rem;
+
+            address {
+                .logoFooter {
+                    width: 20%;
+                }
+
+                p, a {
+                    font-size: 1.8rem;
+                    margin: .5rem 0;
+                    strong {
+                        margin-left: .5em;
+                    }
+                }
+            }
+        }
+
+        nav { //les infos
+            font-size: 1.8rem;
+            padding-bottom: 2rem;
+        }
+
+        div { //réseaux sociaux
+            margin-bottom: 2.5rem;
+
+            .icon {
+                font-size: 3.5rem;
+            }
+        }
+    }
+
+    .home {
+        .carousel {
+            margin-bottom: 10rem;
+            .slick-arrow {
+                &::before {
+                    font-size: 6rem;
+                }
+            }
+
+            .slick-next {
+                right: 4rem;
+            }
+
+            .slick-dots {
+                li {
+                    margin: 0 1.5rem;
+                }
+
+                button::before {
+                    margin-top: -10px;
+                    font-size: 3rem;
+                }
+            }
+        }
+
+        .homeListe { //liste des films
+                figure {
+                    padding: 2.5rem 0;
+
+                img {
+                    margin-right: 2rem;
+                }
+
+                figcaption {
+                    h2 {
+                        margin-bottom: 1rem;
+                        font-size: 3rem;
+                    }
+
+                    p {
+                        font-size: 2.5rem;
+                    }
+                }
+                p {font-size: 2.5rem;}
+
+                .clearfix {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    .horaire {//le cardTime
+        li {
+            padding: 1rem;
+            a {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    .infos { //les pages d'informations (cgu/cgv/confidentialité/a propos)
+        width: 90%;
+        margin: auto;
+    }
+ 
+    form {
+        width: 80%;
+        fieldset {
+            padding: 2rem 3rem;
+            legend {
+                font-size: 3.5rem;
+            }
+
+            label, p {
+                font-size: 2.5rem;
+            }
+            input {
+                line-height: 3rem;
+                font-size: 2rem;
+            }
+
+            [type="submit"] {
+                margin-top: 2rem;
+                font-size: 2.5rem;
+            }
+        }
+
+        a {
+            margin-top: 1rem;
+            font-size: 2.5rem;
+        }
+    }
+
+    // style page de détail d'un film:
+    #movieDetail {
+        article:not(.video) {
+            margin: 0;
+        }
+
+        article {
+            h2 {
+                font-size: 3rem;
+            }
+
+            img {
+                width: 50%;
+                margin-right: 1.5rem;
+            }
+
+            p {
+                font-size: 2rem;
+            }
+        }
+        
+        p {
+            font-size: 2rem;
+        }
+
+        .horaire { //le cardTime
+            li {
+                a {
+                    font-size: 1.8rem;
+                }
+            }
+        }
+        
+        .synopsys {
+
+            strong {
+                font-size: 2rem;
+            }
+        }
+
+        a {
+            font-size: 1.8rem;
+        }
+    }
+
+    .session {//page de séance d'un film et la réservation
+        section {
+            article {
+
+                img {
+                    max-width: 225px;
+                }
+
+                .reservation { //bouton pour réserver
+                    padding: 1rem;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}
+
+
+//version desktop
+@media screen and (min-width: 1200px) {
+    header {
+        padding-bottom: 1rem;
+
+        .icon {
+            font-size: 5rem;
+        }
+
+        .btnBurger{
+            display: none;
+        }
+
+        .logoTitle {
+            text-align: left;
+            padding: 3rem 5rem;
+            @include display(row, flex-start);
+            .logo {
+                width: 10%;
+            }
+            span {
+                font-size: 4.5rem;
+                margin-left: 2rem;
+            }
+        }
+
+        #menu {
+            visibility: visible;// En mode desktop, le menu est visible
+            @include display(row, flex-start);
+            // position: static;
+            width: 100%;
+            .burgerDeco {
+                border-top: none;
+            }
+        }
+
+        #menu, .menu {//menu burger et compte utilisateur
+            font-size: 3rem;
+            top: 100%;
+
+            a {
+                padding: 1.5rem 2rem;
+                font-weight: bold;
+            }
+        }
+
+        .btnDeco {
+            font-size: 3rem;
+        }
+
+        .divSearch {
+            bottom: -45%;
+
+            .inputSearch {
+                font-size: 3rem;
+                padding-top: 1rem;
+                height: 5rem;
+            }
+
+            li, .msgSearch {
+                line-height: 4rem;
+
+                a {
+                    font-size: 2.5rem;
+                }
+            }
+        }
+    }
+
+    footer {
+        @include display(row, space-evenly);
+        align-items: stretch;
+
+        h3 {
+            font-size: 3rem;
+        }
+
+        article {//contact
+            border-bottom: none;
+            width: 35%;
+
+            address {
+
+                p, a {
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        nav {//les infos
+            width: 35%;
+            font-size: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: none;
+        }
+
+        div { //réseaux sociaux
+            @include display(row, center);
+            width: 30%;
+            margin-bottom: 2.5rem;
+            
+            .icon {
+                margin: 2rem;
+                font-size: 3.5rem;
+            }
+        }
+    }
+    
+    .home {
+        h1 { 
+            margin-top: 8vh;
+            font-size: 5rem;
+        }
+
+        .carousel {
+            img {
+                width: 35%;
+            }
+            .slick-prev {
+                left: 28%;
+            }
+            .slick-next {
+                right: 30%;
+            }
+        }
+
+        .homeListe { //liste des films
+            width: 80%;
+            margin: auto;
+            @include display(row, space-around);
+            flex-wrap: wrap;
+            
+            figure {
+                border-bottom: 1px solid $black;
+                width: 40%;
+                padding: 2.5rem 0;
+
+                img {
+                    width: 40%;
+                    margin-right: 2rem;
+                }
+
+                figcaption {
+                    p {
+                        font-size: 2rem;
+                    }
+                }
+                
+                p {
+                    margin-top: 16rem;
+                    font-size: 2rem;
+                }
+
+                .clearfix {
+                    font-size: 2rem;
+                }
+            }
+        }
+    }
+
+    .horaire {//le cardTime
+        li {
+            a {
+                font-size: 2rem;
+            }
+        }
+    }
+
+    .infos {//les pages d'informations (cgu/cgv/confidentialité/a propos)
+        margin: 10vh auto 2vh auto;
+        width: 50%;
+        h2 {
+            font-size: 3rem;
+        }
+        
+        address, p {
+            font-size: 2.5rem;
+        }
+
+        dt { font-size: 3rem !important; }
+    }
+
+    form {//pour tous les formulaires
+        width: 40%;
+        input{
+            font-size: 2rem;
+        }
+    }
+
+    .form {
+        padding-top: 5vh;
+        form{
+            height: 35vh;
+            width: 25%;
+        }
+    }
+
+    #movieDetail { //la page d'un film
+        section {
+            padding-top: 5vh;
+            display: flex;
+            flex-direction: column;
+                
+        }
+        article:not(.video), .titleHoraire, .horaire {
+            width: 70%;
+            margin: 2rem auto;
+        }
+
+        article {
+            &:nth-child(3) {
+                    order: 2;
+                }
+            h2 {
+                font-size: 3rem;
+                margin-bottom: 5rem;
+            }
+
+            img {
+                width: 25%;
+                margin-right: 2rem;
+            }
+
+            iframe {
+                height: 100vh;
+            }
+
+            p {
+                margin-top: 1rem;
+            }
+        }
+
+        .horaire {//le cardTime
+            justify-content: flex-start;
+            gap: 2rem;
+            li {
+                a {
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .video {
+            order: 5;
+        }
+
+        .synopsys {
+            order: 4;
+
+            strong {
+                font-size: 2.5rem;
+            }
+        }
+
+        a {
+            font-size: 2rem;
+        }
+
+        .synopsys + a {
+            order: 6;
+        }
+    }
+
+    .session {//page de séance d'un film et la réservation
+        margin-top: 8vh;     
+        section {
+            h2 {
+                text-align: center;
+            }
+            width: 70%;
+            margin: auto;
+            
+            article {
+                margin: auto;
+                width: 60%;
+                img {
+                    margin-right: 4rem;
+                }
+            }
+        }
+    }
+    #dash {
+        margin-top: 5vh;
+    }
+
 }

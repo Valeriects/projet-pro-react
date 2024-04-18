@@ -1,14 +1,27 @@
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import { fetchMovies } from "../../../store/slices/movie.js";
+import {fetchCategory} from "../../../store/slices/category.js";
+
 
 function AddCategoryMovie() {
     useMenuToggle();
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [catMovie, setCatMovie] = useState("");
+
+    const { list } = useSelector((state) => state.movie);
+    const { listCategory } = useSelector((state) => state.category);
+     
+    useEffect(() => {
+        dispatch(fetchMovies());
+        dispatch(fetchCategory());
+     }, []);
     
     const handleChange = (e) => {
         setCatMovie({
@@ -29,7 +42,6 @@ function AddCategoryMovie() {
             });
 
             if (res.ok) {
-                console.log(res);
                 navigate("/admin/catégorie-film");
             }
 
@@ -40,18 +52,34 @@ function AddCategoryMovie() {
 
     return (
         <>
-            <Link to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
+            <Link className="aBack" to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
             <form onSubmit={submitAdd} >
                  <fieldset>
                         <legend>Création des données d&apos;un lien entre une catégorie et un film</legend>
                         
                        
                         <label htmlFor="movies_id">Id du film :
-                            <input onChange={handleChange} type="text" id="movies_id" name="movies_id" value={catMovie.movies_id}/>
+                            <select onChange={handleChange} name="movies_id" id="movies_id">
+                                <option value="">Choisir le film</option>
+                            
+                                {list.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.title}</option>
+                                    
+                                ))}
+                            </select>
+                        
                         </label>
 
                         <label htmlFor="categories_id">Id de la catégorie :
-                            <input onChange={handleChange} type="text" id="categories_id" name="categories_id" value={catMovie.categories_id}/>
+                        
+                            <select onChange={handleChange} name="categories_id" id="categories_id">
+                                <option value="">Choisir la catégorie</option>
+                            
+                                {listCategory.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.name_cat}</option>
+                                    
+                                ))}
+                            </select>
                         </label>
                        
                        
@@ -61,7 +89,7 @@ function AddCategoryMovie() {
                     
                     </fieldset>
             </form>
-            <Link to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
+            <Link className="aBack" to={"/admin/catégorie-film"}>Retour à la liste des liens entre catégorie et films</Link>
         </>
     );
 }

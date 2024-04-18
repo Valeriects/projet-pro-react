@@ -16,9 +16,6 @@ function TableMovieTheater() {
     }, []);
 
     const { list } = useSelector((state) => state.movieTheater);
- 
-
-    console.log(list);
 
     return (
         <main className="table">
@@ -42,13 +39,13 @@ function TableMovieTheater() {
                     {list.map((item) => (                  
                     <tr key={item.id}>
                         
-                        <td>{item.id}</td> 
+                            <td>{item.id}</td> 
                         <td className="tdIcone">
                             
                             <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link> 
                         
                         </td>
-                        <td>{item?.cinemas_id}</td>
+                        <td>{item?.cinemas_id} - {item.name_cinema}</td>
                         <td>{item?.disabled_access}</td>
                         <td>{item?.name_theater}</td>
                         <td>{item?.nbr_seats}</td>

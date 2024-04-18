@@ -11,10 +11,6 @@ const userLogin = async (req, res) => {
         const [userExist] = await Query.runByParams(queryLogin, [email]);
 
         const compareHash = await bcrypt.compare(password, userExist.password);
-     
-        console.log("password :", password);
-        console.log("mdpBDD :", userExist.password);
-        console.log(compareHash);
    
         if (!userExist || !(compareHash)) { 
             return res.status(409).json({ message: "Identifiants incorrects" });

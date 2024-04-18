@@ -9,7 +9,6 @@ import useMenuToggle from "../../../hook/useMenuToggle";
 
 function TableMovie() {
     useMenuToggle();
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,9 +16,6 @@ function TableMovie() {
     }, []);
 
     const { list } = useSelector((state) => state.movie);
- 
-
-    console.log(list);
 
     return (
         <main className="table">
@@ -55,26 +51,26 @@ function TableMovie() {
                         
                         </td>
                         <td>{item?.title}</td>
-                        <td>{item?.categories}</td>
+                        <td>{item?.categories.join(' - ')}</td>
                         <td>{item?.director}</td>
                         <td>{item?.actor}</td>
-                            <td>
-                                {item?.media[0]?.alt_img ? (
-                                   item?.media[0]?.alt_img
+                        <td>
+                            {item?.media[0]?.alt_img ? (
+                                item?.media[0]?.alt_img
 
-                                ) : <Link to={"/admin/média-film"}>associer un média</Link> 
-                                }
-                             
-                            </td>
-                            <td>
-                                {item?.media[0]?.src_img ? (
-                                    <>
-                                        <img src={`http://localhost:9000/img/${item?.media[0]?.src_img}`} alt={item?.media[0]?.alt_img} />
-                                        {item?.media[0]?.src_img}
-                                    </>
+                            ) : <Link to={"/admin/média-film"}>associer un média</Link> 
+                            }
+                            
+                        </td>
+                        <td>
+                            {item?.media[0]?.src_img ? (
+                                <>
+                                    <img src={`http://localhost:9000/img/${item?.media[0]?.src_img}`} alt={item?.media[0]?.alt_img} />
+                                    {item?.media[0]?.src_img}
+                                </>
 
-                                ) : (' Pas de données ')
-                                } 
+                            ) : (' Pas de données ')
+                            } 
                         </td>
                             <td>
                                  {item?.media[0]?.alt_video ? 
