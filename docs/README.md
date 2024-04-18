@@ -1,5 +1,20 @@
 # Création d'un site pour un cinéma de quartier, les cinéma Fun en React et Nodejs
+lien vers le gitHub :  `https://github.com/Valeriects/projet-pro-react.git`
+  - Dans le dossier `docs` vous trouverez le fichier README.md
 
+
+## Pour démarrer les serveurs dans l'IDE
+Dans le terminal faire cette commande:
+```bash
+cd sites/exam-projet-pro/projet-pro-react/back
+npm run dev
+```
+Dans un autre terminal, faire cette commande:
+```bash
+cd sites/exam-projet-pro/projet-pro-react/client
+npm run dev
+```
+Ensuite, aller sur le lien `http://valeriechanetingsang.ide.3wa.io:9500/`
 
 ## Mise en place du projet node:
 1- Création du dossier `projet-pro-react`.   

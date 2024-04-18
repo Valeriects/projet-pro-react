@@ -329,15 +329,15 @@ main {
 @media screen  and (min-width: 1200px) {
     #adHead {
         position: relative;
-        height: 12vh;
+        height: 10vh;
         .menu {
             visibility: visible;
             position: absolute;
             @include display(row, space-between);
-            top: 49%;
+            top: 27%;
             
-            a, .btnDeco {
-                font-size: 2.5rem;
+            a, .btnDeco, .btnList {
+                font-size: 2rem;
             }
 
             .btnDeco {
@@ -357,8 +357,11 @@ main {
                 position: absolute;
                 background-color: $gris;
                 top:100%;
-                left: 42%;
-                width: 39%;
+                left: 45.5%;
+                width: 34%;
+                a {
+                    font-size: 1.5rem;
+                }
             }
         }
 
@@ -368,11 +371,38 @@ main {
     }
 
     .table {
+        th, td, tr {
+            font-size: 1.5rem;
+        }
         .tdImg{
             @include display(row, space-around);
             align-items: center;
             .imgMedMovie {
                 width: 25%;
+            }
+        }
+    }
+
+    .aBack {
+        font-size: 1.5rem;
+        margin: .5rem;
+    }
+
+    .aBack + form {
+        fieldset {
+            
+            legend {
+                font-size: 2rem;
+            }
+
+            p {
+                margin: 0;
+            }
+
+            input, p,
+            textarea,
+            select {
+                font-size: 1.5rem;
             }
         }
     }

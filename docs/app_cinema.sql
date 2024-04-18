@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `name_cat` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categories`
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `categories_movies` (
   PRIMARY KEY (`id`),
   KEY `fk_categories_movies_movies_idx` (`movies_id`),
   KEY `fk_categories_movies_categories1_idx` (`categories_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `categories_movies`
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `cinemas` (
   `nbr_theater` int UNSIGNED NOT NULL,
   `disabled_access` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `cinemas`
@@ -118,12 +118,12 @@ INSERT INTO `cinemas` (`id`, `name_cinema`, `manager`, `address_cine`, `city`, `
 DROP TABLE IF EXISTS `media`;
 CREATE TABLE IF NOT EXISTS `media` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `src_img` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `alt_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `src_img` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `alt_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `alt_video` varchar(100) NOT NULL,
   `src_video` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `media`
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `movies` (
   `time` time NOT NULL,
   `actor` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `movies`
@@ -183,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `movies_media` (
   PRIMARY KEY (`id`),
   KEY `fk_movies_media_movies1_idx` (`movies_id`),
   KEY `fk_movies_media_media1_idx` (`media_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `movies_media`
@@ -213,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `movie_theaters` (
   `cinemas_id` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_movie_theaters_cinemas1_idx` (`cinemas_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `movie_theaters`
@@ -252,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_orders_sessions1_idx` (`sessions_id`),
   KEY `fk_orders_users1_idx` (`users_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `orders`
@@ -274,7 +274,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `name_role` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `roles`
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   KEY `fk_sessions_movies1_idx` (`movies_id`),
   KEY `fk_sessions_timetables1_idx` (`timetables_id`),
   KEY `fk_sessions_movie_theaters1_idx` (`movie_theaters_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `sessions`
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `timetables` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `hours_timetable` time NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `timetables`
@@ -371,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `roles_id` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_users_roles1_idx` (`roles_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `users`
