@@ -29,8 +29,6 @@ npm init -y
 npm install nodemon -D
 npm i dotenv mysql2 express bcrypt cors jsonwebtoken cookie-parser multer
 
-# remplacement de multer
-npm i express-fileupload  
 ```
 - Dans le fichier `package.json`:   
 On va ajouter ceci: 
@@ -116,9 +114,9 @@ A la racine du projet `projet-pro-react`, et dans le terminal, on fait quelques 
   
   Les polices sur google fonts:
   - Pour tout le site:   
-  $monserrat : "Montserrat", sans-serif;
+  monserrat : "Montserrat", sans-serif;
   - Pour les titres:    
-  $varela:"Varela Round", sans-serif;
+  varela:"Varela Round", sans-serif;
 
 
   ## Les pages:
@@ -129,7 +127,7 @@ A la racine du projet `projet-pro-react`, et dans le terminal, on fait quelques 
     - Menu de compte à droite   
     - Icone de recherche qui ouvre la barre de recherche en mobile first   
     - Logo et nom du site   
-    - Lorsque l'un des menu est ouver ou la barre de recherche, alors les autres menu ou la barre de recherche se referme. 
+    - Lorsque l'un des menu est ouvert ou la barre de recherche, alors les autres menu ou la barre de recherche se referme. 
   * Footer:
     - Contact
     - Les liens vers les informations légales
