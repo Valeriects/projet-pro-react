@@ -11,7 +11,7 @@ const getAllMovies = async (req, res) => {
 
         const allCategories = await Query.run(queryCategories);
 
-        const queryMedias = "SELECT movies.id AS movieId, src_img, alt_img, src_video, alt_video FROM movies JOIN movies_media ON movies.id = movies_media.movies_id JOIN media ON media.id = movies_media.media_id";
+        const queryMedias = "SELECT movies.id AS movieId, src_img, alt_img, src_video, alt_video FROM movies JOIN media ON media.movies_id = movies.id";
 
         const allMedia = await Query.run(queryMedias);
 
@@ -34,7 +34,7 @@ const getSession = async (req, res) => {
 
         const { id, idTimetable } = req.params;
       
-        const query = "SELECT movies.id, movies.title, movies.time, movies.director, movies.actor, movies.release_date, sessions.*, sessions.id AS session_id, movie_theaters.*, cinemas.*, timetables.*, media.alt_img, media.src_img FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id JOIN timetables ON timetables.id = sessions.timetables_id JOIN cinemas ON cinemas.id = movie_theaters.cinemas_id JOIN movies_media ON movies_media.movies_id = movies.id JOIN media ON media.id = movies_media.media_id WHERE movies.id = ? AND timetables.id = ?";
+        const query = "SELECT movies.id, movies.title, movies.time, movies.director, movies.actor, movies.release_date, sessions.*, sessions.id AS session_id, movie_theaters.*, cinemas.*, timetables.*, media.alt_img, media.src_img FROM movies JOIN sessions ON movies.id = sessions.movies_id JOIN movie_theaters ON sessions.movie_theaters_id = movie_theaters.id JOIN timetables ON timetables.id = sessions.timetables_id JOIN cinemas ON cinemas.id = movie_theaters.cinemas_id JOIN media ON media.movies_id = movies.id WHERE movies.id = ? AND timetables.id = ?";
         
 
         const sessionMovie = await Query.runByParams(query, [id, idTimetable]);

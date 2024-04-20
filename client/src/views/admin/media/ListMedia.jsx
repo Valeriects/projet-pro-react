@@ -17,7 +17,6 @@ function TableMedia() {
 
     const { listMedia } = useSelector((state) => state.media);
 
-
     return (
         <main className="table">
 
@@ -27,6 +26,7 @@ function TableMedia() {
                     <tr>
                         <th>id</th>
                         <th>Actions</th>
+                        <th>Film</th>
                         <th>Alt affiche</th>
                         <th>Src affiche</th>
                         <th>Alt vidéo</th>
@@ -42,6 +42,7 @@ function TableMedia() {
                         <td className="tdIcone">
                             <Link to={`${item.id}`} ><FontAwesomeIcon icon={faSquarePen} className="iconeTable" />&<FontAwesomeIcon icon={faTrashCan} className="iconeTable" /></Link> 
                         </td>
+                            <td>{item?.movies_id} - {item?.title}</td>                     
                         <td>{item?.alt_img}</td>
                         <td>{item?.src_img}</td>
                         <td>{item?.alt_video}</td>                     

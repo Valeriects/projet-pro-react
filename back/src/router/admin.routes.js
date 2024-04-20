@@ -5,7 +5,7 @@ import { addMovie, upMovie, deleteMovie } from "../controller/admin/movies.js";
 import { addCinema, upCinema, deleteCinema, getTheaters, addTheater, upTheater, delTheater } from "../controller/admin/cinemas.js";
 import { getSessions, addSession, upSession, deleteSession, delTimetable, upTimetable, addTimetable, getTimetables } from "../controller/admin/sessionTime.js";
 import { getOrders, upOrder, deleteOrder } from "../controller/admin/orders.js";
-import { getMovieMedias, addMovieMedia, upMovieMedia, delMovieMedia, getMedias, addMedia, upMedia, delMedia, getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
+import { getMedias, addMedia, upMedia, delMedia, getCatMovies, addCatMovie, upCatMovie, deleteCatMovie, getCategories, addCategory, upCategory, delCategory } from "../controller/admin/categories-and-media.js";
 import { getCount } from "../controller/admin/adminBack.js";
 
 import { upload } from "../middlewares/multer-config.js";
@@ -55,12 +55,6 @@ router.delete("/timetable/:id", delTimetable);
 router.get("/order", getOrders);
 router.patch("/order/:id", upOrder);
 router.delete("/order/:id", deleteOrder);
-
-//routes MOVIE_MEDIA 
-router.get("/movie-media", getMovieMedias);
-router.post("/movie-media", addMovieMedia);
-router.patch("/movie-media/:id", upMovieMedia);
-router.delete("/movie-media/:id", delMovieMedia);
 
 //routes MEDIA
 router.get("/media", getMedias);

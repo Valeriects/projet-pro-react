@@ -79,8 +79,8 @@ function Dashboard() {
                         <input onChange={handleChange} type="password" id="password" name="password"/>
                     </label>
 
-                    <label htmlFor="phone">Votre numéro de téléphone: 
-                        <input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone" placeholder={infoUser?.phone}/>
+                    <label htmlFor="phone">Votre n° de téléphone: 
+                        +33<input onChange={handleChange} type="tel" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" id="phone" name="phone" placeholder={infoUser?.phone}/>
                     </label>
 
                     <label htmlFor="address">Adresse postale: 

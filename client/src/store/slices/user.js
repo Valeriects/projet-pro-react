@@ -25,7 +25,6 @@ const userSlice = createSlice({
     reducers: {
         login(state, action) {
             state.isLogged = true;
-            console.log("action: ", action.payload);
             state.user = action.payload;
         },
         logout(state) {
@@ -40,7 +39,6 @@ const userSlice = createSlice({
             .addCase(fetchUsers.fulfilled, (state, action) => {
                 state.listUser = action.payload;
                 state.loading = false;
-                console.log("listUser: ", action.payload);
             })
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.error = action.error.message;

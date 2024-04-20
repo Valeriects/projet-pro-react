@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchMovies } from "../../../store/slices/movie";
 import useMenuToggle from "../../../hook/useMenuToggle";
-import { convertDate } from "../../../utils/formatDate.js";
+import { convertDate, formattedTime } from "../../../utils/formatDate.js";
 
 function UpDeleteMovie() {
     useMenuToggle();
@@ -107,12 +107,12 @@ function UpDeleteMovie() {
                             <input onChange={handleChange} type="date" id="release_date" name="release_date" value={movie.release_date}/>
                         </label>
 
-                        <label htmlFor="time">Durée : <span>&quot;{movie?.time}&quot;</span>
+                        <label htmlFor="time">Durée : <span>&quot;{formattedTime(movie?.time)}&quot;</span>
                             <input onChange={handleChange} type="time" id="time" name="time" value={movie.time}/>
                         </label>
 
                         <label htmlFor="synopsis">Synopsis : <span>&quot;{movie?.synopsis}&quot;</span>
-                            <textarea onChange={handleChange} name="synopsis" id="synopsis" cols="50" rows="30"></textarea>
+                            <textarea onChange={handleChange} name="synopsis" id="synopsis" cols="50" rows="30" value={movie.synopsis}></textarea>
                         </label>
 
                         

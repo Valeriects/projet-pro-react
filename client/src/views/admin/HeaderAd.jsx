@@ -66,7 +66,6 @@ function HeaderAd() {
                                 <NavLink to={"réservation"}>réservation</NavLink>
                                 <NavLink to={"cinéma"}>cinéma</NavLink>
                                 <NavLink to={"categorie"}>catégorie</NavLink>
-                                <NavLink to={"média-film"}>média-film</NavLink>
                                 <NavLink to={"catégorie-film"}>catégorie-film</NavLink>
                                 <NavLink to={"horaire"}>horaire</NavLink>
                             </div>

@@ -6,6 +6,8 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 import { fetchMedia } from "../../../store/slices/media";
+import { fetchMovies } from "../../../store/slices/movie";
+
 import useMenuToggle from "../../../hook/useMenuToggle";
 
 function UpDeleteMedia() {
@@ -16,6 +18,8 @@ function UpDeleteMedia() {
     const [media, setMedia] = useState();
 
     const { listMedia } = useSelector((state) => state.media);
+    const { list } = useSelector((state) => state.movie);
+
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -26,6 +30,7 @@ function UpDeleteMedia() {
         if (!media && listMedia.length > 0) {
             setMedia(listMedia.find((media) => media.id === Number(id)));
         }
+        dispatch(fetchMovies());
         
     }, [dispatch, media]);
 
@@ -65,6 +70,7 @@ function UpDeleteMedia() {
             formData.append('alt_img', media.alt_img);
             formData.append('src_video', media.src_video);
             formData.append('alt_video', media.alt_video);
+            formData.append('movies_id', media.movies_id);
 
             await fetch(`/api/v1/admin/media/${media.id}`, {
                 method: "PATCH",
@@ -91,7 +97,18 @@ function UpDeleteMedia() {
                 {media && (
                 
                     <fieldset>
-                        <legend>Données du cinéma n°{ media?.id }</legend>
+                        <legend>Données du cinéma n°{media?.id}</legend>
+                        
+                        <label htmlFor="movies_id">Le film :                        
+                            <select onChange={handleChange} name="movies_id" id="movies_id">
+                                <option value="">Choisir le film</option>
+                            
+                                {list.map((item) => (
+                                    <option key={item.id} value={item.id}>{item.id} - {item.title}</option>
+                                    
+                                ))}
+                            </select>
+                        </label>
                         
                         <label htmlFor="src_img">Modifier le fichier : &quot;<span>{
                             (btnUp && media.src_img.name) ?

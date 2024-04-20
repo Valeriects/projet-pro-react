@@ -5,7 +5,6 @@ import userReducer from "./slices/user";
 import categoryReducer from "./slices/category";
 import cinemaReducer from "./slices/cinema";
 import mediaReducer from "./slices/media";
-import mediaMovieReducer from "./slices/mediaMovie";
 import roleReducer from "./slices/role";
 import orderReducer from "./slices/orders";
 import sessionReducer from "./slices/session";
@@ -21,7 +20,6 @@ const store = configureStore({
         category: categoryReducer,
         cinema: cinemaReducer,
         media: mediaReducer,
-        mediaMovie: mediaMovieReducer,
         role: roleReducer,
         order: orderReducer,
         session: sessionReducer,

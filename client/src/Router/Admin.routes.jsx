@@ -16,9 +16,6 @@ import UpDeleteMedia from "../views/admin/media/Up&DeleteMedia.jsx";
 import TableMovie from "../views/admin/movie/ListMovie.jsx";
 import UpDeleteMovie from "../views/admin/movie/Up&DeleteMovie.jsx";
 import AddMovie from "../views/admin/movie/AddMovie.jsx";
-import TableMediaMovie from "../views/admin/mediaMovie/ListMediaMovie.jsx";
-import UpDeleteMediaMovie from "../views/admin/mediaMovie/Up&DeleteMediaMovie.jsx";
-import AddMediaMovie from "../views/admin/mediaMovie/AddMediaMovie.jsx";
 import TableRole from "../views/admin/role/ListRole.jsx";
 import UpDeleteRole from "../views/admin/role/Up&DeleteRole.jsx";
 import AddRole from "../views/admin/role/AddRole.jsx";
@@ -71,11 +68,6 @@ function AdminRoutes() {
                 <Route path={"film"} element={<TableMovie />} />
                 <Route path={"film/:id"} element={<UpDeleteMovie />} />
                 <Route path={"film/ajout"} element={<AddMovie />} />
-
-                {/* routes des média-films */}
-                <Route path={"média-film"} element={<TableMediaMovie />} />
-                <Route path={"média-film/:id"} element={<UpDeleteMediaMovie />} />
-                <Route path={"média-film/ajout"} element={<AddMediaMovie />} />
 
                 {/* routes des roles */}
                 <Route path={"role"} element={<TableRole />} />

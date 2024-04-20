@@ -6,6 +6,7 @@ import { faTrashCan, faSquarePen } from "@fortawesome/free-solid-svg-icons";
 
 import { fetchMovies } from "../../../store/slices/movie";
 import useMenuToggle from "../../../hook/useMenuToggle";
+import { convertDate, formattedTime } from "../../../utils/formatDate.js";
 
 function TableMovie() {
     useMenuToggle();
@@ -82,8 +83,8 @@ function TableMovie() {
                             <td>
                                  {item?.media[0]?.src_video ? (item?.media[0]?.src_video) : ("Pas de données")} 
                             </td>
-                        <td>{item?.release_date}</td>
-                        <td>{item?.time}</td>
+                        <td>{convertDate(item?.release_date)}</td>
+                        <td>{formattedTime(item?.time)}</td>
                         <td>{item?.synopsis}</td>
 
                     </tr>   
