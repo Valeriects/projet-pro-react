@@ -6,6 +6,9 @@ import logoCinema from "../../../public/assets/images/logo-cinema_web02.png";
 
 
 function Footer() {
+    function handleClickTop() {
+        window.scrollTo(0, 0);
+    }
 
     return (
         <footer>
@@ -14,7 +17,7 @@ function Footer() {
                 <h3>Contact</h3>
 
                 <address>
-                     <NavLink to={"/"}>
+                     <NavLink to={"/"} onClick={handleClickTop}>
                         <img className="logoFooter" src={logoCinema} alt="Logo couleur du cinéma FUN" />
                         <strong>Cinéma FUN</strong>
                     </NavLink>
@@ -29,10 +32,10 @@ function Footer() {
             <nav>
                 <h3>Infos</h3>
 
-                <NavLink to="a-propos">à propos</NavLink>
-                <NavLink to="CGU">CGU</NavLink>
-                <NavLink to="CGV">CGV</NavLink>
-                <NavLink to="politique-confidentialité">Politique de confidentialité</NavLink>
+                <NavLink to="a-propos" onClick={handleClickTop}>à propos</NavLink>
+                <NavLink to="CGU" onClick={handleClickTop}>CGU</NavLink>
+                <NavLink to="CGV" onClick={handleClickTop}>CGV</NavLink>
+                <NavLink to="politique-confidentialité" onClick={handleClickTop}>Politique de confidentialité</NavLink>
             </nav>
 
             <div>

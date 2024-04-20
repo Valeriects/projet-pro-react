@@ -91,7 +91,7 @@ function Header() {
         setIsSearching(false);
         ref.current.value = "";
     }
-    
+
     return (        
         <header>
             <button onClick={toggleBurger} className={`btnBurger ${isMenuOpen ? "open" : ""}`} title="Accéder au menu de navigation" aria-label="Accéder au menu de navigation">
