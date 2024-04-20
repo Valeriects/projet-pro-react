@@ -18,7 +18,10 @@ app.use('/img', express.static(path.join(process.cwd(), "/public/assets/images/"
 app.use(cookieParser());
 
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,  
+        methods: ["GET", "POST", "DELETE", "PATCH"], 
+        credentials: true, //permet de définir sir les cookies sont autorisés
+        secure : true // pour le https
 }));
 
 app.use(express.json()); 

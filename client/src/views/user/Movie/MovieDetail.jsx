@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import useMenuToggle from "../../../hook/useMenuToggle";
 import CardTime from "./Components/CardTime";
+import { convertDate, formattedTime } from "../../../utils/formatDate";
 
 function MovieDetail() {
     useMenuToggle();
@@ -23,13 +24,13 @@ function MovieDetail() {
 
                         <h2>{movie.title}</h2>
 
-                        <img src={`http://localhost:9000/img/${movie.media[0].src_img}`} alt={movie.media[0].alt_img} />
+                        <img src={`${import.meta.env.VITE_API_URL}/img/${movie.media[0].src_img}`} alt={movie.media[0].alt_img} />
                         
                         <p className="real">Réalisateur: <strong> {movie.director}</strong></p>
                         <p className="actor">Acteurs: <strong>{movie.actor}</strong></p>
                         <p className="categorie">Genre: <strong>{movie.categories.join(" - ")}</strong></p>
-                        <p className="dateReal">Date de réalisation: <strong>{movie.release_date}</strong></p>
-                        <p className="timeMovie">Durée: <strong>{movie.time}</strong></p>
+                        <p className="dateReal">Date de réalisation: <strong>{convertDate(movie.release_date)}</strong></p>
+                        <p className="timeMovie">Durée: <strong>{formattedTime(movie.time)}</strong></p>
 
                     </article>
 

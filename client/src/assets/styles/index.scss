@@ -75,7 +75,7 @@ a {
         display: inline-block;
         gap: 5%;
         text-align: center;
-        padding: .5rem;
+        padding: 0 !important;
         border-radius: .5rem;
         border: 1px solid $marron;
         font-weight: bold;
@@ -83,11 +83,17 @@ a {
 
         &:hover {
             background-color: $marron;
-            color: $beige;
         }
 
         a {
             color: $marron;
+            width: 100%;
+            display: inline-block;
+            padding:.5rem;
+
+            &:hover {
+                color: $beigeClair !important;
+            }
         }
     }
 }
@@ -420,7 +426,6 @@ form {
                 }
 
                 figcaption {
-
                     h2, p {
                         &::first-letter {
                             text-transform: capitalize;
@@ -503,7 +508,8 @@ form {
     .horaire {//le cardTime
         li {
             a {
-                margin: .5rem;
+                padding: .5rem;
+                margin:0;
                 font-size: 1.5rem;
             }
         }
@@ -1011,13 +1017,16 @@ form {
                 }
 
                 figcaption {
+                    h2 {
+                        margin-bottom: 2.5rem;
+                    }
                     p {
                         font-size: 2rem;
                     }
                 }
                 
                 p {
-                    margin-top: 16rem;
+                    margin-top: 7.5rem;
                     font-size: 2rem;
                 }
 

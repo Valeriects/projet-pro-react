@@ -65,7 +65,7 @@ function TableMovie() {
                         <td>
                             {item?.media[0]?.src_img ? (
                                 <>
-                                    <img src={`http://localhost:9000/img/${item?.media[0]?.src_img}`} alt={item?.media[0]?.alt_img} />
+                                    <img src={`${import.meta.env.VITE_API_URL}/img/${item?.media[0]?.src_img}`} alt={item?.media[0]?.alt_img} />
                                     {item?.media[0]?.src_img}
                                 </>
 

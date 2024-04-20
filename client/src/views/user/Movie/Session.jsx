@@ -67,7 +67,7 @@ function Session() {
                     
                     <article>
                         <figure>
-                            <img src={`http://localhost:9000/img/${session.src_img}`} alt={session.alt_img} />
+                            <img src={`${import.meta.env.VITE_API_URL}/img/${session.src_img}`} alt={session.alt_img} />
 
                             <figcaption>
                                 <p>{session.title}</p>

@@ -92,13 +92,10 @@ function UpDeleteRole() {
                 
                     <fieldset>
                         <legend>Données du média lié au film n°{ mediaMovie?.id }</legend>
-                        
-                        {/* <p>Titre du film: <span>&quot;{mediaMovie?.title}&quot;</span></p>
-                        <p>Nom du média: <span>&quot;{mediaMovie?.alt_img}&quot;</span></p> */}
+                       
 
                         <label htmlFor="movies_id">Modifier l&apos;ID du film {mediaMovie?.title}:
-                            {/* <input onChange={handleChange} type="text" id="movies_id" name="movies_id" value={mediaMovie?.movies_id}/> */}
-                            {/* <input onChange={(e) => setMediaMovie({...mediaMovie, movies_id: e.target.value})} type="text" id="movies_id" name="movies_id" value={mediaMovie?.movies_id}/> */}
+                          
                              <select onChange={handleChange} name="movies_id" id="movies_id">
                                 <option value="">Choisir le film</option>
                             
@@ -118,8 +115,6 @@ function UpDeleteRole() {
                                     
                                 ))}
                             </select>
-                            {/* <input onChange={handleChange} type="text" id="media_id" name="media_id" value={mediaMovie?.media_id}/> */}
-                            {/* <input onChange={(e) => setMediaMovie({...mediaMovie, media_id: e.target.value})} type="text" id="media_id" name="media_id" value={mediaMovie?.media_id}/> */}
                         </label>
                         
                         <button type="submit" >

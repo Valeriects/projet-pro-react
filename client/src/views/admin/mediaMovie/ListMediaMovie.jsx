@@ -48,7 +48,7 @@ function TableMediaMovie() {
                         </td>
                         <td>{item?.media_id}</td>
                         <td className="tdImg">
-                            <img className="imgMedMovie" src={`http://localhost:9000/img/${item?.src_img}`} alt={item?.alt_img} />
+                            <img className="imgMedMovie" src={`${import.meta.env.VITE_API_URL}/img/${item?.src_img}`} alt={item?.alt_img} />
                             {item?.alt_img}
                         </td>
                         <td>{item?.movies_id}</td>

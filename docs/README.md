@@ -14,7 +14,8 @@ Dans un autre terminal, faire cette commande:
 cd sites/exam-projet-pro/projet-pro-react/client
 npm run dev
 ```
-Ensuite, aller sur le lien `http://valeriechanetingsang.ide.3wa.io:9500/`
+Ensuite, aller sur le lien `http://localhost:9500/`
+
 
 ## Mise en place du projet node:
 1- Création du dossier `projet-pro-react`.   
