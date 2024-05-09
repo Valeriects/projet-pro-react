@@ -95,7 +95,7 @@ function Header() {
     const ancrage = () => {
         window.history.replaceState(null, '', '/#contact');
 
-        document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });
+        document.querySelector("#contact").scrollIntoView({ behavior: "smooth" });dispatch(toggleMenuMember());
     }
 
     return (        
@@ -118,7 +118,7 @@ function Header() {
                     <NavLink to={"authentification/connexion"}>connexion</NavLink>
                 )}
                 <NavLink to={"a-propos"}>infos pratiques</NavLink>
-                <NavLink to={"/#contact"} onClick={ancrage}>contact</NavLink>
+                <NavLink to="#contact" onClick={ancrage}>contact</NavLink>
                 
                 {isLogged && (
                     <button onClick={userLogout} className="btnDeco burgerDeco" title="se déconnecter" aria-label="se déconnecter" >déconnexion</button>

@@ -366,6 +366,11 @@ form {
                 color: $marron;
             }
         }
+
+        #error {
+            color: red;
+            font-weight: bold;
+        }
     }
 
     a {

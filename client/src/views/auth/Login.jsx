@@ -65,6 +65,8 @@ function Login() {
                 <fieldset>
                     <legend>Connectez-vous</legend>
 
+                    <p id="error">{msg}</p>
+
                     <label htmlFor="email">Votre adresse email:</label>
                     <input ref={userMailref} id="email" name="email" type="email" onChange={inputChangeHandler}/>
 

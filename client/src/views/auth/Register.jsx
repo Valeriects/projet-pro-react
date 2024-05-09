@@ -48,6 +48,7 @@ function Register() {
             <form onSubmit={submitHandler}>
                 <fieldset>
                     <legend>Creation de compte</legend>
+                    <p id="error">{msg}</p>
 
                     <label htmlFor="email">Votre adresse email:</label>
                     <input ref={userMailRef} name="email" id="email" type="email" />
